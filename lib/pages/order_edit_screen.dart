@@ -35,7 +35,7 @@ class OrderEditScreen extends ConsumerStatefulWidget {
   final OrderModel? _currentOrder;
 
   @override
-  _OrderEditScreenState createState() => _OrderEditScreenState();
+  ConsumerState<OrderEditScreen> createState() => _OrderEditScreenState();
 }
 
 class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {

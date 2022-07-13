@@ -32,7 +32,7 @@ class ProductEditScreen extends ConsumerStatefulWidget {
   final ProductModel? _currentProduct;
 
   @override
-  _ProductEditScreenState createState() => _ProductEditScreenState();
+  ConsumerState<ProductEditScreen> createState() => _ProductEditScreenState();
 }
 
 class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {

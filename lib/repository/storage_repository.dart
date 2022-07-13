@@ -37,7 +37,7 @@ class StorageRepositoryImpl implements StorageRepository {
       uploadTask = _storageReference.child(path).putFile(file);
     }
 
-    final String? url = await uploadTask.then((TaskSnapshot snapshot) async {
+    final String url = await uploadTask.then((TaskSnapshot snapshot) async {
       logger.d('upload complete');
       final String url = await snapshot.ref.getDownloadURL();
       return url;
@@ -47,7 +47,7 @@ class StorageRepositoryImpl implements StorageRepository {
       return Future<String>.value('');
     });
 
-    final StorageModel? result = (url == null || url.isEmpty)
+    final StorageModel? result = (url.isEmpty)
         ? null
         : StorageModel(url: url, path: path);
     logger.d('upload result: $result');

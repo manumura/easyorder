@@ -26,7 +26,7 @@ class CategoryEditScreen extends ConsumerStatefulWidget {
   final CategoryModel? _currentCategory;
 
   @override
-  _CategoryEditScreenState createState() => _CategoryEditScreenState();
+  ConsumerState<CategoryEditScreen> createState() => _CategoryEditScreenState();
 }
 
 class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {

@@ -19,7 +19,7 @@ class CategorySlidableListTile extends ConsumerStatefulWidget {
   final CategoryModel category;
 
   @override
-  _CategorySlidableListTileState createState() =>
+  ConsumerState<CategorySlidableListTile> createState() =>
       _CategorySlidableListTileState();
 }
 

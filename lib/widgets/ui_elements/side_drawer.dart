@@ -9,7 +9,7 @@ import 'package:package_info/package_info.dart';
 
 class SideDrawer extends StatefulWidget {
   @override
-  _SideDrawerState createState() => _SideDrawerState();
+  State<SideDrawer> createState() => _SideDrawerState();
 }
 
 class _SideDrawerState extends State<SideDrawer> {

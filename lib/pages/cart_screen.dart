@@ -26,7 +26,7 @@ class CartScreen extends ConsumerStatefulWidget {
   static const String routeName = '/order_cart';
 
   @override
-  _CartScreenState createState() => _CartScreenState();
+  ConsumerState<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends ConsumerState<CartScreen>

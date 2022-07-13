@@ -12,7 +12,7 @@ import 'package:logger/logger.dart';
 
 class CategoryPaginatedList extends ConsumerStatefulWidget {
   @override
-  _CategoryPaginatedListState createState() => _CategoryPaginatedListState();
+  ConsumerState<CategoryPaginatedList> createState() => _CategoryPaginatedListState();
 }
 
 class _CategoryPaginatedListState extends ConsumerState<CategoryPaginatedList> {

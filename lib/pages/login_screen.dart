@@ -24,7 +24,7 @@ class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen>
@@ -759,6 +759,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
       if (user == null || !user.isEmailVerified) {
         setState(() => _isLoading = false);
+        if (!mounted) return null;
         UiHelper.showAlertDialog(
             context,
             AlertType.error,
@@ -806,6 +807,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
       if (user == null) {
         setState(() => _isLoading = false);
+        if (!mounted) return null;
         UiHelper.showAlertDialog(context, AlertType.error,
             'Authentication failed !', 'Please try again later');
       } else {
@@ -840,6 +842,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
 
       if (user == null) {
         setState(() => _isLoading = false);
+        if (!mounted) return;
         UiHelper.showAlertDialog(
             context,
             AlertType.error,
@@ -858,6 +861,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       _passwordConfirmOpacityAnimationController.reverse();
       _passwordConfirmAnimationController.reverse();
 
+      if (!mounted) return;
       UiHelper.showAlertDialog(
           context,
           AlertType.info,
@@ -895,6 +899,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       _passwordConfirmOpacityAnimationController.reverse();
       _passwordConfirmAnimationController.reverse();
 
+      if (!mounted) return;
       UiHelper.showAlertDialog(
           context,
           AlertType.info,

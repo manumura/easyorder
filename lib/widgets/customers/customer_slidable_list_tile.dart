@@ -19,7 +19,7 @@ class CustomerSlidableListTile extends ConsumerStatefulWidget {
   final CustomerModel customer;
 
   @override
-  _CustomerSlidableListTileState createState() =>
+  ConsumerState<CustomerSlidableListTile> createState() =>
       _CustomerSlidableListTileState();
 }
 

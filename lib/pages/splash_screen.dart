@@ -18,7 +18,7 @@ class SplashScreen extends ConsumerStatefulWidget {
   static const String routeName = '/';
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {

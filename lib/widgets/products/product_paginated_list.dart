@@ -14,7 +14,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 class ProductPaginatedList extends ConsumerStatefulWidget {
   @override
-  _ProductPaginatedListState createState() => _ProductPaginatedListState();
+  ConsumerState<ProductPaginatedList> createState() => _ProductPaginatedListState();
 }
 
 class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {

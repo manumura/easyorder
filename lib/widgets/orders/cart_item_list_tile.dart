@@ -11,7 +11,7 @@ class CartItemListTile extends ConsumerStatefulWidget {
   final CartItemModel cartItem;
 
   @override
-  _CartItemListTileState createState() => _CartItemListTileState();
+  ConsumerState<CartItemListTile> createState() => _CartItemListTileState();
 }
 
 class _CartItemListTileState extends ConsumerState<CartItemListTile> {

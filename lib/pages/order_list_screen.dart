@@ -25,7 +25,7 @@ class OrderListScreen extends ConsumerStatefulWidget {
   static const String routeName = '/orders';
 
   @override
-  _OrderListScreenState createState() => _OrderListScreenState();
+  ConsumerState<OrderListScreen> createState() => _OrderListScreenState();
 }
 
 class _OrderListScreenState extends ConsumerState<OrderListScreen>

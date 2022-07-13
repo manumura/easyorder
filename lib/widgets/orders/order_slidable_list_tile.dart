@@ -19,7 +19,7 @@ class OrderSlidableListTile extends ConsumerStatefulWidget {
   final OrderModel order;
 
   @override
-  _OrderSlidableListTileState createState() => _OrderSlidableListTileState();
+  ConsumerState<OrderSlidableListTile> createState() => _OrderSlidableListTileState();
 }
 
 class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {

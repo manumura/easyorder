@@ -55,8 +55,8 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
 
       final UserModel user = UserModel.fromFirebaseUser(userCredential.user!);
       return user;
-    } on Exception catch (e, _) {
-      logger.e('Login error: $e');
+    } on Exception catch (e, s) {
+      logger.e('Login error: $e $s');
       throw AuthenticationException(
           'Please check your username and password', e);
     }
@@ -125,8 +125,8 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
         return user;
       }
       return null;
-    } on FirebaseAuthException catch (e, _) {
-      logger.e('Login error: $e');
+    } on FirebaseAuthException catch (e, s) {
+      logger.e('Login error: $e $s');
       if (e.code == 'account-exists-with-different-credential') {
         throw AuthenticationException(
             'Did you already register with this email using a different provider ?',
@@ -154,8 +154,8 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
       await userCredential.user!.sendEmailVerification();
       final UserModel user = UserModel.fromFirebaseUser(userCredential.user!);
       return user;
-    } on Exception catch (e, _) {
-      logger.e('Create user error: $e');
+    } on Exception catch (e, s) {
+      logger.e('Create user error: $e $s');
       throw AuthenticationException(
           'Please try again and verify that your email is not already used', e);
     }
@@ -165,8 +165,8 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
   Future<void> sendPasswordResetEmail({required String email}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
-    } on Exception catch (e, _) {
-      logger.e('Send reset password error: $e');
+    } on Exception catch (e, s) {
+      logger.e('Send reset password error: $e $s');
       throw AuthenticationException('Please try again later', e);
     }
   }

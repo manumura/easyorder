@@ -29,7 +29,7 @@ class CustomerEditScreen extends ConsumerStatefulWidget {
   final CustomerModel? _currentCustomer;
 
   @override
-  _CustomerEditScreenState createState() => _CustomerEditScreenState();
+  ConsumerState<CustomerEditScreen> createState() => _CustomerEditScreenState();
 }
 
 class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
