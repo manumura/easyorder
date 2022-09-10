@@ -60,25 +60,25 @@ class UiHelper {
       case AlertType.warning:
         header = 'Warning';
         btnColor = Colors.orange;
-        dialogType = DialogType.WARNING;
+        dialogType = DialogType.warning;
         break;
       case AlertType.error:
         header = 'Error';
         btnColor = Colors.red;
-        dialogType = DialogType.ERROR;
+        dialogType = DialogType.error;
         break;
       case AlertType.info:
       default:
         header = 'Info';
         btnColor = Colors.blue;
-        dialogType = DialogType.INFO;
+        dialogType = DialogType.info;
         break;
     }
 
     AwesomeDialog(
             context: context,
             dialogType: dialogType,
-            animType: AnimType.BOTTOMSLIDE,
+            animType: AnimType.bottomSlide,
             body: Column(
               children: <Widget>[
                 Padding(

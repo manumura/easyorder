@@ -122,8 +122,8 @@ class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {
   void _showConfirmationDialog(OrderBloc orderBloc) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.WARNING,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
       body: Column(
         children: const <Widget>[
           Padding(

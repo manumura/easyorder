@@ -320,8 +320,8 @@ class _CartScreenState extends ConsumerState<CartScreen>
   void _showConfirmationDialog() {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.WARNING,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
       body: Column(
         children: const <Widget>[
           Padding(

@@ -126,11 +126,11 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
               if (_currentIndex == 0)
                 _buildOrderList(orders$)
               else
-                OrderList(orders: const <OrderModel>[]),
+                const OrderList(orders: <OrderModel>[]),
               if (_currentIndex == 1)
                 _buildOrderList(orders$)
               else
-                OrderList(orders: const <OrderModel>[]),
+                const OrderList(orders: <OrderModel>[]),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

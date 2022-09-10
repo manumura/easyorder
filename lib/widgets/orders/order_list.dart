@@ -3,7 +3,7 @@ import 'package:easyorder/models/order_model.dart';
 import 'package:easyorder/widgets/orders/order_slidable_list_tile.dart';
 
 class OrderList extends StatelessWidget {
-  OrderList({required this.orders});
+  const OrderList({super.key, required this.orders});
 
   final List<OrderModel> orders;
 

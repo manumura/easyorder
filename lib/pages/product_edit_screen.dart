@@ -645,8 +645,8 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
 
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.WARNING,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

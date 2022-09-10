@@ -68,8 +68,8 @@ class _ProductSlidableListTileState
       ProductListStateNotifier productListStateNotifier) {
     AwesomeDialog(
       context: context,
-      dialogType: DialogType.WARNING,
-      animType: AnimType.BOTTOMSLIDE,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
       body: Column(
         children: const <Widget>[
           Padding(
