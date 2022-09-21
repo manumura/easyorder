@@ -89,7 +89,7 @@ FirebaseOptions _getFirebaseOptions({required String environment}) {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
 
   final Logger logger = getLogger();
   final FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
