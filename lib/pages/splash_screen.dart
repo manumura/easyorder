@@ -78,8 +78,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     );
   }
 
-  Widget _buildScreen(BuildContext context, UserModel? userModel) {
-    final bool isLoggedIn = userModel != null;
+  Widget _buildScreen(BuildContext context, UserModel? user) {
+    final bool isLoggedIn = user != null;
     logger.d('isLoggedIn? $isLoggedIn');
     return isLoggedIn ? OrderListScreen() : LoginScreen();
   }
