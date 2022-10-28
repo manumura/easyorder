@@ -27,9 +27,10 @@ import 'package:logger/logger.dart';
 // import 'package:flutter/rendering.dart';
 // import 'package:device_preview/device_preview.dart';
 
+// TODO https://pub.dev/packages/firebase_ui_auth
 // TODO AppCheck : https://pub.dev/packages/firebase_app_check/example https://firebase.flutter.dev/docs/app-check/usage/
 // TODO Missing google_app_id. Firebase Analytics disabled
-// TODO https://www.youtube.com/watch?v=CylXr3AF3uU&list=WL&index=29&ab_channel=Flutter
+// TODO MaterialStateProperties https://www.youtube.com/watch?v=CylXr3AF3uU&list=WL&index=29&ab_channel=Flutter
 // TODO invoices
 // TODO OrderFilterScreen
 // TODO noti due date
