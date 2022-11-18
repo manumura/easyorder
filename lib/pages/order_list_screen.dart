@@ -111,6 +111,14 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
             elevation:
                 Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
             actions: <Widget>[
+              // TODO test crashlytics
+              // IconButton(
+              //   icon: const Icon(
+              //     FontAwesomeIcons.addressCard,
+              //     color: Colors.white,
+              //   ),
+              //   onPressed: () => throw Exception(),
+              // ),
               _buildChip(orders$),
               _buildCsvExportButton(orderBloc),
               LogoutButton(),

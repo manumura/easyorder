@@ -5,6 +5,7 @@ import 'package:easyorder/firebase_options_prod.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/models/about_route_arguments.dart';
 import 'package:easyorder/pages/category_edit_screen.dart';
@@ -24,6 +25,7 @@ import 'package:easyorder/state/service_locator.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+
 // import 'package:flutter/rendering.dart';
 // import 'package:device_preview/device_preview.dart';
 
@@ -45,35 +47,39 @@ Future<void> main() async {
   //   debugPrintMarkNeedsLayoutStacks = true;
   //   debugPrintMarkNeedsPaintStacks = true;
 
-  await runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-    const String env = String.fromEnvironment('ENVIRONMENT', defaultValue: '');
-    final FirebaseOptions firebaseOptions = _getFirebaseOptions(environment: env);
-    await Firebase.initializeApp(
-      options: firebaseOptions,
-    );
+  const String env = String.fromEnvironment('ENVIRONMENT', defaultValue: '');
+  final FirebaseOptions firebaseOptions = _getFirebaseOptions(environment: env);
+  await Firebase.initializeApp(
+    options: firebaseOptions,
+  );
 
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  FlutterError.onError = (FlutterErrorDetails errorDetails) {
+    // If you wish to record a "non-fatal" exception, please use `FirebaseCrashlytics.instance.recordFlutterError` instead
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+    // If you wish to record a "non-fatal" exception, please remove the "fatal" parameter
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
-    Logger.level = Level.nothing; // nothing / debug
+  Logger.level = Level.debug; // nothing / debug
 
-    // GetIt
-    setupServiceLocator();
+  // GetIt
+  setupServiceLocator();
 
-    runApp(
-      ProviderScope(
-        child: MyApp(),
-      ),
-    );
-    //  runApp(
-    //    DevicePreview(
-    //      builder: (context) => ProviderScope(child: MyApp(),),
-    //    ),
-    //  );
-  }, (Object error, StackTrace stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-  });
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
+  //  runApp(
+  //    DevicePreview(
+  //      builder: (context) => ProviderScope(child: MyApp(),),
+  //    ),
+  //  );
 }
 
 FirebaseOptions _getFirebaseOptions({required String environment}) {
@@ -148,7 +154,7 @@ class MyApp extends StatelessWidget {
                 AboutRouteArguments? aboutRouteArguments;
                 if (settings.arguments is AboutRouteArguments) {
                   aboutRouteArguments =
-                  settings.arguments as AboutRouteArguments?;
+                      settings.arguments as AboutRouteArguments?;
                 }
 
                 if (routes[settings.name!] is PrivacyPolicyScreen) {
@@ -172,8 +178,8 @@ class MyApp extends StatelessWidget {
                 const Cubic curve = Curves.ease;
 
                 final Animatable<Offset> tween =
-                Tween<Offset>(begin: begin, end: end)
-                    .chain(CurveTween(curve: curve));
+                    Tween<Offset>(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
 
                 return SlideTransition(
                   position: animation.drive(tween),

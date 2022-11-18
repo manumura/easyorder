@@ -58,6 +58,13 @@ flutterfire configure \
   --macos-bundle-id=com.manolo.easyorder.dev \
   --android-package-name=com.manolo.easyorder.dev
 
+ flutterfire configure \
+   --project=simple-order-manager \
+   --out=lib/firebase_options_prod.dart \
+   --ios-bundle-id=com.manolo.easyorder \
+   --macos-bundle-id=com.manolo.easyorder \
+   --android-package-name=com.manolo.easyorder
+
 flutter pub run build_runner watch --delete-conflicting-outputs
 
 flutter build apk --flavor dev --dart-define=ENVIRONMENT=dev

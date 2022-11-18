@@ -27,9 +27,15 @@ class DevFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
-        return linux;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -79,27 +85,5 @@ class DevFirebaseOptions {
     androidClientId: '559162255779-5bm60kjeq6eajol8naapk2bpujaqs3l0.apps.googleusercontent.com',
     iosClientId: '559162255779-t7g1dern1af7oh516th533i8rpoo2fqa.apps.googleusercontent.com',
     iosBundleId: 'com.manolo.easyorder.dev',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCr84F9LYgV5YElS1_F9UMqOLcjnJ54Akg',
-    appId: '1:559162255779:web:7e2145ce912fa4a6275216',
-    messagingSenderId: '559162255779',
-    projectId: 'simple-order-manager-dev',
-    authDomain: 'simple-order-manager-dev.firebaseapp.com',
-    databaseURL: 'https://simple-order-manager-dev.firebaseio.com',
-    storageBucket: 'simple-order-manager-dev.appspot.com',
-    measurementId: 'G-J2DNZPHF5L',
-  );
-
-  static const FirebaseOptions linux = FirebaseOptions(
-    apiKey: 'AIzaSyCr84F9LYgV5YElS1_F9UMqOLcjnJ54Akg',
-    appId: '1:559162255779:web:b79cb26f9d16d510275216',
-    messagingSenderId: '559162255779',
-    projectId: 'simple-order-manager-dev',
-    authDomain: 'simple-order-manager-dev.firebaseapp.com',
-    databaseURL: 'https://simple-order-manager-dev.firebaseio.com',
-    storageBucket: 'simple-order-manager-dev.appspot.com',
-    measurementId: 'G-61PGM71SMP',
   );
 }
