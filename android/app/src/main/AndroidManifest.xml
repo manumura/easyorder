@@ -10,7 +10,7 @@
     </queries>
 
    <application
-        android:label="easyorder"
+        android:label="Simple Order Manager"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
