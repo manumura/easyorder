@@ -65,7 +65,7 @@ Future<void> main() async {
     return true;
   };
 
-  Logger.level = Level.debug; // nothing / debug
+  Logger.level = Level.nothing; // nothing / debug
 
   // GetIt
   setupServiceLocator();

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:csv/csv.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/order_bloc.dart';
 import 'package:easyorder/models/cart_item_model.dart';
@@ -141,26 +142,26 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
                 const OrderList(orders: <OrderModel>[]),
             ],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            onTap: (int index) {
-              _switchTab(index);
-            },
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_basket),
-                label: 'Current Orders',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.access_time),
-                label: 'Past Orders',
-              ),
-            ],
-            elevation: 10.0,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: backgroundColor,
-            selectedFontSize: 16.0,
-            selectedIconTheme: const IconThemeData(size: 30.0),
+          bottomNavigationBar: NavigationBarTheme(
+            data: navigationBarThemeData,
+            child: NavigationBar(
+              selectedIndex: _currentIndex,
+              onDestinationSelected: (int index) {
+                _switchTab(index);
+              },
+              destinations: const <NavigationDestination>[
+                NavigationDestination(
+                  icon: Icon(Icons.shopping_basket),
+                  label: 'Current Orders',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.access_time),
+                  label: 'Past Orders',
+                ),
+              ],
+              elevation: 10.0,
+              backgroundColor: backgroundColor,
+            ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
