@@ -159,5 +159,92 @@ void main() {
       expect(result, isNull);
     });
 
+    test('should update a category successfully', () async {
+      final CategoryModel categoryToUpdate = CategoryModel(
+        id: 'cat3',
+        uuid: 'uuid3',
+        name: 'test_category',
+        description: 'test_category_description',
+        userEmail: mockUser.email,
+        userId: mockUser.id,
+        active: true,
+      );
+
+      when(mockCategoryRepository
+          .update(userId: mockUser.id, categoryId: 'cat3', category: captureAnyNamed('category')))
+          .thenAnswer((_) => Future<bool>.value(true));
+
+      final CategoryModel? result = await categoryBloc.update(categoryId: 'cat3', category: categoryToUpdate, image: file);
+
+      final VerificationResult verification = verify(mockCategoryRepository.update(userId: mockUser.id, categoryId: 'cat3', category: captureAnyNamed('category')));
+      final CategoryModel categoryUpdated = CategoryModel.clone(categoryToUpdate);
+      categoryUpdated.imagePath = verification.captured.single.imagePath.toString();
+      categoryUpdated.imageUrl = verification.captured.single.imageUrl.toString();
+
+      expect(result, categoryUpdated);
+      expect(result?.imageUrl, categoryUpdated.imageUrl);
+      expect(result?.imagePath, categoryUpdated.imagePath);
+    });
+
+    test('should fail to update a category when no user', () async {
+      final CategoryModel categoryToUpdate = CategoryModel(
+        id: 'cat3',
+        uuid: 'uuid3',
+        name: 'test_category',
+        description: 'test_category_description',
+        userEmail: mockUser.email,
+        userId: mockUser.id,
+        active: true,
+      );
+
+      final CategoryModel? result = await categoryBlocWithNoUser.update(categoryId: 'cat3', category: categoryToUpdate, image: file);
+      expect(result, isNull);
+    });
+
+    test('should toggle a category successfully', () async {
+      final CategoryModel categoryToToggle = CategoryModel(
+        id: 'cat3',
+        uuid: 'uuid3',
+        name: 'test_category',
+        description: 'test_category_description',
+        userEmail: mockUser.email,
+        userId: mockUser.id,
+        active: true,
+      );
+
+      final CategoryModel categoryToggled = CategoryModel.clone(categoryToToggle);
+      categoryToggled.active = false;
+
+      when(mockCategoryRepository
+          .toggleActive(userId: mockUser.id, categoryId: 'cat3', active: false))
+          .thenAnswer((_) => Future<CategoryModel>.value(categoryToggled));
+
+      final CategoryModel? result = await categoryBloc.toggleActive(categoryId: 'cat3', active: false);
+
+      verify(mockCategoryRepository.toggleActive(userId: mockUser.id, categoryId: 'cat3', active: false));
+      expect(result, categoryToggled);
+    });
+
+    test('should fail to toggle a category when no user', () async {
+      final CategoryModel? result = await categoryBlocWithNoUser.toggleActive(categoryId: 'cat3', active: false);
+      expect(result, isNull);
+    });
+
+    test('should delete a category successfully', () async {
+      when(mockCategoryRepository
+          .delete(userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'))
+          .thenAnswer((_) => Future<bool>.value(true));
+
+      final bool result = await categoryBloc.delete(categoryId: 'cat3', categoryUuid: 'uuid3', categoryImagePath: 'test_path');
+
+      verify(mockCategoryRepository.delete(userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'));
+      expect(result, true);
+    });
+
+    test('should fail to delete a category when no user', () async {
+      final bool result = await categoryBlocWithNoUser.delete(categoryId: 'cat3', categoryUuid: 'uuid3');
+      expect(result, false);
+    });
+
   });
 }
