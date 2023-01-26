@@ -71,6 +71,11 @@ flutter build apk --flavor dev --dart-define=ENVIRONMENT=dev
 
 flutter build appbundle --release --flavor prod --dart-define=ENVIRONMENT=prod
 
+// https://pub.dev/packages/dart_code_metrics
+dart fix --dry-run
+dart fix --apply
+
+
 // TODO
 In your Podfile uncomment the next line (You need set the minimum target to 11.0 or higher)
 platform :ios, '11.0'

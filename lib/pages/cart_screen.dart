@@ -1,5 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/cart_bloc.dart';
 import 'package:easyorder/models/cart_item_model.dart';
@@ -290,15 +290,17 @@ class _CartScreenState extends ConsumerState<CartScreen>
         }
 
         final String count = snapshot.data?.itemCount.toString() ?? '0';
-        return Badge(
-          shape: BadgeShape.circle,
-          badgeColor: Colors.red,
+        return badges.Badge(
+          badgeStyle: const badges.BadgeStyle(
+            shape: badges.BadgeShape.circle,
+            badgeColor: Colors.red,
+          ),
           badgeContent: Text(count,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
               )),
-          position: BadgePosition.topEnd(top: 0, end: -5),
+          position: badges.BadgePosition.topEnd(top: 0, end: -5),
           child: const Icon(
             Icons.shopping_cart,
             size: 30.0,
