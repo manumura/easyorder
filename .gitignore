@@ -224,3 +224,5 @@ android/.idea/
 android/app/src/main/res/values/strings.xml
 ios/Flutter/flutter_export_environment.sh
 /.flutter-plugins-dependencies
+/TODO
+android/app/google-services*.json
