@@ -1,6 +1,3 @@
-import 'package:auth_buttons/auth_buttons.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/auth_bloc.dart';
 import 'package:easyorder/bloc/user_bloc.dart';
 import 'package:easyorder/exceptions/authentication_exception.dart';
@@ -16,9 +13,13 @@ import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/helpers/validator.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
+import 'package:sign_button/constants.dart';
+import 'package:sign_button/create_button.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const String routeName = '/login';
@@ -648,22 +649,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       ),
     );
     final Widget googleSignInButton = _authMode == AuthenticationType.login
-        ? GoogleAuthButton(
-            // key: _googleKey,
+        ? SignInButton(
+            buttonType: ButtonType.google,
+            buttonSize: ButtonSize.small, // small(default), medium, large
             onPressed: () => _signInWithProvider(AuthenticationProvider.google),
-            style: const AuthButtonStyle(
-              borderRadius: 24.0,
-            ),
           )
         : const SizedBox();
     final Widget facebookSignInButton = _authMode == AuthenticationType.login
-        ? FacebookAuthButton(
-            // key: _fbKey,
+        ? SignInButton(
+            buttonType: ButtonType.facebook,
+            buttonSize: ButtonSize.small,
+            // btnText: 'Facebook Signin',
             onPressed: () =>
                 _signInWithProvider(AuthenticationProvider.facebook),
-            style: const AuthButtonStyle(
-              borderRadius: 24.0,
-            ),
           )
         : const SizedBox();
 

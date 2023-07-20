@@ -17,7 +17,7 @@ final ThemeData _androidTheme = ThemeData(
     ),
   ),
   textTheme: const TextTheme(
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       color: Colors.white,
     ),
   ),
@@ -40,7 +40,7 @@ final ThemeData _iOSTheme = ThemeData(
     ),
   ),
   textTheme: const TextTheme(
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       color: Colors.white,
     ),
   ),

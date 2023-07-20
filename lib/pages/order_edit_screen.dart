@@ -878,7 +878,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         firstDate: firstDate ?? DateTime(2010),
         lastDate: lastDate ?? DateTime(2100),
         initialDate: currentValue ?? DateTime.now());
-    if (date != null) {
+    if (date != null && context.mounted) {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),

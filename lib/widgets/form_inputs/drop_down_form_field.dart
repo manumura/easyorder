@@ -3,20 +3,16 @@ import 'package:flutter/material.dart';
 
 class DropdownFormField<T> extends FormField<T> {
   DropdownFormField({
-    Key? key,
+    super.key,
     InputDecoration? decoration,
     T? initialValue,
     required List<DropdownMenuItem<T>> items,
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
-    FormFieldSetter<T>? onSaved,
-    FormFieldValidator<T>? validator,
+    AutovalidateMode super.autovalidateMode = AutovalidateMode.disabled,
+    super.onSaved,
+    super.validator,
     Icon? icon,
     required String labelText,
   }) : super(
-          key: key,
-          onSaved: onSaved,
-          validator: validator,
-          autovalidateMode: autovalidateMode,
           initialValue: items.firstWhereOrNull((DropdownMenuItem<T> item) =>
                       item.value == initialValue) ==
                   null

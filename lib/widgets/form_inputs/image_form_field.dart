@@ -13,17 +13,14 @@ import './image_input_adapter.dart';
 class ImageFormField extends FormField<ImageInputAdapter> {
   /// ImageFormField
   ImageFormField({
-    FormFieldSetter<ImageInputAdapter>? onSaved,
-    FormFieldValidator<ImageInputAdapter>? validator,
-    ImageInputAdapter? initialValue,
+    super.onSaved,
+    super.validator,
+    super.initialValue,
     AutovalidateMode autovalidate = AutovalidateMode.disabled,
     double fileMaxWidth = 300.0,
     double previewImageHeight = 300.0,
     int imageQuality = 100,
   }) : super(
-          onSaved: onSaved,
-          validator: validator,
-          initialValue: initialValue,
           autovalidateMode: autovalidate,
           builder: (FormFieldState<ImageInputAdapter> state) {
             final Color buttonColor = Theme.of(state.context).primaryColor;
