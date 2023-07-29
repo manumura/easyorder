@@ -47,11 +47,12 @@ class ConfigurationRepositoryImpl implements ConfigurationRepository {
       await remoteConfig.activate();
     } on FirebaseException catch (exception) {
       // Fetch throttled.
-      logger.e('Remote config fetch throttled', exception);
+      logger.e('Remote config fetch throttled', error: exception, stackTrace: exception.stackTrace);
     } catch (exception) {
       logger.e(
           'Unable to fetch remote config. Cached or default values will be used',
-          exception);
+          error: exception,
+      );
     }
 
     return remoteConfig;

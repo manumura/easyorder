@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class PriceTotalTag extends StatelessWidget {
   const PriceTotalTag({
-    Key? key,
+    super.key,
     required this.price,
-  }) : super(key: key);
+  });
 
   final double price;
 
