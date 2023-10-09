@@ -1,4 +1,12 @@
+import 'dart:io';
+
+import 'package:csv/csv.dart';
+import 'package:easyorder/models/cart_item_model.dart';
+import 'package:easyorder/models/order_model.dart';
+import 'package:easyorder/models/order_status.dart';
 import 'package:easyorder/models/time_difference.dart';
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 int minutesBetween(DateTime from, DateTime to) {
   final DateTime start =
@@ -30,3 +38,62 @@ TimeDifference calculateTimeDifference(int diffInMinutes) {
 // bool _isNumeric(String str) {
 //   return double.tryParse(str) != null;
 // }
+
+Future<File> generateCsv(List<OrderModel> orders, DateTime now) async {
+  final List<List<dynamic>> rows = <List<dynamic>>[];
+
+  final List<dynamic> header = <dynamic>[];
+  header.addAll(<String>[
+    'Status',
+    'Number',
+    'Customer',
+    'Date',
+    'Due Date',
+    'Description',
+    'Total Price',
+    'Item Quantity',
+    'Item Name',
+    'Item Price'
+  ]);
+  rows.add(header);
+
+  for (int i = 0; i < orders.length; i++) {
+    final List<dynamic> row = <dynamic>[];
+
+    final OrderModel order = orders[i];
+    row.add(order.status == OrderStatus.completed ? 'COMPLETED' : 'PENDING');
+    row.add(order.number);
+    row.add(order.customer.name);
+    row.add(order.date);
+    row.add(order.dueDate ?? '');
+    row.add(order.description ?? '');
+
+    if (order.cart != null) {
+      row.add(order.cart?.price);
+      for (final CartItemModel cartItem in order.cart!.cartItems) {
+        row.add(cartItem.quantity);
+        row.add(cartItem.product.name);
+        row.add(cartItem.product.price);
+      }
+    }
+
+    rows.add(row);
+  }
+
+  final DateTime now = DateTime.now();
+  final String fileSuffix = DateFormat('yyyyMMddHHmmss').format(now);
+
+  // final Directory? directory = await getExternalStorageDirectory();
+  final Directory directory = await getApplicationCacheDirectory();
+  // if (directory == null) {
+  //   logger.d('Cannot find external storage directory');
+  //   return;
+  // }
+
+  final File file = File('${directory.path}/orders_$fileSuffix.csv');
+  // final File file = MemoryFileSystem().file('tmp.csv');
+  final String csv = const ListToCsvConverter().convert(rows);
+  file.writeAsString(csv);
+
+  return file;
+}

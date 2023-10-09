@@ -1,25 +1,24 @@
 import 'dart:io';
 
-import 'package:csv/csv.dart';
-import 'package:easyorder/shared/adaptive_theme.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/order_bloc.dart';
-import 'package:easyorder/models/cart_item_model.dart';
+import 'package:easyorder/models/alert_type.dart';
 import 'package:easyorder/models/order_model.dart';
-import 'package:easyorder/models/order_status.dart';
 import 'package:easyorder/pages/order_edit_screen.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/shared/constants.dart';
+import 'package:easyorder/shared/utils.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
+import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/orders/order_list.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
 import 'package:easyorder/widgets/ui_elements/logout_button.dart';
 import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 
 class OrderListScreen extends ConsumerStatefulWidget {
@@ -263,76 +262,33 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
   }
 
   Future<void> _exportToCsv(BuildContext context, OrderBloc orderBloc) async {
-    setState(() => _isLoading = true);
-    final List<OrderModel> orders = await orderBloc.find();
-    final List<List<dynamic>> rows = <List<dynamic>>[];
+    try {
+      setState(() => _isLoading = true);
+      final List<OrderModel> orders = await orderBloc.find();
 
-    final List<dynamic> header = <dynamic>[];
-    header.addAll(<String>[
-      'Status',
-      'Number',
-      'Customer',
-      'Date',
-      'Due Date',
-      'Description',
-      'Total Price',
-      'Item Quantity',
-      'Item Name',
-      'Item Price'
-    ]);
-    rows.add(header);
+      final DateTime now = DateTime.now();
+      final String dateTitle = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+      final File file = await generateCsv(orders, now);
 
-    for (int i = 0; i < orders.length; i++) {
-      final List<dynamic> row = <dynamic>[];
-
-      final OrderModel order = orders[i];
-      row.add(order.status == OrderStatus.completed ? 'COMPLETED' : 'PENDING');
-      row.add(order.number);
-      row.add(order.customer.name);
-      row.add(order.date);
-      row.add(order.dueDate ?? '');
-      row.add(order.description ?? '');
-
-      if (order.cart != null) {
-        row.add(order.cart?.price);
-        for (final CartItemModel cartItem in order.cart!.cartItems) {
-          row.add(cartItem.quantity);
-          row.add(cartItem.product.name);
-          row.add(cartItem.product.price);
-        }
+      if (!mounted) return;
+      final RenderBox? box = context.findRenderObject() as RenderBox?;
+      if (box == null) {
+        logger.d('Cannot find render box');
+        return;
       }
 
-      rows.add(row);
-    }
-
-    final DateTime now = DateTime.now();
-    final String dateTitle = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-    final String fileSuffix = DateFormat('yyyyMMddHHmmss').format(now);
-
-    final Directory? directory = await getExternalStorageDirectory();
-    if (directory == null) {
-      logger.d('Cannot find external storage directory');
+      Share.shareFiles(
+        <String>[file.path],
+        subject: 'Simple Order Manager: orders export $dateTitle',
+        text: 'Please find attached the orders export as csv file.',
+        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+      );
+      setState(() => _isLoading = false);
+    } catch (e) {
+      setState(() => _isLoading = false);
+      UiHelper.showAlertDialog(context, AlertType.error,
+          'Csv creation failed !', 'Please try again later.');
       return;
     }
-
-    final File file = File('${directory.path}/orders_$fileSuffix.csv');
-    // final File file = MemoryFileSystem().file('tmp.csv');
-    final String csv = const ListToCsvConverter().convert(rows);
-    file.writeAsString(csv);
-
-    if (!mounted) return;
-    final RenderBox? box = context.findRenderObject() as RenderBox?;
-    if (box == null) {
-      logger.d('Cannot find render box');
-      return;
-    }
-
-    Share.shareFiles(
-      <String>[file.path],
-      subject: 'Simple Order Manager: orders export $dateTitle',
-      text: 'Please find attached the orders export as csv file.',
-      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-    );
-    setState(() => _isLoading = false);
   }
 }
