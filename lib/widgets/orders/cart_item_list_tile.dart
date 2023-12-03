@@ -38,7 +38,22 @@ class _CartItemListTileState extends ConsumerState<CartItemListTile> {
   @override
   Widget build(BuildContext context) {
     final CartBloc cartBloc = ref.watch(cartBlocProvider);
+    return _buildCard(_buildListTile(context, cartBloc));
+  }
 
+  Widget _buildCard(Widget child) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      elevation: 8.0,
+      margin: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 1.0),
+      child: child,
+    );
+  }
+
+  Widget _buildListTile(BuildContext context, CartBloc cartBloc) {
     return ListTile(
       leading: _buildAvatar(),
       title: Text(widget.cartItem.product.name),

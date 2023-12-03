@@ -194,17 +194,21 @@ class _CartScreenState extends ConsumerState<CartScreen>
 
   PreferredSizeWidget _buildTabBar(Map<String, int> categoriesMap) {
     return TabBar(
+      labelStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
       controller: _tabController,
       labelColor: Theme.of(context).primaryColor,
-      unselectedLabelColor: Colors.white,
+      unselectedLabelColor: Colors.grey,
       indicatorSize: TabBarIndicatorSize.tab,
-      indicator: const BoxDecoration(
-        borderRadius: BorderRadius.only(
+      indicator: BoxDecoration(
+        borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        color: Colors.white,
+        color: Colors.indigo[200],
       ),
+      // indicatorColor: backgroundColor,
       isScrollable: true,
-      indicatorColor: backgroundColor,
       onTap: (int index) {
         _itemScrollController.scrollTo(
           index: categoriesMap[categoriesMap.keys.elementAt(index)] ?? 0,
@@ -247,7 +251,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
                     style: const TextStyle(
                       // backgroundColor: Colors.red,
                       // color: Theme.of(context).primaryColor,
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -266,11 +270,12 @@ class _CartScreenState extends ConsumerState<CartScreen>
             nextProduct != null && product.category != nextProduct.category;
 
         return isNewCategory
-            ? const Divider(
-                color: Colors.indigo,
-                thickness: 1,
+            ? const SizedBox(
+                height: 10,
               )
-            : const Divider();
+            : const SizedBox(
+                height: 5,
+              );
       },
       itemScrollController: _itemScrollController,
       itemPositionsListener: _itemPositionsListener,
@@ -302,7 +307,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
                 color: Colors.white,
                 fontSize: 16,
               )),
-          position: badges.BadgePosition.topEnd(top: 0, end: -5),
+          position: badges.BadgePosition.topEnd(top: -10, end: -5),
           child: const Icon(
             Icons.shopping_cart,
             size: 30.0,

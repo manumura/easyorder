@@ -26,6 +26,25 @@ abstract class AbstractProductListTile {
 
   Widget buildListTile(
       BuildContext context, ProductModel product, Widget trailingWidget) {
+    final Widget circleAvatar = _buildAvatar(product);
+
+    return ListTile(
+      leading: circleAvatar,
+      title: _buildTitle(context, product),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(
+            height: 2.0,
+          ),
+          PriceTag(price: product.price),
+        ],
+      ),
+      trailing: trailingWidget,
+    );
+  }
+
+  Widget _buildAvatar(ProductModel product) {
     final Widget circleAvatar = product.imageUrl == null
         ? const CircleAvatar(
             backgroundImage: AssetImage('assets/placeholder.jpg'),
@@ -44,20 +63,7 @@ abstract class AbstractProductListTile {
                 const Icon(Icons.error),
           );
 
-    return ListTile(
-      leading: circleAvatar,
-      title: _buildTitle(context, product),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(
-            height: 2.0,
-          ),
-          PriceTag(price: product.price),
-        ],
-      ),
-      trailing: trailingWidget,
-    );
+    return circleAvatar;
   }
 
   Widget _buildTitle(BuildContext context, ProductModel product) {
