@@ -651,15 +651,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     final Widget googleSignInButton = _authMode == AuthenticationType.login
         ? SignInButton(
             buttonType: ButtonType.google,
-            buttonSize: ButtonSize.small, // small(default), medium, large
+            buttonSize: ButtonSize.medium, // small(default), medium, large
             onPressed: () => _signInWithProvider(AuthenticationProvider.google),
           )
         : const SizedBox();
     final Widget facebookSignInButton = _authMode == AuthenticationType.login
         ? SignInButton(
             buttonType: ButtonType.facebook,
-            buttonSize: ButtonSize.small,
+            buttonSize: ButtonSize.medium,
             // btnText: 'Facebook Signin',
+            width: 250,
             onPressed: () =>
                 _signInWithProvider(AuthenticationProvider.facebook),
           )
