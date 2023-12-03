@@ -348,9 +348,9 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
       builder: (BuildContext context, TextEditingController controller,
           FocusNode focusNode) {
         return TextFormField(
-          controller: _customerTextController,
+          controller: controller, //_customerTextController,
           enabled: !_isOrderCompleted,
-          focusNode: _customerFocusNode,
+          focusNode: focusNode, // _customerFocusNode,
           validator: (String? value) {
             return Validator.validateCustomer(value);
           },
@@ -365,7 +365,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
                 ? const SizedBox()
                 : IconButton(
                     onPressed: () {
-                      _customerTextController.clear();
+                      controller.clear(); // _customerTextController.clear();
                     },
                     icon: const Icon(
                       Icons.clear,
@@ -380,28 +380,36 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
           ),
         );
       },
+      controller: _customerTextController,
       debounceDuration: const Duration(milliseconds: 300),
-      suggestionsCallback: (String pattern) {
-        return _filterByNameContaining(customers, pattern);
-      },
       itemBuilder: (BuildContext context, CustomerModel customer) {
         return CustomerAutocompleteListTile(
             key: ValueKey<String?>(customer.uuid), customer: customer);
       },
       emptyBuilder: (BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+        return const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
+          ),
           child: Text(
             'No active customer found',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Theme.of(context).disabledColor, fontSize: 18.0),
+              color: Colors.black54,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+            ),
           ),
         );
       },
       transitionBuilder:
           (BuildContext context, Animation<double> animation, Widget child) {
         return child;
+      },
+      suggestionsCallback: (String pattern) {
+        return _filterByNameContaining(customers, pattern);
       },
       onSelected: (CustomerModel customer) {
         _selectedCustomer = customer;
@@ -895,7 +903,6 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
 
   List<CustomerModel> _filterByNameContaining(
       List<CustomerModel> initialCustomers, String pattern) {
-    print('pattern: $pattern');
     if (pattern.isEmpty) {
       return initialCustomers;
     }

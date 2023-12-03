@@ -251,6 +251,7 @@ class CustomerAutocompleteListTile extends StatelessWidget
         const Divider(
           color: Colors.black,
           height: 5,
+          thickness: 0.2,
         ),
       ],
     );
