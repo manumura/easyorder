@@ -285,7 +285,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
           child: IconButton(
             iconSize: 36,
             icon: const Icon(Icons.add_circle),
-            color: Theme.of(context).colorScheme.secondary,
+            // color: Theme.of(context).colorScheme.secondary,
             splashColor: Theme.of(context).primaryColor,
             onPressed: _openEditCategoryScreen,
           ),
@@ -405,24 +405,30 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
     const String message =
         'Inactive products won\'t appear in the items list during the order creation.';
 
-    return Row(
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.info_outline_rounded),
-          color: isActive ? Colors.green : Colors.red,
-          tooltip: message,
-          onPressed: () {
-            UiHelper.showAlertDialogNoTitle(context, AlertType.info, message);
-          },
-        ),
-        Text(
-          isActive ? 'This product is active' : 'This product is inactive',
-          style: TextStyle(
-            color: isActive ? Colors.green : Colors.red,
-            fontWeight: FontWeight.bold,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: isActive ? Colors.green : Colors.red,
+      ),
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.info_outline_rounded),
+            color: Colors.white,
+            tooltip: message,
+            onPressed: () {
+              UiHelper.showAlertDialogNoTitle(context, AlertType.info, message);
+            },
           ),
-        ),
-      ],
+          Text(
+            isActive ? 'This product is active' : 'This product is inactive',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -431,7 +437,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
       onPressed: _isLoading ? null : () => _submitForm(),
       icon: const Icon(
         Icons.save,
-        color: Colors.white,
+        // color: Colors.white,
         size: 30,
       ),
     );
@@ -442,7 +448,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
       onPressed: _isLoading ? null : () => _showConfirmationDialog(),
       icon: const Icon(
         Icons.delete_forever,
-        color: Colors.white,
+        // color: Colors.white,
         size: 30,
       ),
     );
@@ -647,10 +653,10 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
       context: context,
       dialogType: DialogType.warning,
       animType: AnimType.bottomSlide,
-      body: Column(
+      body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const <Widget>[
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(
@@ -752,7 +758,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
   void _openEditCategoryScreen() {
     Navigator.of(context).push(MaterialPageRoute<void>(
         settings: const RouteSettings(name: CategoryEditScreen.routeName),
-        builder: (BuildContext context) => CategoryEditScreen()));
+        builder: (BuildContext context) => const CategoryEditScreen()));
   }
 
   void _showErrorDialog() {

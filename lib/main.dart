@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
     TermsAndConditionsScreen.routeName: TermsAndConditionsScreen(),
     CustomerListScreen.routeName: CustomerListScreen(),
     CustomerEditScreen.routeName: const CustomerEditScreen(),
-    CategoryListScreen.routeName: CategoryListScreen(),
+    CategoryListScreen.routeName: const CategoryListScreen(),
     CategoryEditScreen.routeName: const CategoryEditScreen(),
     ProductListScreen.routeName: ProductListScreen(),
     ProductEditScreen.routeName: ProductEditScreen(),

@@ -12,7 +12,8 @@ import 'package:logger/logger.dart';
 
 class CategoryPaginatedList extends ConsumerStatefulWidget {
   @override
-  ConsumerState<CategoryPaginatedList> createState() => _CategoryPaginatedListState();
+  ConsumerState<CategoryPaginatedList> createState() =>
+      _CategoryPaginatedListState();
 }
 
 class _CategoryPaginatedListState extends ConsumerState<CategoryPaginatedList> {
@@ -70,7 +71,9 @@ class _CategoryPaginatedListState extends ConsumerState<CategoryPaginatedList> {
       },
       child: ListView.separated(
         padding: const EdgeInsets.all(10.0),
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
+        separatorBuilder: (BuildContext context, int index) => const SizedBox(
+          height: 8,
+        ),
         itemCount: itemCount,
         itemBuilder: (BuildContext context, int index) {
           if (index >= categories.length && !hasNoMoreItemToLoad) {

@@ -9,9 +9,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Easy Order'),
       ),
-      body: Column(
+      body: const Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: const <Widget>[
+        children: <Widget>[
           Center(child: Text('Welcome !')),
         ],
       ),

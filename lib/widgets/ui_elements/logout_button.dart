@@ -22,7 +22,7 @@ class LogoutButton extends HookConsumerWidget {
     return IconButton(
       icon: const Icon(
         FontAwesomeIcons.rightFromBracket,
-        color: Colors.white,
+        // color: Colors.white,
       ),
       onPressed: () => _onLogout(context, authBloc, localCacheService),
     );

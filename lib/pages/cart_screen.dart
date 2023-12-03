@@ -64,8 +64,10 @@ class _CartScreenState extends ConsumerState<CartScreen>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onBackPressed,
+    return NavigatorPopHandler(
+      onPop: () {
+        Navigator.of(context).pop('Back pressed');
+      },
       child: _buildScreenStream(),
     );
   }
@@ -324,8 +326,8 @@ class _CartScreenState extends ConsumerState<CartScreen>
       context: context,
       dialogType: DialogType.warning,
       animType: AnimType.bottomSlide,
-      body: Column(
-        children: const <Widget>[
+      body: const Column(
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(
@@ -384,11 +386,6 @@ class _CartScreenState extends ConsumerState<CartScreen>
         // _onProductCreated(productCreated);
       }
     });
-  }
-
-  Future<bool> _onBackPressed() {
-    Navigator.of(context).pop('Back pressed');
-    return Future<bool>.value(false);
   }
 
   // Future<bool> _onDone() {

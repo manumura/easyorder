@@ -80,7 +80,7 @@ class CategoryListScreen extends HookConsumerWidget {
           Navigator.of(context).push(
             MaterialPageRoute<void>(
               settings: const RouteSettings(name: CategoryEditScreen.routeName),
-              builder: (BuildContext context) => CategoryEditScreen(),
+              builder: (BuildContext context) => const CategoryEditScreen(),
             ),
           );
         },

@@ -77,7 +77,8 @@ class _SideDrawerState extends State<SideDrawer> {
               Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
                   settings:
                       const RouteSettings(name: CategoryListScreen.routeName),
-                  builder: (BuildContext context) => CategoryListScreen()));
+                  builder: (BuildContext context) =>
+                      const CategoryListScreen()));
             },
           ),
           const Divider(),

@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/exceptions/already_in_use_exception.dart';
 import 'package:easyorder/exceptions/not_unique_exception.dart';
 import 'package:easyorder/models/alert_type.dart';
@@ -16,6 +15,7 @@ import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/helpers/validator.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:loading_overlay/loading_overlay.dart';
@@ -317,24 +317,30 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
     const String message =
         'Inactive customers won\'t appear in the selection list during the order creation.';
 
-    return Row(
-      children: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.info_outline_rounded),
-          color: isActive ? Colors.green : Colors.red,
-          tooltip: message,
-          onPressed: () {
-            UiHelper.showAlertDialogNoTitle(context, AlertType.info, message);
-          },
-        ),
-        Text(
-          isActive ? 'This customer is active' : 'This customer is inactive',
-          style: TextStyle(
-            color: isActive ? Colors.green : Colors.red,
-            fontWeight: FontWeight.bold,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: isActive ? Colors.green : Colors.red,
+      ),
+      child: Row(
+        children: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.info_outline_rounded),
+            color: Colors.white,
+            tooltip: message,
+            onPressed: () {
+              UiHelper.showAlertDialogNoTitle(context, AlertType.info, message);
+            },
           ),
-        ),
-      ],
+          Text(
+            isActive ? 'This customer is active' : 'This customer is inactive',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -343,7 +349,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
       onPressed: _isLoading ? null : () => _submitForm(),
       icon: const Icon(
         Icons.save,
-        color: Colors.white,
+        // color: Colors.white,
         size: 30,
       ),
     );
@@ -354,7 +360,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
       onPressed: _isLoading ? null : () => _showConfirmationDialog(),
       icon: const Icon(
         Icons.delete_forever,
-        color: Colors.white,
+        // color: Colors.white,
         size: 30,
       ),
     );
@@ -536,10 +542,10 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
       context: context,
       dialogType: DialogType.warning,
       animType: AnimType.bottomSlide,
-      body: Column(
+      body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const <Widget>[
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(

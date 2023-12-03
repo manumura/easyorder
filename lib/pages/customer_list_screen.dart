@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/customer_bloc.dart';
 import 'package:easyorder/pages/customer_edit_screen.dart';
 import 'package:easyorder/state/providers.dart';
@@ -7,6 +6,7 @@ import 'package:easyorder/widgets/search/customer_search_delegate.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
 import 'package:easyorder/widgets/ui_elements/logout_button.dart';
 import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomerListScreen extends HookConsumerWidget {
@@ -78,7 +78,7 @@ class CustomerListScreen extends HookConsumerWidget {
           Navigator.of(context).push(
             MaterialPageRoute<void>(
               settings: const RouteSettings(name: CustomerEditScreen.routeName),
-              builder: (BuildContext context) => CustomerEditScreen(),
+              builder: (BuildContext context) => const CustomerEditScreen(),
             ),
           );
         },

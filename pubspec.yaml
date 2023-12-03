@@ -32,82 +32,82 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
 
   another_flushbar: ^1.12.30
 #  auth_buttons: ^3.0.0
   awesome_dialog: ^3.1.0
-  badges: ^3.1.1
-  cached_network_image: ^3.2.3
-  cloud_firestore: ^4.8.5
-  collection: ^1.17.1
-  csv: ^5.0.2
+  badges: ^3.1.2
+  cached_network_image: ^3.3.0
+  cloud_firestore: ^4.13.3
+  collection: ^1.18.0
+  csv: ^5.1.1
   datetime_picker_formfield: ^2.0.1
   # TODO device_preview: ^0.7.4
-  flutter_facebook_auth: ^6.0.1
-  flutter_markdown: ^0.6.17+1
-  flutter_slidable: ^3.0.0
-  firebase_analytics: ^10.4.5
-  firebase_auth: ^4.7.3
-  firebase_core: ^2.15.1
-  firebase_crashlytics: ^3.3.5
+  flutter_facebook_auth: ^6.0.3
+  flutter_markdown: ^0.6.18+2
+  flutter_slidable: ^3.0.1
+  firebase_analytics: ^10.7.2
+  firebase_auth: ^4.15.0
+  firebase_core: ^2.24.0
+  firebase_crashlytics: ^3.4.6
   #  firebase_performance: ^0.7.0+7
-  firebase_remote_config: ^4.2.5
-  firebase_storage: ^11.2.6
-  flutter_hooks: ^0.20.0
+  firebase_remote_config: ^4.3.6
+  firebase_storage: ^11.5.3
+  flutter_hooks: ^0.20.3
   flutter_switch: ^0.3.2
-  flutter_typeahead: ^4.6.2
+  flutter_typeahead: ^5.0.1
   freezed_annotation: ^2.4.1
   functional_listener: ^2.3.1
-  font_awesome_flutter: ^10.5.0
-  get_it: ^7.6.0
-  google_fonts: ^5.1.0 # https://fonts.google.com/?query=luckiest
-  google_sign_in: ^6.1.4
-  hooks_riverpod: ^2.3.8
-  geocoding: ^2.1.0
-  geolocator: ^10.0.0
-  http: ^1.1.0
-  image_picker: ^1.0.2
-  injectable: ^2.3.0
+  font_awesome_flutter: ^10.6.0
+  get_it: ^7.6.4
+  google_fonts: ^6.1.0 # https://fonts.google.com/?query=luckiest
+  google_sign_in: ^6.1.6
+  hooks_riverpod: ^2.4.9
+  geocoding: ^2.1.1
+  geolocator: ^10.1.0
+  http: ^1.1.2
+  image_picker: ^1.0.4
+  injectable: ^2.3.2
   intl: ^0.18.1
   intl_phone_number_input: ^0.7.3+1
   json_annotation: ^4.8.1
   loading_overlay: ^0.3.0
-  logger: ^2.0.1
+  logger: ^2.0.2+1
   mime: ^1.0.4
   package_info: ^2.0.2
   path: ^1.8.3
-  path_provider: ^2.1.0
+  path_provider: ^2.1.1
   rxdart: ^0.27.7
-  sign_button: ^2.0.4
+  sign_button: ^2.0.6
   scrollable_positioned_list: ^0.3.8
   share: ^2.0.4
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.2
   sticky_headers: ^0.3.0+2
-  upgrader: ^8.1.0
-  url_launcher: ^6.1.12
-  uuid: ^3.0.7
+  upgrader: ^8.4.0
+  url_launcher: ^6.2.1
+  uuid: ^4.2.1
 
 dev_dependencies:
   build_runner:
-  custom_lint: ^0.5.2
+  custom_lint: ^0.5.7
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.2
+  flutter_native_splash: ^2.3.6
   flutter_test:
     sdk: flutter
-  freezed: ^2.4.1
-  injectable_generator: ^2.4.0
+  freezed: ^2.4.5
+  injectable_generator: ^2.4.1
   json_serializable: ^6.7.1
-  mockito: ^5.4.2
+  mockito: ^5.4.3
 #  mocktail: ^0.3.0
-  riverpod_lint: ^2.0.1
+  riverpod_lint: ^2.3.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.2
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

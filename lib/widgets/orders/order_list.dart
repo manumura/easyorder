@@ -20,7 +20,9 @@ class OrderList extends StatelessWidget {
         return OrderSlidableListTile(order: order);
       },
       itemCount: orders.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 5,
+      ),
     );
   }
 }

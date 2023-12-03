@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/cart_bloc.dart';
 import 'package:easyorder/bloc/customer_bloc.dart';
 import 'package:easyorder/bloc/order_bloc.dart';
@@ -21,6 +20,7 @@ import 'package:easyorder/widgets/helpers/validator.dart';
 import 'package:easyorder/widgets/orders/order_items_list_tile.dart';
 import 'package:easyorder/widgets/orders/price_total_tag.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -334,7 +334,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
           child: IconButton(
             iconSize: 36,
             icon: const Icon(Icons.add_circle),
-            color: Theme.of(context).colorScheme.secondary,
+            // color: Theme.of(context).colorScheme.secondary,
             splashColor: Theme.of(context).primaryColor,
             onPressed: _openEditCustomerScreen,
           ),
@@ -344,35 +344,42 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   }
 
   Widget _buildCustomerAutocompleteField(List<CustomerModel> customers) {
-    return TypeAheadFormField<CustomerModel>(
-      textFieldConfiguration: TextFieldConfiguration(
-        controller: _customerTextController,
-        enabled: !_isOrderCompleted,
-        focusNode: _customerFocusNode,
-        decoration: InputDecoration(
-          prefixIcon: const Padding(
-            padding: EdgeInsets.only(left: 5.0),
-            child: Icon(
-              Icons.perm_identity,
+    return TypeAheadField<CustomerModel>(
+      builder: (BuildContext context, TextEditingController controller,
+          FocusNode focusNode) {
+        return TextFormField(
+          controller: _customerTextController,
+          enabled: !_isOrderCompleted,
+          focusNode: _customerFocusNode,
+          validator: (String? value) {
+            return Validator.validateCustomer(value);
+          },
+          decoration: InputDecoration(
+            prefixIcon: const Padding(
+              padding: EdgeInsets.only(left: 5.0),
+              child: Icon(
+                Icons.perm_identity,
+              ),
             ),
-          ),
-          suffixIcon: !_isCustomerClearVisible
-              ? const SizedBox()
-              : IconButton(
-                  onPressed: () {
-                    _customerTextController.clear();
-                  },
-                  icon: const Icon(
-                    Icons.clear,
+            suffixIcon: !_isCustomerClearVisible
+                ? const SizedBox()
+                : IconButton(
+                    onPressed: () {
+                      _customerTextController.clear();
+                    },
+                    icon: const Icon(
+                      Icons.clear,
+                    ),
                   ),
-                ),
-          labelText: 'Customer *',
-          contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          filled: true,
-          fillColor: Colors.white,
-        ),
-      ),
+            labelText: 'Customer *',
+            contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+            filled: true,
+            fillColor: Colors.white,
+          ),
+        );
+      },
       debounceDuration: const Duration(milliseconds: 300),
       suggestionsCallback: (String pattern) {
         return _filterByNameContaining(customers, pattern);
@@ -381,7 +388,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         return CustomerAutocompleteListTile(
             key: ValueKey<String?>(customer.uuid), customer: customer);
       },
-      noItemsFoundBuilder: (BuildContext context) {
+      emptyBuilder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
@@ -392,16 +399,13 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
           ),
         );
       },
-      transitionBuilder: (BuildContext context, Widget suggestionsBox,
-          AnimationController? controller) {
-        return suggestionsBox;
+      transitionBuilder:
+          (BuildContext context, Animation<double> animation, Widget child) {
+        return child;
       },
-      onSuggestionSelected: (CustomerModel customer) {
+      onSelected: (CustomerModel customer) {
         _selectedCustomer = customer;
         _customerTextController.text = customer.name;
-      },
-      validator: (String? value) {
-        return Validator.validateCustomer(value);
       },
     );
   }
@@ -801,8 +805,8 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
       context: context,
       dialogType: DialogType.warning,
       animType: AnimType.bottomSlide,
-      body: Column(
-        children: const <Widget>[
+      body: const Column(
+        children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(
@@ -891,6 +895,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
 
   List<CustomerModel> _filterByNameContaining(
       List<CustomerModel> initialCustomers, String pattern) {
+    print('pattern: $pattern');
     if (pattern.isEmpty) {
       return initialCustomers;
     }
@@ -923,7 +928,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         .push(
       MaterialPageRoute<CustomerModel>(
         settings: const RouteSettings(name: CustomerEditScreen.routeName),
-        builder: (BuildContext context) => CustomerEditScreen(),
+        builder: (BuildContext context) => const CustomerEditScreen(),
       ),
     )
         .then(

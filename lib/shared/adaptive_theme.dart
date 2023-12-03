@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/shared/constants.dart';
+import 'package:flutter/material.dart';
 
 final ThemeData _androidTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.indigo,
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: Colors.indigo,
-    accentColor: Colors.blueAccent,
+    accentColor: Colors.indigoAccent,
   ),
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
@@ -52,38 +52,38 @@ ThemeData getAdaptiveThemeData(BuildContext context) {
       ? _androidTheme
       : _iOSTheme;
 }
+
 final NavigationBarThemeData navigationBarThemeData = NavigationBarThemeData(
   height: 62,
-  // indicatorColor: Colors.transparent,
+  indicatorColor: Colors.indigo.shade100,
   // backgroundColor: Colors.white,
-  iconTheme: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return const IconThemeData(
-            size: 30.0,
-            color: Colors.indigo,
-          );
-        }
-        return const IconThemeData(
-          size: 24.0,
-          opacity: 0.8,
-        );
-      }),
-  labelTextStyle: MaterialStateProperty.resolveWith(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
-          return const TextStyle(
-            fontSize: 13.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.indigo,
-            // letterSpacing: 0.8,
-          );
-        }
-        return const TextStyle(
-          fontSize: 12.0,
-          fontWeight: FontWeight.w700,
-          color: Colors.grey,
-          // letterSpacing: 0.8,
-        );
-      }),
+  iconTheme: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+    if (states.contains(MaterialState.selected)) {
+      return const IconThemeData(
+        size: 30.0,
+        color: Colors.indigo,
+      );
+    }
+    return const IconThemeData(
+      size: 24.0,
+      opacity: 0.8,
+    );
+  }),
+  labelTextStyle:
+      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+    if (states.contains(MaterialState.selected)) {
+      return const TextStyle(
+        fontSize: 13.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.indigo,
+        // letterSpacing: 0.8,
+      );
+    }
+    return const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w900,
+      color: Colors.grey,
+      // letterSpacing: 0.8,
+    );
+  }),
 );

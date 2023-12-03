@@ -14,7 +14,8 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 class ProductPaginatedList extends ConsumerStatefulWidget {
   @override
-  ConsumerState<ProductPaginatedList> createState() => _ProductPaginatedListState();
+  ConsumerState<ProductPaginatedList> createState() =>
+      _ProductPaginatedListState();
 }
 
 class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {
@@ -72,7 +73,9 @@ class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {
       },
       child: ListView.separated(
         padding: const EdgeInsets.all(10.0),
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
+        separatorBuilder: (BuildContext context, int index) => const SizedBox(
+          height: 8,
+        ),
         itemCount: itemCount,
         itemBuilder: (BuildContext context, int index) {
           if (index >= products.length && !hasNoMoreItemToLoad) {
@@ -101,7 +104,7 @@ class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {
               height: 40.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                color: backgroundColor,
+                // color: backgroundColor,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               alignment: Alignment.centerLeft,
@@ -110,7 +113,10 @@ class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {
                     ? 'No category'
                     : product.category!.name,
                 style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontSize: 20.0),
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
       content: ProductSlidableListTile(product: product),
