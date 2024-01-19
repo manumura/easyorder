@@ -344,6 +344,31 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   }
 
   Widget _buildCustomerAutocompleteField(List<CustomerModel> customers) {
+    final List<DropdownMenuEntry<CustomerModel>> entries = customers
+        .map((CustomerModel customer) => DropdownMenuEntry<CustomerModel>(
+            value: customer, label: customer.name))
+        .toList();
+    // return DropdownMenu<CustomerModel>(
+    //   dropdownMenuEntries: entries,
+    //   onSelected: (CustomerModel? selected) {
+    //     print('selected' + selected.toString());
+    //     _selectedCustomer = selected;
+    //   },
+    //   controller: _customerTextController,
+    //   initialSelection: widget._currentOrder?.customer,
+    //   enabled: !_isOrderCompleted,
+    //   enableFilter: true,
+    //   requestFocusOnTap: true,
+    //   leadingIcon: const Icon(Icons.search),
+    //   label: const Text('Customer *'),
+    //   inputDecorationTheme: InputDecorationTheme(
+    //     filled: true,
+    //     contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+    //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+    //     fillColor: Colors.white,
+    //   ),
+    //   width: 300,
+    // );
     return TypeAheadField<CustomerModel>(
       builder: (BuildContext context, TextEditingController controller,
           FocusNode focusNode) {
@@ -609,7 +634,9 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
             elevation: MaterialStateProperty.resolveWith(
                 (Set<MaterialState> states) => 4.0),
           ),
-          label: (cartItems.isEmpty) ? const Text('ADD') : const Text('EDIT'),
+          label: (cartItems.isEmpty)
+              ? const Text('ADD TO CART')
+              : const Text('MY CART'),
           icon: const Icon(Icons.add_shopping_cart),
           onPressed: () => _openCartScreen(cartItems),
         ),
