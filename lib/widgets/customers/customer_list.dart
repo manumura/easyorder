@@ -21,7 +21,9 @@ class CustomerList extends StatelessWidget {
             key: ValueKey<String?>(customer.uuid), customer: customer);
       },
       itemCount: customers.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 8,
+      ),
     );
   }
 }

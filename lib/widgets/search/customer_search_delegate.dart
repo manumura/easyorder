@@ -14,7 +14,7 @@ class CustomerSearchDelegate extends SearchDelegate<List<Widget>?> {
 
   @override
   TextStyle get searchFieldStyle => const TextStyle(
-        color: Colors.white54,
+        // color: Colors.primaries.first,
         fontSize: 18.0,
       );
 
@@ -22,8 +22,15 @@ class CustomerSearchDelegate extends SearchDelegate<List<Widget>?> {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      appBarTheme:
-          theme.appBarTheme.copyWith(backgroundColor: theme.primaryColor),
+      appBarTheme: theme.appBarTheme.copyWith(
+        color: theme.secondaryHeaderColor,
+        // backgroundColor: theme.secondaryHeaderColor,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        // border: InputBorder.none,
+        // Use this change the placeholder's text style
+        hintStyle: TextStyle(fontSize: 18.0),
+      ),
     );
   }
 

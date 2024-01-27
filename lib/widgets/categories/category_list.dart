@@ -21,7 +21,9 @@ class CategoryList extends StatelessWidget {
             key: ValueKey<String?>(category.uuid), category: category);
       },
       itemCount: categories.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 8,
+      ),
     );
   }
 }

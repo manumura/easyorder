@@ -16,10 +16,12 @@ class ProductList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(10.0),
       itemCount: products.length,
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
       itemBuilder: (BuildContext context, int index) {
         return ProductListTile(product: products[index]);
       },
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 8,
+      ),
     );
   }
 }
