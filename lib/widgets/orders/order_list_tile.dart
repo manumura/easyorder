@@ -10,7 +10,7 @@ import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart'
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-abstract class AbstractOrderListTile {
+mixin AbstractOrderListTile {
   Widget buildCard(Widget child) {
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -28,7 +28,7 @@ abstract class AbstractOrderListTile {
     return ListTile(
       title: Text(
         'Order#: ${order.number}',
-        style: TextStyle(color: Theme.of(context).primaryColor),
+        style: TextStyle(color: Theme.of(context).highlightColor),
       ),
       subtitle: _buildCardSubtitle(context, order),
       trailing: trailingWidget,

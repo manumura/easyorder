@@ -8,7 +8,7 @@ import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart'
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
 
-abstract class AbstractProductListTile {
+mixin AbstractProductListTile {
   static const double switchWidth = 55;
   final Logger logger = getLogger();
 
@@ -85,7 +85,7 @@ abstract class AbstractProductListTile {
               ),
         Text(
           product.name,
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: TextStyle(color: Theme.of(context).highlightColor),
         ),
       ],
     );

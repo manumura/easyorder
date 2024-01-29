@@ -60,7 +60,10 @@ Last updated July 27, 2019
 //          LogoutButton(),
 //        ],
         ),
-        body: body,
+        body: Container(
+          color: Theme.of(context).canvasColor,
+          child: body,
+        ),
       ),
     );
   }

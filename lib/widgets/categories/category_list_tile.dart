@@ -6,7 +6,7 @@ import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart'
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:logger/logger.dart';
 
-abstract class AbstractCategoryListTile {
+mixin AbstractCategoryListTile {
   static const double switchWidth = 55;
   final Logger logger = getLogger();
 
@@ -60,7 +60,7 @@ abstract class AbstractCategoryListTile {
               ),
         Text(
           category.name,
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: TextStyle(color: Theme.of(context).highlightColor),
         ),
       ],
     );

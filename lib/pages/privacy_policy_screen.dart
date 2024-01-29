@@ -29,7 +29,10 @@ class PrivacyPolicyScreen extends StatelessWidget {
 //            LogoutButton(),
 //          ],
         ),
-        body: body,
+        body: Container(
+          color: Theme.of(context).canvasColor,
+          child: body,
+        ),
       ),
     );
   }

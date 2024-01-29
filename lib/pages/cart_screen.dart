@@ -199,13 +199,13 @@ class _CartScreenState extends ConsumerState<CartScreen>
         fontWeight: FontWeight.bold,
       ),
       controller: _tabController,
-      labelColor: Theme.of(context).primaryColor,
+      labelColor: Theme.of(context).highlightColor,
       unselectedLabelColor: Colors.grey,
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        color: Colors.indigo[200],
+        color: Theme.of(context).primaryColor.withOpacity(0.3),
       ),
       // indicatorColor: backgroundColor,
       isScrollable: true,

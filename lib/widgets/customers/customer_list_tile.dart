@@ -7,7 +7,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
-abstract class AbstractCustomerListTile {
+mixin AbstractCustomerListTile {
   static const double switchWidth = 55;
   final Logger logger = getLogger();
 
@@ -89,7 +89,7 @@ abstract class AbstractCustomerListTile {
               ),
         Text(
           customer.name,
-          style: TextStyle(color: Theme.of(context).primaryColor),
+          style: TextStyle(color: Theme.of(context).highlightColor),
         ),
       ],
     );
