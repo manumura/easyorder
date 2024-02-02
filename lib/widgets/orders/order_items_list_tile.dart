@@ -15,9 +15,17 @@ class OrderItemsListTile extends StatelessWidget {
 
     return ListTile(
       dense: true,
-      title: Text(product.name),
-      leading: Text('${item.quantity} x'),
-      trailing: PriceTag(price: itemTotalPrice),
+      title: Text(
+        product.name,
+        style: const TextStyle(fontSize: 14.0),
+      ),
+      leading: Text(
+        '${item.quantity} x',
+        style: const TextStyle(fontSize: 14.0),
+      ),
+      trailing: PriceTag(
+        price: itemTotalPrice,
+      ),
       visualDensity: VisualDensity.compact,
     );
 //    return Text('$item');

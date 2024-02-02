@@ -5,7 +5,6 @@ import 'package:easyorder/models/alert_type.dart';
 import 'package:easyorder/models/order_model.dart';
 import 'package:easyorder/pages/order_edit_screen.dart';
 import 'package:easyorder/shared/adaptive_theme.dart';
-import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/shared/utils.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';

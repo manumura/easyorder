@@ -98,7 +98,10 @@ class _CartItemListTileState extends ConsumerState<CartItemListTile> {
           disabledColor: Colors.grey,
           color: Colors.black,
         ),
-        Text('$_count'),
+        Text(
+          '$_count',
+          style: const TextStyle(fontSize: 16.0),
+        ),
         IconButton(
           icon: const Icon(
             Icons.add,

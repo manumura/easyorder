@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/models/config.dart';
 import 'package:easyorder/models/product_model.dart';
-import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/state/product_list_state_notifier.dart';
 import 'package:easyorder/state/product_paginated_list_state.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/products/product_slidable_list_tile.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:sticky_headers/sticky_headers.dart';

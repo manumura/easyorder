@@ -61,16 +61,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       upgrader: Upgrader(
         appcastConfig: appcastConfig,
         // debugLogging: true,
-        canDismissDialog: false,
-        dialogStyle: Platform.isAndroid
-            ? UpgradeDialogStyle.material
-            : UpgradeDialogStyle.cupertino,
         minAppVersion: config.minAppVersion,
-        onUpdate: () {
-          logger.d('----- Updating app -----');
-          return true;
-        },
       ),
+      canDismissDialog: false,
+      dialogStyle: Platform.isAndroid
+          ? UpgradeDialogStyle.material
+          : UpgradeDialogStyle.cupertino,
+      onUpdate: () {
+        logger.d('----- Updating app -----');
+        return true;
+      },
       child: _buildScreen(
         context,
         user,
