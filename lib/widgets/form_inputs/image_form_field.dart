@@ -142,6 +142,10 @@ class ImageFormField extends FormField<ImageInputAdapter> {
       double fileMaxWidth, int imageQuality) {
     showModalBottomSheet<BuildContext>(
       shape: const RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.white,
+          width: 2.0,
+        ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10.0),
           topRight: Radius.circular(10.0),
@@ -150,7 +154,8 @@ class ImageFormField extends FormField<ImageInputAdapter> {
       context: state.context,
       builder: (BuildContext context) {
         return Container(
-          height: 150.0,
+          width: MediaQuery.of(context).size.width,
+          height: 160.0,
 //            decoration: BoxDecoration(
 //              color: Colors.white,
 //              borderRadius: BorderRadius.only(
@@ -163,7 +168,10 @@ class ImageFormField extends FormField<ImageInputAdapter> {
             children: <Widget>[
               const Text(
                 'Pick an Image',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
+                ),
               ),
               const SizedBox(
                 height: 10.0,
@@ -178,7 +186,12 @@ class ImageFormField extends FormField<ImageInputAdapter> {
                   _getImage(
                       state, ImageSource.camera, fileMaxWidth, imageQuality);
                 },
-                child: const Text('Use Camera'),
+                child: const Text(
+                  'Use Camera',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
               ),
               TextButton(
                 style: ButtonStyle(
@@ -190,7 +203,12 @@ class ImageFormField extends FormField<ImageInputAdapter> {
                   _getImage(
                       state, ImageSource.gallery, fileMaxWidth, imageQuality);
                 },
-                child: const Text('Use Gallery'),
+                child: const Text(
+                  'Use Gallery',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
               )
             ],
           ),
