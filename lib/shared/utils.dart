@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:csv/csv.dart';
 import 'package:easyorder/models/cart_item_model.dart';
@@ -96,4 +97,12 @@ Future<File> generateCsv(List<OrderModel> orders, DateTime now) async {
   file.writeAsString(csv);
 
   return file;
+}
+
+Future<String> writeImageToStorage(Uint8List bytes, String filename) async {
+  final Directory output = await getTemporaryDirectory();
+  final String screenshotFilePath = '${output.path}/$filename';
+  final File screenshotFile = File(screenshotFilePath);
+  await screenshotFile.writeAsBytes(bytes);
+  return screenshotFilePath;
 }

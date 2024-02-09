@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easyorder/firebase_options_dev.dart';
 import 'package:easyorder/firebase_options_prod.dart';
+import 'package:feedback/feedback.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -72,7 +73,9 @@ Future<void> main() async {
 
   runApp(
     ProviderScope(
-      child: MyApp(),
+      child: BetterFeedback(
+        child: MyApp(),
+      ),
     ),
   );
   //  runApp(
