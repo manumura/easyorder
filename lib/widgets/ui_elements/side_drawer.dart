@@ -1,12 +1,12 @@
-import 'package:easyorder/shared/utils.dart';
-import 'package:feedback/feedback.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/pages/category_list_screen.dart';
 import 'package:easyorder/pages/customer_list_screen.dart';
 import 'package:easyorder/pages/order_list_screen.dart';
 import 'package:easyorder/pages/product_list_screen.dart';
-import 'package:easyorder/shared/about_box_children.dart';
+import 'package:easyorder/shared/about_utils.dart';
 import 'package:easyorder/shared/constants.dart';
+import 'package:easyorder/shared/utils.dart';
+import 'package:feedback/feedback.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
@@ -66,7 +66,6 @@ class _SideDrawerState extends State<SideDrawer> {
             leading: const Icon(Icons.shop),
             title: const Text('Manage Products'),
             onTap: () {
-//              Navigator.pushReplacementNamed(context, '/');
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute<void>(
                   settings:
@@ -112,36 +111,31 @@ class _SideDrawerState extends State<SideDrawer> {
             leading: const FaIcon(FontAwesomeIcons.comments),
             title: const Text('Give Feedback'),
             onTap: () {
-              BetterFeedback.of(context).show((UserFeedback feedback) async {
-                final String screenshotFilePath = await writeImageToStorage(
-                    feedback.screenshot, 'screenshot.png');
+              BetterFeedback.of(context).show(
+                (UserFeedback feedback) async {
+                  final String screenshotFilePath = await writeImageToStorage(
+                      feedback.screenshot, 'screenshot.png');
 
-                final Email email = Email(
-                  body: feedback.text,
-                  subject: 'Simple Order Manager Feedback',
-                  recipients: <String>['manumuradev@gmail.com'],
-                  attachmentPaths: <String>[screenshotFilePath],
-                  isHTML: false,
-                );
-                await FlutterEmailSender.send(email);
-              });
+                  final Email email = Email(
+                    body: feedback.text,
+                    subject: 'Simple Order Manager Feedback',
+                    recipients: <String>['manumuradev@gmail.com'],
+                    attachmentPaths: <String>[screenshotFilePath],
+                    isHTML: false,
+                  );
+                  await FlutterEmailSender.send(email);
+                },
+              );
             },
           ),
           const Divider(),
-          AboutListTile(
-            icon: const Icon(
+          ListTile(
+            leading: const Icon(
               Icons.info,
             ),
-            applicationIcon: Icon(
-              Icons.shopping_cart_rounded,
-              size: 65,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            applicationName: _packageInfo.appName,
-            applicationVersion: _packageInfo.version,
-            applicationLegalese: applicationLegalese,
-            aboutBoxChildren: buildAboutBoxChildren(context),
-            child: const Text('About'),
+            title: const Text('About'),
+            onTap: () =>
+                openAboutDialog(context, _packageInfo, applicationLegalese),
           ),
         ],
       ),

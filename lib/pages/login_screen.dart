@@ -5,7 +5,7 @@ import 'package:easyorder/models/alert_type.dart';
 import 'package:easyorder/models/authentication_provider.dart';
 import 'package:easyorder/models/authentication_type.dart';
 import 'package:easyorder/models/user_model.dart';
-import 'package:easyorder/shared/about_box_children.dart';
+import 'package:easyorder/shared/about_utils.dart';
 import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/form_helper.dart';
@@ -477,18 +477,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           Icons.info,
           color: Colors.indigo,
         ),
-        onPressed: () => showAboutDialog(
-          context: context,
-          applicationIcon: Icon(
-            Icons.shopping_cart_rounded,
-            size: 65,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          applicationName: _packageInfo.appName,
-          applicationVersion: _packageInfo.version,
-          applicationLegalese: applicationLegalese,
-          children: buildAboutBoxChildren(context),
-        ),
+        onPressed: () =>
+            openAboutDialog(context, _packageInfo, applicationLegalese),
         label: const Text(
           'About',
           style: TextStyle(

@@ -2,6 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:easyorder/models/about_route_arguments.dart';
 import 'package:easyorder/pages/privacy_policy_screen.dart';
 import 'package:easyorder/pages/terms_and_conditions_screen.dart';
+import 'package:package_info/package_info.dart';
+
+void openAboutDialog(
+    BuildContext context, PackageInfo packageInfo, String applicationLegalese) {
+  showAboutDialog(
+    context: context,
+    applicationIcon: Icon(
+      Icons.shopping_cart_rounded,
+      size: 65,
+      color: Theme.of(context).colorScheme.secondary,
+    ),
+    applicationName: packageInfo.appName,
+    applicationVersion: packageInfo.version,
+    applicationLegalese: applicationLegalese,
+    children: buildAboutBoxChildren(context),
+    useRootNavigator: false,
+  );
+}
 
 List<Widget> buildAboutBoxChildren(BuildContext context) {
   return <Widget>[
@@ -60,9 +78,12 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
             (Set<MaterialState> states) => Theme.of(context).primaryColor),
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed(
-          PrivacyPolicyScreen.routeName,
-          arguments: AboutRouteArguments(isLoggedIn: true),
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => PrivacyPolicyScreen(
+              isLoggedIn: true,
+            ),
+          ),
         );
       },
       child: const Text('Privacy Policy'),
