@@ -1,3 +1,4 @@
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/models/order_model.dart';
 import 'package:easyorder/models/order_status.dart';
@@ -28,7 +29,7 @@ mixin AbstractOrderListTile {
     return ListTile(
       title: Text(
         'Order#: ${order.number}',
-        style: TextStyle(color: Theme.of(context).highlightColor),
+        style: TextStyle(color: titleColor),
       ),
       subtitle: _buildCardSubtitle(context, order),
       trailing: trailingWidget,

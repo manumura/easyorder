@@ -1,5 +1,11 @@
-import 'package:easyorder/shared/constants.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+
+final Color backgroundColor =
+    Platform.isAndroid ? Colors.indigo.shade100 : Colors.grey.shade50;
+final Color titleColor =
+    Platform.isAndroid ? Colors.indigo.shade700 : Colors.blueGrey.shade700;
 
 final ThemeData _androidTheme = ThemeData(
   brightness: Brightness.light,
@@ -10,7 +16,7 @@ final ThemeData _androidTheme = ThemeData(
   ),
   canvasColor: Colors.indigo.shade100,
   dialogBackgroundColor: Colors.indigo.shade100,
-  highlightColor: Colors.indigo.shade700,
+  // highlightColor: Colors.indigo.shade700,
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
       color: Colors.red,
@@ -36,7 +42,7 @@ final ThemeData _iOSTheme = ThemeData(
   ),
   canvasColor: Colors.grey.shade50,
   dialogBackgroundColor: Colors.grey.shade50,
-  highlightColor: Colors.blueGrey.shade700,
+  // highlightColor: Colors.blueGrey.shade700,
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
       color: Colors.red,

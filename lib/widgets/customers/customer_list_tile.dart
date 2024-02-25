@@ -1,3 +1,4 @@
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/models/customer_model.dart';
 import 'package:easyorder/pages/customer_edit_screen.dart';
@@ -89,7 +90,7 @@ mixin AbstractCustomerListTile {
               ),
         Text(
           customer.name,
-          style: TextStyle(color: Theme.of(context).highlightColor),
+          style: TextStyle(color: titleColor),
         ),
       ],
     );

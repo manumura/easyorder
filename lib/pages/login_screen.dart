@@ -6,6 +6,7 @@ import 'package:easyorder/models/authentication_provider.dart';
 import 'package:easyorder/models/authentication_type.dart';
 import 'package:easyorder/models/user_model.dart';
 import 'package:easyorder/shared/about_utils.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/form_helper.dart';

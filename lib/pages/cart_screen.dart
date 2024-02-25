@@ -6,6 +6,7 @@ import 'package:easyorder/models/cart_model.dart';
 import 'package:easyorder/models/items_position_model.dart';
 import 'package:easyorder/models/product_model.dart';
 import 'package:easyorder/pages/product_edit_screen.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/shared/cart_helper.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
@@ -198,7 +199,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
         fontWeight: FontWeight.bold,
       ),
       controller: _tabController,
-      labelColor: Theme.of(context).highlightColor,
+      labelColor: titleColor,
       unselectedLabelColor: Colors.grey,
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(

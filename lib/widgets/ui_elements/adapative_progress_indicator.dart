@@ -1,6 +1,6 @@
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:easyorder/shared/constants.dart';
 
 class AdaptiveProgressIndicator extends StatelessWidget {
   @override

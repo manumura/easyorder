@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/models/product_model.dart';
 import 'package:easyorder/pages/product_edit_screen.dart';
@@ -85,7 +86,7 @@ mixin AbstractProductListTile {
               ),
         Text(
           product.name,
-          style: TextStyle(color: Theme.of(context).highlightColor),
+          style: TextStyle(color: titleColor),
         ),
       ],
     );

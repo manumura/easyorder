@@ -78,12 +78,9 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
             (Set<MaterialState> states) => Theme.of(context).primaryColor),
       ),
       onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => PrivacyPolicyScreen(
-              isLoggedIn: true,
-            ),
-          ),
+        Navigator.of(context).pushNamed(
+          PrivacyPolicyScreen.routeName,
+          arguments: AboutRouteArguments(isLoggedIn: true),
         );
       },
       child: const Text('Privacy Policy'),

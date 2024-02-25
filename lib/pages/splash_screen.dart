@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/auth_bloc.dart';
 import 'package:easyorder/models/config.dart';
 import 'package:easyorder/models/user_model.dart';
 import 'package:easyorder/pages/login_screen.dart';
 import 'package:easyorder/pages/order_list_screen.dart';
-import 'package:easyorder/shared/constants.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:upgrader/upgrader.dart';
