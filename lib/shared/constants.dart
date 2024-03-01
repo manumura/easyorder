@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
-const String applicationLegalese = '© 2021 Emmanuel Mura';
+final int year = DateTime.now().year;
+final String applicationLegalese = '© $year Emmanuel Mura';
 const String genericErrorTitle = 'Something went wrong!';
 const String genericErrorMessage =
     'Please try again later, and make sure the app is up-to-date.';

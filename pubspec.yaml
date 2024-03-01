@@ -39,22 +39,22 @@ dependencies:
   awesome_dialog: ^3.2.0
   badges: ^3.1.2
   cached_network_image: ^3.3.1
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^4.15.6
   collection: ^1.18.0
-  csv: ^5.1.1
+  csv: ^6.0.0
   datetime_picker_formfield: ^2.0.1
   # TODO device_preview: ^0.7.4
-  feedback: ^3.0.0
+  feedback: ^3.0.1
   flutter_facebook_auth: ^6.1.1
   flutter_markdown: ^0.6.20+1
   flutter_slidable: ^3.0.1
-  firebase_analytics: ^10.8.6
-  firebase_auth: ^4.17.5
-  firebase_core: ^2.25.4
-  firebase_crashlytics: ^3.4.15
+  firebase_analytics: ^10.8.7
+  firebase_auth: ^4.17.6
+  firebase_core: ^2.25.5
+  firebase_crashlytics: ^3.4.16
   #  firebase_performance: ^0.7.0+7
-  firebase_remote_config: ^4.3.14
-  firebase_storage: ^11.6.6
+  firebase_remote_config: ^4.3.15
+  firebase_storage: ^11.6.7
   flutter_email_sender: ^6.0.2
   flutter_hooks: ^0.20.5
   flutter_switch: ^0.3.2
