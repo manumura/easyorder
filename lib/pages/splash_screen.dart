@@ -54,16 +54,21 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     }
     logger.d(
         'Remote config minAppVersion: ${config.minAppVersion}, appcastURL: ${config.appcastURL}');
-    final AppcastConfiguration appcastConfig =
-        AppcastConfiguration(url: config.appcastURL);
 
     return UpgradeAlert(
       upgrader: Upgrader(
-        appcastConfig: appcastConfig,
+        storeController: UpgraderStoreController(
+          // UpgraderPlayStore(),
+          onAndroid: () => UpgraderAppcastStore(
+            appcastURL: config.appcastURL,
+          ),
+          oniOS: () => UpgraderAppcastStore(appcastURL: config.appcastURL),
+        ),
+        upgraderDevice: UpgraderDevice(),
         // debugLogging: true,
         minAppVersion: config.minAppVersion,
       ),
-      canDismissDialog: false,
+      barrierDismissible: false,
       dialogStyle: Platform.isAndroid
           ? UpgradeDialogStyle.material
           : UpgradeDialogStyle.cupertino,

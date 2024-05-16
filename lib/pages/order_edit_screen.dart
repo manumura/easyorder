@@ -624,18 +624,18 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: ElevatedButton.icon(
           style: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => ContinuousRectangleBorder(
+            shape: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => ContinuousRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),
             ),
-            foregroundColor: MaterialStateProperty.resolveWith(
-                (Set<MaterialState> states) => Colors.white),
-            backgroundColor: MaterialStateProperty.resolveWith(
-                (Set<MaterialState> states) =>
+            foregroundColor: WidgetStateProperty.resolveWith(
+                (Set<WidgetState> states) => Colors.white),
+            backgroundColor: WidgetStateProperty.resolveWith(
+                (Set<WidgetState> states) =>
                     Theme.of(context).colorScheme.secondary),
-            elevation: MaterialStateProperty.resolveWith(
-                (Set<MaterialState> states) => 4.0),
+            elevation: WidgetStateProperty.resolveWith(
+                (Set<WidgetState> states) => 4.0),
           ),
           label: (cartItems.isEmpty)
               ? const Text('ADD TO CART')
@@ -659,15 +659,15 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: ElevatedButton.icon(
           style: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => ContinuousRectangleBorder(
+            shape: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => ContinuousRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),
             ),
-            foregroundColor: MaterialStateProperty.resolveWith(
-                (Set<MaterialState> states) => Colors.white),
-            backgroundColor: MaterialStateProperty.resolveWith(
-                (Set<MaterialState> states) => color),
+            foregroundColor: WidgetStateProperty.resolveWith(
+                (Set<WidgetState> states) => Colors.white),
+            backgroundColor: WidgetStateProperty.resolveWith(
+                (Set<WidgetState> states) => color),
           ),
           label: Text(label),
           icon: icon,

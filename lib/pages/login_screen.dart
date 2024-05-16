@@ -620,15 +620,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       width: 200,
       child: ElevatedButton(
         style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(
-            (Set<MaterialState> states) => RoundedRectangleBorder(
+          shape: WidgetStateProperty.resolveWith(
+            (Set<WidgetState> states) => RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
           ),
-          foregroundColor: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => Colors.white),
-          backgroundColor: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) =>
+          foregroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) =>
                   Theme.of(context).colorScheme.secondary),
         ),
         onPressed: () => _submitForm(),

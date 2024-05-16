@@ -32,17 +32,17 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               children: <Widget>[
                 OutlinedButton(
                   style: ButtonStyle(
-                    side: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) => BorderSide(
+                    side: WidgetStateProperty.resolveWith(
+                      (Set<WidgetState> states) => BorderSide(
                         color: buttonColor,
                         width: 2.0,
                       ),
                     ),
-                    padding: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) => const EdgeInsets.all(12),
+                    padding: WidgetStateProperty.resolveWith(
+                      (Set<WidgetState> states) => const EdgeInsets.all(12),
                     ),
-                    shape: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) => RoundedRectangleBorder(
+                    shape: WidgetStateProperty.resolveWith(
+                      (Set<WidgetState> states) => RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
@@ -118,17 +118,17 @@ class ImageFormField extends FormField<ImageInputAdapter> {
     if (state.value != null && (state.value!.isFile || state.value!.isUrl)) {
       deleteButton = ElevatedButton.icon(
         style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith(
-            (Set<MaterialState> states) => ContinuousRectangleBorder(
+          shape: WidgetStateProperty.resolveWith(
+            (Set<WidgetState> states) => ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
           ),
-          foregroundColor: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => Colors.white),
-          backgroundColor: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => Colors.red),
-          elevation: MaterialStateProperty.resolveWith(
-              (Set<MaterialState> states) => 4.0),
+          foregroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => Colors.red),
+          elevation: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => 4.0),
         ),
         label: const Text('DELETE IMAGE'),
         icon: const Icon(Icons.delete_forever),
@@ -178,8 +178,8 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) =>
+                  foregroundColor: WidgetStateProperty.resolveWith(
+                      (Set<WidgetState> states) =>
                           Theme.of(context).primaryColor),
                 ),
                 onPressed: () {
@@ -195,8 +195,8 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) =>
+                  foregroundColor: WidgetStateProperty.resolveWith(
+                      (Set<WidgetState> states) =>
                           Theme.of(context).primaryColor),
                 ),
                 onPressed: () {

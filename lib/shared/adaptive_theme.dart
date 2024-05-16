@@ -69,8 +69,8 @@ final NavigationBarThemeData navigationBarThemeData = NavigationBarThemeData(
   height: 62,
   indicatorColor: Colors.indigo.shade100,
   // backgroundColor: Colors.white,
-  iconTheme: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-    if (states.contains(MaterialState.selected)) {
+  iconTheme: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.selected)) {
       return const IconThemeData(
         size: 30.0,
         color: Colors.indigo,
@@ -82,8 +82,8 @@ final NavigationBarThemeData navigationBarThemeData = NavigationBarThemeData(
     );
   }),
   labelTextStyle:
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-    if (states.contains(MaterialState.selected)) {
+      WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.selected)) {
       return const TextStyle(
         fontSize: 13.0,
         fontWeight: FontWeight.bold,
