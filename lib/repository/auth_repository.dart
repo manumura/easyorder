@@ -103,7 +103,7 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
       final LoginResult result = await _facebookAuth.login();
       if (result.status == LoginStatus.success) {
         // Create a credential from the access token
-        final String? token = result.accessToken?.token;
+        final String? token = result.accessToken?.tokenString;
 
         if (token == null) {
           logger.d('token is null');
@@ -133,7 +133,7 @@ class AuthRepositoryFirebaseImpl implements AuthRepository {
             e);
       }
       throw AuthenticationException('Please try again later', e);
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       logger.e('Login error: $e');
       throw AuthenticationException('Please try again later', e);
     }
