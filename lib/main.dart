@@ -26,21 +26,9 @@ import 'package:easyorder/state/service_locator.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-
 // import 'package:flutter/rendering.dart';
 // import 'package:device_preview/device_preview.dart';
 
-// TODO https://pub.dev/packages/firebase_ui_auth
-// TODO AppCheck : https://pub.dev/packages/firebase_app_check/example https://firebase.flutter.dev/docs/app-check/usage/
-// TODO Missing google_app_id. Firebase Analytics disabled
-// TODO MaterialStateProperties https://www.youtube.com/watch?v=CylXr3AF3uU&list=WL&index=29&ab_channel=Flutter
-// TODO invoices
-// TODO OrderFilterScreen
-// TODO noti due date
-// https://www.youtube.com/watch?v=JAq9fVn3X7U
-// https://stackoverflow.com/questions/65223986/schedule-notification-in-flutter-using-firebase
-// https://medium.com/firebase-developers/how-to-schedule-a-cloud-function-to-run-in-the-future-in-order-to-build-a-firestore-document-ttl-754f9bf3214a
-// https://sanjog12799.medium.com/notifications-in-flutter-2300ce067ec3
 Future<void> main() async {
   //   debugPaintSizeEnabled = true;
   //   debugPaintBaselinesEnabled = true;

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/exceptions/already_in_use_exception.dart';
 import 'package:easyorder/exceptions/not_unique_exception.dart';
 import 'package:easyorder/models/alert_type.dart';
@@ -14,6 +13,7 @@ import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/helpers/validator.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
@@ -340,7 +340,7 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
     )
         .then((CategoryModel? categoryCreated) {
       setState(() => _isLoading = false);
-      if (categoryCreated != null) {
+      if (mounted && categoryCreated != null) {
         Navigator.pop(context, categoryCreated);
       } else {
         _showErrorDialog();
@@ -359,7 +359,9 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -386,7 +388,7 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
     )
         .then((CategoryModel? categoryUpdated) {
       setState(() => _isLoading = false);
-      if (categoryUpdated != null) {
+      if (mounted && categoryUpdated != null) {
         Navigator.pop(context, categoryUpdated);
       } else {
         _showErrorDialog();
@@ -405,7 +407,9 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -463,7 +467,7 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
         .then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.pop(context);
         } else {
           _showErrorDialog();
@@ -483,7 +487,9 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -502,7 +508,7 @@ class _CategoryEditScreenState extends ConsumerState<CategoryEditScreen> {
         .then(
       (CategoryModel? categoryUpdated) {
         setState(() => _isLoading = false);
-        if (categoryUpdated != null) {
+        if (mounted && categoryUpdated != null) {
           Navigator.pop(context, categoryUpdated);
         } else {
           _showErrorDialog();

@@ -89,7 +89,6 @@ class CategoryListTile extends StatelessWidget with AbstractCategoryListTile {
   @override
   Widget build(BuildContext context) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, category),
       child:
           buildListTile(context, category, _buildEditButton(context, category)),
@@ -121,7 +120,6 @@ class CategorySwitchListTile extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, category),
       child: buildListTile(
           context, category, _buildActiveSwitch(context, category)),

@@ -402,9 +402,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
     final Map<String, int> categoriesMap = <String, int>{};
     String? previousCategoryName;
     for (int i = 0; i < cartItems.length; i++) {
-      final String? name = cartItems[i].product.category != null
-          ? cartItems[i].product.category!.name
-          : null;
+      final String? name = cartItems[i].product.category?.name;
 
       if (name != null && name != previousCategoryName) {
         categoriesMap[name] = i;

@@ -335,7 +335,6 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
             iconSize: 36,
             icon: const Icon(Icons.add_circle),
             // color: Theme.of(context).colorScheme.secondary,
-            splashColor: Theme.of(context).primaryColor,
             onPressed: _openEditCustomerScreen,
           ),
         ),
@@ -753,7 +752,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
     _orderBloc.create(order: orderToCreate).then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.of(context).pop('CREATE');
         } else {
           _showErrorDialog();
@@ -788,7 +787,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         .then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.of(context).pop('UPDATE');
         } else {
           _showErrorDialog();
@@ -819,7 +818,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
         .then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.of(context).pop(isCompleted ? 'COMPLETE' : 'REOPEN');
         } else {
           _showErrorDialog();
@@ -884,7 +883,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
     _orderBloc.delete(orderId: widget._currentOrder!.id!).then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.pop(context);
         } else {
           _showErrorDialog();

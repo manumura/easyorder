@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/auth_bloc.dart';
 import 'package:easyorder/models/alert_type.dart';
 import 'package:easyorder/pages/splash_screen.dart';
@@ -6,6 +5,7 @@ import 'package:easyorder/service/local_cache_service.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -34,6 +34,10 @@ class LogoutButton extends HookConsumerWidget {
       (_) {
         // Redirect to splash screen so that user can be logged out
         // from anywhere in the app
+        if (!context.mounted) {
+          return;
+        }
+
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => SplashScreen(),
@@ -44,6 +48,10 @@ class LogoutButton extends HookConsumerWidget {
     ).catchError(
       (Object err, StackTrace trace) {
         logger.e('Error: $err');
+
+        if (!context.mounted) {
+          return;
+        }
         _showErrorDialog(context, 'Logout failed !', 'Please try again later');
       },
     );

@@ -127,8 +127,8 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               (Set<WidgetState> states) => Colors.white),
           backgroundColor: WidgetStateProperty.resolveWith(
               (Set<WidgetState> states) => Colors.red),
-          elevation: WidgetStateProperty.resolveWith(
-              (Set<WidgetState> states) => 4.0),
+          elevation:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) => 4.0),
         ),
         label: const Text('DELETE IMAGE'),
         icon: const Icon(Icons.delete_forever),
@@ -233,14 +233,20 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               ImageInputAdapter(file: File(image.path));
           state.didChange(imageInputAdapter);
         }
-        Navigator.pop(state.context);
+
+        if (state.mounted) {
+          Navigator.pop(state.context);
+        }
       },
     ).onError((Object? error, StackTrace stackTrace) {
       logger.e('Error while picking image: $error');
-      Navigator.pop(state.context);
       final Flushbar<void> flushbar = UiHelper.createErrorFlushbar(
           message: 'Unexpected error while picking image', title: 'Error !');
       flushbar.show(navigatorKey.currentContext ?? state.context);
+
+      if (state.mounted) {
+        Navigator.pop(state.context);
+      }
     });
   }
 

@@ -167,7 +167,6 @@ class OrderListTile extends StatelessWidget with AbstractOrderListTile {
   Widget build(BuildContext context) {
     final Widget trailingWidget = _buildPriceTag(context, order);
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => _openOrderEditScreen(context, order),
       child: buildListTile(context, order, trailingWidget),
     );

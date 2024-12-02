@@ -81,8 +81,7 @@ final NavigationBarThemeData navigationBarThemeData = NavigationBarThemeData(
       opacity: 0.8,
     );
   }),
-  labelTextStyle:
-      WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+  labelTextStyle: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
     if (states.contains(WidgetState.selected)) {
       return const TextStyle(
         fontSize: 13.0,

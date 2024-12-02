@@ -132,7 +132,6 @@ class CustomerListTile extends HookConsumerWidget
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, customer),
       child:
           buildListTile(context, customer, _buildEditButton(context, customer)),
@@ -164,7 +163,6 @@ class CustomerSwitchListTile extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, customer),
       child: buildListTile(
           context, customer, _buildActiveSwitch(context, customer)),

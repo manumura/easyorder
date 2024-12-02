@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/category_bloc.dart';
 import 'package:easyorder/exceptions/already_in_use_exception.dart';
 import 'package:easyorder/exceptions/not_unique_exception.dart';
@@ -20,6 +19,7 @@ import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/helpers/validator.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
@@ -286,7 +286,6 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
             iconSize: 36,
             icon: const Icon(Icons.add_circle),
             // color: Theme.of(context).colorScheme.secondary,
-            splashColor: Theme.of(context).primaryColor,
             onPressed: _openEditCategoryScreen,
           ),
         ),
@@ -569,7 +568,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
     )
         .then((ProductModel? productCreated) {
       setState(() => _isLoading = false);
-      if (productCreated != null) {
+      if (mounted && productCreated != null) {
         Navigator.pop(context, productCreated);
       } else {
         _showErrorDialog();
@@ -588,7 +587,9 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -616,7 +617,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
     )
         .then((ProductModel? productUpdated) {
       setState(() => _isLoading = false);
-      if (productUpdated != null) {
+      if (mounted && productUpdated != null) {
         Navigator.pop(context, productUpdated);
       } else {
         _showErrorDialog();
@@ -639,7 +640,9 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -698,7 +701,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
         .then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.pop(context);
         } else {
           _showErrorDialog();
@@ -718,7 +721,9 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -742,7 +747,7 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
         .then(
       (ProductModel? productUpdated) {
         setState(() => _isLoading = false);
-        if (productUpdated != null) {
+        if (mounted && productUpdated != null) {
           Navigator.pop(context, productUpdated);
         } else {
           _showErrorDialog();

@@ -393,7 +393,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         : Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: Theme.of(context).colorScheme.secondary,
               onTap: () {
                 if (_authMode == AuthenticationType.login) {
                   setState(() {
@@ -435,7 +434,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         : Material(
             color: Colors.transparent,
             child: InkWell(
-              splashColor: Theme.of(context).colorScheme.secondary,
               onTap: () {
                 if (_authMode == AuthenticationType.login) {
                   setState(() => _authMode = AuthenticationType.forgotPassword);
@@ -763,13 +761,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       return user;
     } on AuthenticationException catch (e) {
       setState(() => _isLoading = false);
-      UiHelper.showAlertDialog(
-          context, AlertType.error, 'Authentication failed !', e.message);
+      if (mounted) {
+        UiHelper.showAlertDialog(
+            context, AlertType.error, 'Authentication failed !', e.message);
+      }
       return null;
     } catch (e) {
       setState(() => _isLoading = false);
-      UiHelper.showAlertDialog(context, AlertType.error,
-          'Authentication failed !', 'Please check your username and password');
+      if (mounted) {
+        UiHelper.showAlertDialog(
+            context,
+            AlertType.error,
+            'Authentication failed !',
+            'Please check your username and password');
+      }
       return null;
     }
   }
@@ -809,13 +814,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       return user;
     } on AuthenticationException catch (e) {
       setState(() => _isLoading = false);
-      UiHelper.showAlertDialog(
-          context, AlertType.error, 'Authentication failed !', e.message);
+      if (mounted) {
+        UiHelper.showAlertDialog(
+            context, AlertType.error, 'Authentication failed !', e.message);
+      }
       return null;
     } catch (e) {
       setState(() => _isLoading = false);
-      UiHelper.showAlertDialog(context, AlertType.error,
-          'Authentication failed !', 'Please try again later');
+      if (mounted) {
+        UiHelper.showAlertDialog(context, AlertType.error,
+            'Authentication failed !', 'Please try again later');
+      }
       return null;
     }
   }

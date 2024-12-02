@@ -29,18 +29,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Authentication
 final Provider<AuthBloc> authBlocProvider = Provider<AuthBloc>(
-  (ProviderRef<AuthBloc> ref) => AuthBlocImpl(
+  (Ref<AuthBloc> ref) => AuthBlocImpl(
     authRepository: AuthRepositoryFirebaseImpl(),
   ),
 );
 
 final StreamProvider<UserModel?> user$Provider = StreamProvider<UserModel?>(
-  (StreamProviderRef<UserModel?> ref) => ref.watch(authBlocProvider).user$,
+  (Ref<AsyncValue<UserModel?>> ref) => ref.watch(authBlocProvider).user$,
 );
 
 // User
 final Provider<UserBloc> userBlocProvider = Provider<UserBloc>(
-  (ProviderRef<UserBloc> ref) => UserBlocImpl(
+  (Ref<UserBloc> ref) => UserBlocImpl(
     userRepository: UserRepositoryFirebaseImpl(),
   ),
 );
@@ -48,7 +48,7 @@ final Provider<UserBloc> userBlocProvider = Provider<UserBloc>(
 // Category
 final FutureProvider<CategoryBloc?> categoryBlocProvider =
     FutureProvider<CategoryBloc?>(
-  (FutureProviderRef<CategoryBloc?> ref) async {
+  (Ref<AsyncValue<CategoryBloc?>> ref) async {
     final UserModel? user = await ref.watch(user$Provider.future);
     if (user == null) {
       return null;
@@ -93,7 +93,7 @@ final StateNotifierProvider<CategoryListStateNotifier,
 // Product
 final FutureProvider<ProductBloc?> productBlocProvider =
     FutureProvider<ProductBloc?>(
-  (FutureProviderRef<ProductBloc?> ref) async {
+  (Ref<AsyncValue<ProductBloc?>> ref) async {
     final UserModel? user = await ref.watch(user$Provider.future);
     if (user == null) {
       return null;
@@ -109,7 +109,7 @@ final FutureProvider<ProductBloc?> productBlocProvider =
 
 final StreamProvider<List<ProductModel>> activeProducts$Provider =
     StreamProvider<List<ProductModel>>(
-        (StreamProviderRef<List<ProductModel>> ref) {
+        (Ref<AsyncValue<List<ProductModel>>> ref) {
   final AsyncValue<ProductBloc?> productBloc$ = ref.watch(productBlocProvider);
   return productBloc$.when(
     data: (ProductBloc? productBloc) {
@@ -157,7 +157,7 @@ final StateNotifierProvider<ProductListStateNotifier, ProductPaginatedListState>
 // Customer
 final FutureProvider<CustomerBloc?> customerBlocProvider =
     FutureProvider<CustomerBloc?>(
-  (FutureProviderRef<CustomerBloc?> ref) async {
+  (Ref<AsyncValue<CustomerBloc?>> ref) async {
     final UserModel? user = await ref.watch(user$Provider.future);
     if (user == null) {
       return null;
@@ -201,7 +201,7 @@ final StateNotifierProvider<CustomerListStateNotifier,
 
 // Order
 final FutureProvider<OrderBloc?> orderBlocProvider = FutureProvider<OrderBloc?>(
-  (FutureProviderRef<OrderBloc?> ref) async {
+  (Ref<AsyncValue<OrderBloc?>> ref) async {
     final UserModel? user = await ref.watch(user$Provider.future);
     if (user == null) {
       return null;
@@ -218,7 +218,7 @@ final FutureProvider<OrderBloc?> orderBlocProvider = FutureProvider<OrderBloc?>(
 
 // Cart
 final Provider<CartBloc> cartBlocProvider = Provider<CartBloc>(
-  (ProviderRef<CartBloc> ref) {
+  (Ref<CartBloc> ref) {
     final CartBloc cartBloc = CartBlocImpl();
     ref.onDispose(() {
       cartBloc.dispose();
@@ -230,7 +230,7 @@ final Provider<CartBloc> cartBlocProvider = Provider<CartBloc>(
 // Config
 final FutureProvider<ConfigurationRepository> configurationRepositoryProvider =
     FutureProvider<ConfigurationRepository>(
-  (FutureProviderRef<ConfigurationRepository> ref) async {
+  (Ref<AsyncValue<ConfigurationRepository>> ref) async {
     final ConfigurationRepository configurationRepository =
         await ConfigurationRepositoryImpl.getInstance();
     ref.onDispose(() {
@@ -242,7 +242,7 @@ final FutureProvider<ConfigurationRepository> configurationRepositoryProvider =
 
 final FutureProvider<ConfigurationService> configurationServiceProvider =
     FutureProvider<ConfigurationService>(
-  (FutureProviderRef<ConfigurationService> ref) async {
+  (Ref<AsyncValue<ConfigurationService>> ref) async {
     final ConfigurationRepository configurationRepository =
         await ref.watch(configurationRepositoryProvider.future);
     final ConfigurationService configurationService = ConfigurationServiceImpl(
@@ -255,7 +255,7 @@ final FutureProvider<ConfigurationService> configurationServiceProvider =
 );
 
 final Provider<Config?> configProvider = Provider<Config?>(
-  (ProviderRef<Config?> ref) {
+  (Ref<Config?> ref) {
     final AsyncValue<ConfigurationService> configurationService$ =
         ref.watch(configurationServiceProvider);
 
@@ -303,7 +303,7 @@ final Provider<Config?> configProvider = Provider<Config?>(
 
 final Provider<LocalCacheService?> localCacheServiceProvider =
     Provider<LocalCacheService?>(
-  (ProviderRef<LocalCacheService?> ref) {
+  (Ref<LocalCacheService?> ref) {
     final LocalStorageService localStorageService =
         getIt<LocalStorageService>();
     return LocalCacheService(localStorageService: localStorageService);

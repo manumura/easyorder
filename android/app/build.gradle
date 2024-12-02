@@ -31,7 +31,8 @@ android {
     namespace 'com.manolo.easyorder'
     // compileSdkVersion flutter.compileSdkVersion
     compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
-    ndkVersion flutter.ndkVersion
+// TODO    ndkVersion flutter.ndkVersion
+    ndkVersion "26.1.10909125"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

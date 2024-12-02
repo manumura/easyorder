@@ -113,7 +113,6 @@ class ProductListTile extends StatelessWidget with AbstractProductListTile {
   @override
   Widget build(BuildContext context) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, product),
       child:
           buildListTile(context, product, _buildEditButton(context, product)),
@@ -145,7 +144,6 @@ class ProductSwitchListTile extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final Widget child = InkWell(
-      splashColor: Theme.of(context).primaryColor,
       onTap: () => openEditScreen(context, product),
       child:
           buildListTile(context, product, _buildActiveSwitch(context, product)),

@@ -457,7 +457,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
     )
         .then((CustomerModel? customerCreated) {
       setState(() => _isLoading = false);
-      if (customerCreated != null) {
+      if (mounted && customerCreated != null) {
         Navigator.pop(context, customerCreated);
       } else {
         _showErrorDialog();
@@ -476,7 +476,9 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -505,7 +507,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
     )
         .then((CustomerModel? customerUpdated) {
       setState(() => _isLoading = false);
-      if (customerUpdated != null) {
+      if (mounted && customerUpdated != null) {
         Navigator.pop(context, customerUpdated);
       } else {
         _showErrorDialog();
@@ -528,7 +530,9 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -587,7 +591,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
         .then(
       (bool success) {
         setState(() => _isLoading = false);
-        if (success) {
+        if (mounted && success) {
           Navigator.pop(context);
         } else {
           _showErrorDialog();
@@ -607,7 +611,9 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
           content = err.message;
         }
 
-        UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        if (mounted) {
+          UiHelper.showAlertDialog(context, AlertType.error, title, content);
+        }
       },
     );
   }
@@ -626,7 +632,7 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
         .then(
       (CustomerModel? customerUpdated) {
         setState(() => _isLoading = false);
-        if (customerUpdated != null) {
+        if (mounted && customerUpdated != null) {
           Navigator.pop(context, customerUpdated);
         } else {
           _showErrorDialog();

@@ -261,6 +261,11 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
   }
 
   Future<void> _exportToCsv(BuildContext context, OrderBloc orderBloc) async {
+    if (!context.mounted) {
+      logger.d('Widget is not mounted');
+      return;
+    }
+
     try {
       setState(() => _isLoading = true);
       final List<OrderModel> orders = await orderBloc.find();
@@ -269,7 +274,6 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
       final String dateTitle = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
       final File file = await generateCsv(orders, now);
 
-      if (!mounted) return;
       final RenderBox? box = context.findRenderObject() as RenderBox?;
       if (box == null) {
         logger.d('Cannot find render box');
