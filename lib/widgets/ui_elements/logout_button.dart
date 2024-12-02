@@ -11,6 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class LogoutButton extends HookConsumerWidget {
+  LogoutButton({super.key});
+
   final Logger logger = getLogger();
 
   @override

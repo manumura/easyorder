@@ -19,7 +19,7 @@ import 'package:logger/logger.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
-  const CartScreen({required this.cartItems});
+  const CartScreen({super.key, required this.cartItems});
 
   final List<CartItemModel> cartItems;
 

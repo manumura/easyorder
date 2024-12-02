@@ -3,7 +3,7 @@ import 'package:easyorder/models/customer_model.dart';
 import 'package:easyorder/widgets/customers/customer_list_tile.dart';
 
 class CustomerList extends StatelessWidget {
-  CustomerList({required this.customers});
+  const CustomerList({super.key, required this.customers});
 
   final List<CustomerModel> customers;
 

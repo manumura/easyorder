@@ -3,7 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TermsAndConditionsScreen extends StatelessWidget {
-  TermsAndConditionsScreen({this.isLoggedIn = false});
+  const TermsAndConditionsScreen({super.key, this.isLoggedIn = false});
 
   static const String routeName = '/terms_conditions';
 

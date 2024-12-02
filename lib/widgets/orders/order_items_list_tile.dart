@@ -4,7 +4,7 @@ import 'package:easyorder/models/product_model.dart';
 import 'package:easyorder/widgets/orders/price_tag.dart';
 
 class OrderItemsListTile extends StatelessWidget {
-  OrderItemsListTile({required this.item});
+  const OrderItemsListTile({super.key, required this.item});
 
   final CartItemModel item;
 

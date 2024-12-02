@@ -21,6 +21,8 @@ import 'package:logger/logger.dart';
 import 'package:share/share.dart';
 
 class OrderListScreen extends ConsumerStatefulWidget {
+  const OrderListScreen({super.key});
+
   static const String routeName = '/orders';
 
   @override

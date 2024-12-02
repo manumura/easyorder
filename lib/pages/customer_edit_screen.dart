@@ -22,7 +22,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
 
 class CustomerEditScreen extends ConsumerStatefulWidget {
-  const CustomerEditScreen([this._currentCustomer]);
+  const CustomerEditScreen({super.key, CustomerModel? currentCustomer})
+      : _currentCustomer = currentCustomer;
 
   static const String routeName = '/customer-edit';
 

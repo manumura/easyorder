@@ -19,7 +19,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
 
 class CategoryEditScreen extends ConsumerStatefulWidget {
-  const CategoryEditScreen([this._currentCategory]);
+  const CategoryEditScreen({super.key, CategoryModel? currentCategory})
+      : _currentCategory = currentCategory;
 
   static const String routeName = '/category-edit';
 

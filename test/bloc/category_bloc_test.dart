@@ -14,15 +14,23 @@ import 'package:mockito/mockito.dart';
 
 import 'category_bloc_test.mocks.dart';
 
-@GenerateMocks([CategoryRepository, StorageService])
+@GenerateMocks(<Type>[CategoryRepository, StorageService])
 void main() {
-
   late CategoryBloc categoryBloc;
   late CategoryBloc categoryBlocWithNoUser;
   final MockStorageService mockStorageService = MockStorageService();
-  final MockCategoryRepository mockCategoryRepository = MockCategoryRepository();
-  final UserModel mockUser = UserModel(id: '1', email: 'test@test.com', isEmailVerified: true, providerIds: []);
-  final UserModel mockUserWithNoId = UserModel(id: '', email: 'test@test.com', isEmailVerified: true, providerIds: []);
+  final MockCategoryRepository mockCategoryRepository =
+      MockCategoryRepository();
+  final UserModel mockUser = UserModel(
+      id: '1',
+      email: 'test@test.com',
+      providerIds: <String>[],
+      isEmailVerified: true);
+  final UserModel mockUserWithNoId = UserModel(
+      id: '',
+      email: 'test@test.com',
+      isEmailVerified: true,
+      providerIds: <String>[]);
   final Map<String, dynamic> lastCategoryAsJson = <String, dynamic>{
     'id': 'cat1',
     'uuid': 'uuid1',
@@ -47,7 +55,8 @@ void main() {
     active: true,
   );
   final File file = File('path');
-  final StorageModel storage = StorageModel(url: 'storage_url', path: 'storage_path');
+  final StorageModel storage =
+      StorageModel(url: 'storage_url', path: 'storage_path');
 
   setUp(() async {
     // setupServiceLocator();
@@ -56,42 +65,45 @@ void main() {
     await getIt.reset();
     getIt.registerSingleton<StorageService>(mockStorageService);
 
-    when(mockStorageService.upload(userId: '1', file: file, imageType: ImageType.category, path: null))
+    when(mockStorageService.upload(
+            userId: '1', file: file, imageType: ImageType.category, path: null))
         .thenAnswer((_) => Future<StorageModel>.value(storage));
 
-    when(mockCategoryRepository
-        .findActive(userId: '1'))
-        .thenAnswer((_) => Stream<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
+    when(mockCategoryRepository.findActive(userId: '1')).thenAnswer((_) =>
+        Stream<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
 
-    categoryBloc = CategoryBlocImpl(user: mockUser, categoryRepository: mockCategoryRepository);
+    categoryBloc = CategoryBlocImpl(
+        user: mockUser, categoryRepository: mockCategoryRepository);
 
-    when(mockCategoryRepository
-        .findActive(userId: ''))
-        .thenAnswer((_) => Stream<List<CategoryModel>>.value(<CategoryModel>[]));
+    when(mockCategoryRepository.findActive(userId: '')).thenAnswer(
+        (_) => Stream<List<CategoryModel>>.value(<CategoryModel>[]));
 
-    categoryBlocWithNoUser = CategoryBlocImpl(user: mockUserWithNoId, categoryRepository: mockCategoryRepository);
+    categoryBlocWithNoUser = CategoryBlocImpl(
+        user: mockUserWithNoId, categoryRepository: mockCategoryRepository);
   });
 
   group('CategoryBloc', () {
     test('should return a list of categories successfully when find', () async {
-      when(mockCategoryRepository
-          .find(userId: mockUser.id, pageSize: 5, lastCategory: lastCategory))
-          .thenAnswer((_) => Future<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
+      when(mockCategoryRepository.find(
+              userId: mockUser.id, pageSize: 5, lastCategory: lastCategory))
+          .thenAnswer((_) =>
+              Future<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
 
-      final List<CategoryModel> result = await categoryBloc.find(pageSize: 5, lastCategory: lastCategory);
+      final List<CategoryModel> result =
+          await categoryBloc.find(pageSize: 5, lastCategory: lastCategory);
       expect(result, <CategoryModel>[mockCategory]);
     });
 
     test('return an empty list of categories when find with no user', () async {
-      final List<CategoryModel> result = await categoryBlocWithNoUser.find(pageSize: 5, lastCategory: lastCategory);
+      final List<CategoryModel> result = await categoryBlocWithNoUser.find(
+          pageSize: 5, lastCategory: lastCategory);
       expect(result, <CategoryModel>[]);
     });
 
     test('should return a stream of categories count successfully', () async {
-      when(mockCategoryRepository
-          .count(userId: mockUser.id))
-          .thenAnswer((_) => Stream<int>.periodic(
-          const Duration(seconds: 1), (int value) => value).take(5));
+      when(mockCategoryRepository.count(userId: mockUser.id)).thenAnswer((_) =>
+          Stream<int>.periodic(const Duration(seconds: 1), (int value) => value)
+              .take(5));
 
       final Stream<int?> result = categoryBloc.count();
       expect(result, emitsInOrder(<int>[0, 1, 2, 3, 4]));
@@ -105,17 +117,23 @@ void main() {
       // });
     });
 
-    test('should return a list of categories successfully when find by name', () async {
-      when(mockCategoryRepository
-          .findByName(userId: mockUser.id, name: 'test_category'))
-          .thenAnswer((_) => Future<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
+    test('should return a list of categories successfully when find by name',
+        () async {
+      when(mockCategoryRepository.findByName(
+              userId: mockUser.id, name: 'test_category'))
+          .thenAnswer((_) =>
+              Future<List<CategoryModel>>.value(<CategoryModel>[mockCategory]));
 
-      final List<CategoryModel> result = await categoryBloc.findByName(name: 'test_category');
+      final List<CategoryModel> result =
+          await categoryBloc.findByName(name: 'test_category');
       expect(result, <CategoryModel>[mockCategory]);
     });
 
-    test('should return an empty list of categories when find by name with no user', () async {
-      final List<CategoryModel> result = await categoryBlocWithNoUser.findByName(name: 'test_category');
+    test(
+        'should return an empty list of categories when find by name with no user',
+        () async {
+      final List<CategoryModel> result =
+          await categoryBlocWithNoUser.findByName(name: 'test_category');
       expect(result, <CategoryModel>[]);
     });
 
@@ -128,18 +146,23 @@ void main() {
         active: true,
       );
 
-      when(mockCategoryRepository
-          .create(userId: mockUser.id, category: captureAnyNamed('category')))
+      when(mockCategoryRepository.create(
+              userId: mockUser.id, category: captureAnyNamed('category')))
           .thenAnswer((_) => Future<String>.value('cat3'));
 
-      final CategoryModel? result = await categoryBloc.create(category: categoryToCreate, image: file);
+      final CategoryModel? result =
+          await categoryBloc.create(category: categoryToCreate, image: file);
 
-      final VerificationResult verification = verify(mockCategoryRepository.create(userId: mockUser.id, category: captureAnyNamed('category')));
-      final CategoryModel categoryCreated = CategoryModel.clone(categoryToCreate);
+      final VerificationResult verification = verify(mockCategoryRepository
+          .create(userId: mockUser.id, category: captureAnyNamed('category')));
+      final CategoryModel categoryCreated =
+          CategoryModel.clone(categoryToCreate);
       categoryCreated.id = verification.captured.single.id.toString();
       categoryCreated.uuid = verification.captured.single.uuid.toString();
-      categoryCreated.imagePath = verification.captured.single.imagePath.toString();
-      categoryCreated.imageUrl = verification.captured.single.imageUrl.toString();
+      categoryCreated.imagePath =
+          verification.captured.single.imagePath.toString();
+      categoryCreated.imageUrl =
+          verification.captured.single.imageUrl.toString();
 
       expect(result, categoryCreated);
       expect(result?.imageUrl, categoryCreated.imageUrl);
@@ -155,7 +178,8 @@ void main() {
         active: true,
       );
 
-      final CategoryModel? result = await categoryBlocWithNoUser.create(category: categoryToCreate, image: file);
+      final CategoryModel? result = await categoryBlocWithNoUser.create(
+          category: categoryToCreate, image: file);
       expect(result, isNull);
     });
 
@@ -170,16 +194,26 @@ void main() {
         active: true,
       );
 
-      when(mockCategoryRepository
-          .update(userId: mockUser.id, categoryId: 'cat3', category: captureAnyNamed('category')))
+      when(mockCategoryRepository.update(
+              userId: mockUser.id,
+              categoryId: 'cat3',
+              category: captureAnyNamed('category')))
           .thenAnswer((_) => Future<bool>.value(true));
 
-      final CategoryModel? result = await categoryBloc.update(categoryId: 'cat3', category: categoryToUpdate, image: file);
+      final CategoryModel? result = await categoryBloc.update(
+          categoryId: 'cat3', category: categoryToUpdate, image: file);
 
-      final VerificationResult verification = verify(mockCategoryRepository.update(userId: mockUser.id, categoryId: 'cat3', category: captureAnyNamed('category')));
-      final CategoryModel categoryUpdated = CategoryModel.clone(categoryToUpdate);
-      categoryUpdated.imagePath = verification.captured.single.imagePath.toString();
-      categoryUpdated.imageUrl = verification.captured.single.imageUrl.toString();
+      final VerificationResult verification = verify(
+          mockCategoryRepository.update(
+              userId: mockUser.id,
+              categoryId: 'cat3',
+              category: captureAnyNamed('category')));
+      final CategoryModel categoryUpdated =
+          CategoryModel.clone(categoryToUpdate);
+      categoryUpdated.imagePath =
+          verification.captured.single.imagePath.toString();
+      categoryUpdated.imageUrl =
+          verification.captured.single.imageUrl.toString();
 
       expect(result, categoryUpdated);
       expect(result?.imageUrl, categoryUpdated.imageUrl);
@@ -197,7 +231,8 @@ void main() {
         active: true,
       );
 
-      final CategoryModel? result = await categoryBlocWithNoUser.update(categoryId: 'cat3', category: categoryToUpdate, image: file);
+      final CategoryModel? result = await categoryBlocWithNoUser.update(
+          categoryId: 'cat3', category: categoryToUpdate, image: file);
       expect(result, isNull);
     });
 
@@ -212,39 +247,47 @@ void main() {
         active: true,
       );
 
-      final CategoryModel categoryToggled = CategoryModel.clone(categoryToToggle);
+      final CategoryModel categoryToggled =
+          CategoryModel.clone(categoryToToggle);
       categoryToggled.active = false;
 
-      when(mockCategoryRepository
-          .toggleActive(userId: mockUser.id, categoryId: 'cat3', active: false))
+      when(mockCategoryRepository.toggleActive(
+              userId: mockUser.id, categoryId: 'cat3', active: false))
           .thenAnswer((_) => Future<CategoryModel>.value(categoryToggled));
 
-      final CategoryModel? result = await categoryBloc.toggleActive(categoryId: 'cat3', active: false);
+      final CategoryModel? result =
+          await categoryBloc.toggleActive(categoryId: 'cat3', active: false);
 
-      verify(mockCategoryRepository.toggleActive(userId: mockUser.id, categoryId: 'cat3', active: false));
+      verify(mockCategoryRepository.toggleActive(
+          userId: mockUser.id, categoryId: 'cat3', active: false));
       expect(result, categoryToggled);
     });
 
     test('should fail to toggle a category when no user', () async {
-      final CategoryModel? result = await categoryBlocWithNoUser.toggleActive(categoryId: 'cat3', active: false);
+      final CategoryModel? result = await categoryBlocWithNoUser.toggleActive(
+          categoryId: 'cat3', active: false);
       expect(result, isNull);
     });
 
     test('should delete a category successfully', () async {
-      when(mockCategoryRepository
-          .delete(userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'))
+      when(mockCategoryRepository.delete(
+              userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'))
           .thenAnswer((_) => Future<bool>.value(true));
 
-      final bool result = await categoryBloc.delete(categoryId: 'cat3', categoryUuid: 'uuid3', categoryImagePath: 'test_path');
+      final bool result = await categoryBloc.delete(
+          categoryId: 'cat3',
+          categoryUuid: 'uuid3',
+          categoryImagePath: 'test_path');
 
-      verify(mockCategoryRepository.delete(userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'));
+      verify(mockCategoryRepository.delete(
+          userId: mockUser.id, categoryId: 'cat3', categoryUuid: 'uuid3'));
       expect(result, true);
     });
 
     test('should fail to delete a category when no user', () async {
-      final bool result = await categoryBlocWithNoUser.delete(categoryId: 'cat3', categoryUuid: 'uuid3');
+      final bool result = await categoryBlocWithNoUser.delete(
+          categoryId: 'cat3', categoryUuid: 'uuid3');
       expect(result, false);
     });
-
   });
 }

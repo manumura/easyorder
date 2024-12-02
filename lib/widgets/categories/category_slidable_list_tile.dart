@@ -13,9 +13,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class CategorySlidableListTile extends ConsumerStatefulWidget {
-  CategorySlidableListTile({required this.key, required this.category});
+  const CategorySlidableListTile({super.key, required this.category});
 
-  final Key key;
   final CategoryModel category;
 
   @override

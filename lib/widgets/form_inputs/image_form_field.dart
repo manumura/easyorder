@@ -12,7 +12,7 @@ import './image_input_adapter.dart';
 
 class ImageFormField extends FormField<ImageInputAdapter> {
   /// ImageFormField
-  ImageFormField({
+  ImageFormField({super.key, 
     super.onSaved,
     super.validator,
     super.initialValue,

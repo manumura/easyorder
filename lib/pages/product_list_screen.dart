@@ -10,6 +10,8 @@ import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProductListScreen extends HookConsumerWidget {
+  const ProductListScreen({super.key});
+
   static const String routeName = '/products';
 
   @override

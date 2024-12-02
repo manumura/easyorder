@@ -11,6 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class CustomerPaginatedList extends ConsumerStatefulWidget {
+  const CustomerPaginatedList({super.key});
+
   @override
   ConsumerState<CustomerPaginatedList> createState() =>
       _CustomerPaginatedListState();

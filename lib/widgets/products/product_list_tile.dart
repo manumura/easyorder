@@ -97,7 +97,9 @@ mixin AbstractProductListTile {
         .push(
       MaterialPageRoute<void>(
           settings: const RouteSettings(name: ProductEditScreen.routeName),
-          builder: (BuildContext context) => ProductEditScreen(product)),
+          builder: (BuildContext context) => ProductEditScreen(
+                currentProduct: product,
+              )),
     )
         .then((_) {
       logger.d('Back to product list');
@@ -106,7 +108,7 @@ mixin AbstractProductListTile {
 }
 
 class ProductListTile extends StatelessWidget with AbstractProductListTile {
-  ProductListTile({required this.product});
+  ProductListTile({super.key, required this.product});
 
   final ProductModel product;
 
@@ -135,9 +137,8 @@ class ProductListTile extends StatelessWidget with AbstractProductListTile {
 class ProductSwitchListTile extends StatelessWidget
     with AbstractProductListTile {
   ProductSwitchListTile(
-      {required this.key, required this.product, required this.onToggle});
+      {super.key, required this.product, required this.onToggle});
 
-  final Key key;
   final ProductModel product;
   final ValueChanged<bool> onToggle;
 
@@ -176,7 +177,7 @@ class ProductSwitchListTile extends StatelessWidget
 
 class ProductLoadingListTile extends StatelessWidget
     with AbstractProductListTile {
-  ProductLoadingListTile({required this.product});
+  ProductLoadingListTile({super.key, required this.product});
 
   final ProductModel product;
 

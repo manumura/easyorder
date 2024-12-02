@@ -114,7 +114,9 @@ mixin AbstractCustomerListTile {
         .push(
       MaterialPageRoute<void>(
           settings: const RouteSettings(name: CustomerEditScreen.routeName),
-          builder: (BuildContext context) => CustomerEditScreen(customer)),
+          builder: (BuildContext context) => CustomerEditScreen(
+                currentCustomer: customer,
+              )),
     )
         .then((_) {
       logger.d('Back to customer list');
@@ -124,9 +126,8 @@ mixin AbstractCustomerListTile {
 
 class CustomerListTile extends HookConsumerWidget
     with AbstractCustomerListTile {
-  CustomerListTile({required this.key, required this.customer});
+  CustomerListTile({super.key, required this.customer});
 
-  final Key key;
   final CustomerModel customer;
 
   @override
@@ -154,9 +155,8 @@ class CustomerListTile extends HookConsumerWidget
 class CustomerSwitchListTile extends StatelessWidget
     with AbstractCustomerListTile {
   CustomerSwitchListTile(
-      {required this.key, required this.customer, required this.onToggle});
+      {super.key, required this.customer, required this.onToggle});
 
-  final Key key;
   final CustomerModel customer;
   final ValueChanged<bool> onToggle;
 
@@ -195,9 +195,8 @@ class CustomerSwitchListTile extends StatelessWidget
 
 class CustomerLoadingListTile extends StatelessWidget
     with AbstractCustomerListTile {
-  CustomerLoadingListTile({required this.key, required this.customer});
+  CustomerLoadingListTile({super.key, required this.customer});
 
-  final Key key;
   final CustomerModel customer;
 
   @override
@@ -221,9 +220,8 @@ class CustomerLoadingListTile extends StatelessWidget
 
 class CustomerAutocompleteListTile extends StatelessWidget
     with AbstractCustomerListTile {
-  CustomerAutocompleteListTile({required this.key, required this.customer});
+  CustomerAutocompleteListTile({super.key, required this.customer});
 
-  final Key key;
   final CustomerModel customer;
 
   @override

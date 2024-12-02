@@ -23,6 +23,8 @@ import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
+  const LoginScreen({super.key});
+
   static const String routeName = '/login';
 
   @override

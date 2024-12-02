@@ -3,7 +3,7 @@ import 'package:easyorder/models/category_model.dart';
 import 'package:easyorder/widgets/categories/category_list_tile.dart';
 
 class CategoryList extends StatelessWidget {
-  CategoryList({required this.categories});
+  const CategoryList({super.key, required this.categories});
 
   final List<CategoryModel> categories;
 

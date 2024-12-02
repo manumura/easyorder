@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomerListScreen extends HookConsumerWidget {
+  const CustomerListScreen({super.key});
+
   static const String routeName = '/customers';
 
   @override

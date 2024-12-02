@@ -3,7 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
-  PrivacyPolicyScreen({this.isLoggedIn = false});
+  const PrivacyPolicyScreen({super.key, this.isLoggedIn = false});
 
   static const String routeName = '/privacy_policy';
 

@@ -14,7 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class ProductSlidableListTile extends ConsumerStatefulWidget {
-  ProductSlidableListTile({required this.product});
+  const ProductSlidableListTile({super.key, required this.product});
 
   final ProductModel product;
 

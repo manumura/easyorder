@@ -13,9 +13,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class CustomerSlidableListTile extends ConsumerStatefulWidget {
-  CustomerSlidableListTile({required this.key, required this.customer});
+  const CustomerSlidableListTile({super.key, required this.customer});
 
-  final Key key;
   final CustomerModel customer;
 
   @override

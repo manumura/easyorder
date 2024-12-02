@@ -72,7 +72,9 @@ mixin AbstractCategoryListTile {
         .push(
       MaterialPageRoute<void>(
           settings: const RouteSettings(name: CategoryEditScreen.routeName),
-          builder: (BuildContext context) => CategoryEditScreen(category)),
+          builder: (BuildContext context) => CategoryEditScreen(
+                currentCategory: category,
+              )),
     )
         .then((_) {
       logger.d('Back to category list');
@@ -81,9 +83,8 @@ mixin AbstractCategoryListTile {
 }
 
 class CategoryListTile extends StatelessWidget with AbstractCategoryListTile {
-  CategoryListTile({required this.key, required this.category});
+  CategoryListTile({super.key, required this.category});
 
-  final Key key;
   final CategoryModel category;
 
   @override
@@ -111,9 +112,8 @@ class CategoryListTile extends StatelessWidget with AbstractCategoryListTile {
 class CategorySwitchListTile extends StatelessWidget
     with AbstractCategoryListTile {
   CategorySwitchListTile(
-      {required this.key, required this.category, required this.onToggle});
+      {super.key, required this.category, required this.onToggle});
 
-  final Key key;
   final CategoryModel category;
   final ValueChanged<bool> onToggle;
 
@@ -152,9 +152,8 @@ class CategorySwitchListTile extends StatelessWidget
 
 class CategoryLoadingListTile extends StatelessWidget
     with AbstractCategoryListTile {
-  CategoryLoadingListTile({required this.key, required this.category});
+  CategoryLoadingListTile({super.key, required this.category});
 
-  final Key key;
   final CategoryModel category;
 
   @override

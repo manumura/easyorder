@@ -14,7 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class OrderSlidableListTile extends ConsumerStatefulWidget {
-  OrderSlidableListTile({required this.order});
+  const OrderSlidableListTile({super.key, required this.order});
 
   final OrderModel order;
 

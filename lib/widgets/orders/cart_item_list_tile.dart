@@ -6,7 +6,7 @@ import 'package:easyorder/state/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CartItemListTile extends ConsumerStatefulWidget {
-  CartItemListTile({required this.cartItem});
+  const CartItemListTile({super.key, required this.cartItem});
 
   final CartItemModel cartItem;
 

@@ -25,7 +25,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
 
 class ProductEditScreen extends ConsumerStatefulWidget {
-  ProductEditScreen([this._currentProduct]);
+  const ProductEditScreen({super.key, ProductModel? currentProduct})
+      : _currentProduct = currentProduct;
 
   static const String routeName = '/product-edit';
 

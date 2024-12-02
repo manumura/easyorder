@@ -157,7 +157,7 @@ mixin AbstractOrderListTile {
 }
 
 class OrderListTile extends StatelessWidget with AbstractOrderListTile {
-  OrderListTile({required this.order});
+  OrderListTile({super.key, required this.order});
 
   final OrderModel order;
 
@@ -187,7 +187,9 @@ class OrderListTile extends StatelessWidget with AbstractOrderListTile {
   void _openOrderEditScreen(BuildContext context, OrderModel order) {
     // final variable to avoid recreation of the screen every time when
     // the keyboard is opened or closed in this screen.
-    final Widget orderEditScreen = OrderEditScreen(order);
+    final Widget orderEditScreen = OrderEditScreen(
+      currentOrder: order,
+    );
 
     Navigator.of(context)
         .push(
@@ -205,7 +207,7 @@ class OrderListTile extends StatelessWidget with AbstractOrderListTile {
 }
 
 class OrderLoadingListTile extends StatelessWidget with AbstractOrderListTile {
-  OrderLoadingListTile({required this.order});
+  OrderLoadingListTile({super.key, required this.order});
 
   final OrderModel order;
 
@@ -224,7 +226,7 @@ class OrderLoadingListTile extends StatelessWidget with AbstractOrderListTile {
 }
 
 class OrderErrorListTile extends StatelessWidget with AbstractOrderListTile {
-  OrderErrorListTile({required this.message});
+  OrderErrorListTile({super.key, required this.message});
 
   final String message;
 

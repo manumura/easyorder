@@ -15,6 +15,8 @@ import 'package:logger/logger.dart';
 import 'package:upgrader/upgrader.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
+  const SplashScreen({super.key});
+
   static const String routeName = '/';
 
   @override

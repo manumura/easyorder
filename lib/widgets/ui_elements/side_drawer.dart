@@ -12,6 +12,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 
 class SideDrawer extends StatefulWidget {
+  const SideDrawer({super.key});
+
   @override
   State<SideDrawer> createState() => _SideDrawerState();
 }

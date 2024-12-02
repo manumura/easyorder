@@ -3,7 +3,7 @@ import 'package:easyorder/models/product_model.dart';
 import 'package:easyorder/widgets/products/product_list_tile.dart';
 
 class ProductList extends StatelessWidget {
-  ProductList({required this.products});
+  const ProductList({super.key, required this.products});
 
   final List<ProductModel> products;
 

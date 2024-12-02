@@ -12,6 +12,8 @@ import 'package:logger/logger.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class ProductPaginatedList extends ConsumerStatefulWidget {
+  const ProductPaginatedList({super.key});
+
   @override
   ConsumerState<ProductPaginatedList> createState() =>
       _ProductPaginatedListState();

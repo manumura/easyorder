@@ -28,7 +28,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
 
 class OrderEditScreen extends ConsumerStatefulWidget {
-  OrderEditScreen([this._currentOrder]);
+  const OrderEditScreen({super.key, OrderModel? currentOrder})
+      : _currentOrder = currentOrder;
 
   static const String routeName = '/order_edit';
 
