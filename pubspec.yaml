@@ -39,7 +39,7 @@ dependencies:
   awesome_dialog: ^3.2.1
   badges: ^3.1.2
   cached_network_image: ^3.4.1
-  cloud_firestore: ^5.5.0
+  cloud_firestore: ^5.6.0
   collection: ^1.18.0
   csv: ^6.0.0
   datetime_picker_formfield: ^2.0.1
@@ -47,14 +47,14 @@ dependencies:
   feedback: ^3.1.0
   flutter_facebook_auth: ^7.1.1
   flutter_markdown: ^0.7.4+3
-  flutter_slidable: ^3.1.1
-  firebase_analytics: ^11.3.5
-  firebase_auth: ^5.3.3
-  firebase_core: ^3.8.0
-  firebase_crashlytics: ^4.1.5
+  flutter_slidable: ^3.1.2
+  firebase_analytics: ^11.3.6
+  firebase_auth: ^5.3.4
+  firebase_core: ^3.9.0
+  firebase_crashlytics: ^4.2.0
   #  firebase_performance: ^0.7.0+7
-  firebase_remote_config: ^5.1.5
-  firebase_storage: ^12.3.6
+  firebase_remote_config: ^5.2.0
+  firebase_storage: ^12.3.7
   flutter_email_sender: ^6.0.3
   flutter_hooks: ^0.20.5
   flutter_switch: ^0.3.2
@@ -62,7 +62,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   functional_listener: ^4.1.0
   font_awesome_flutter: ^10.8.0
-  get_it: ^8.0.2
+  get_it: ^8.0.3
   google_fonts: ^6.2.1 # https://fonts.google.com/?query=luckiest
   google_sign_in: ^6.2.2
   hooks_riverpod: ^2.6.1
@@ -84,29 +84,23 @@ dependencies:
   sign_button: ^2.0.6
   scrollable_positioned_list: ^0.3.8
   share: ^2.0.4
-  shared_preferences: ^2.3.3
+  shared_preferences: ^2.3.4
   sticky_headers: ^0.3.0+2
-  upgrader: ^11.3.0
+  upgrader: ^11.3.1
   url_launcher: ^6.3.1
   uuid: ^4.5.1
-
-dependency_overrides:
-#  TODO https://github.com/FlutterFlow/flutterflow-issues/issues/3601
-  pointer_interceptor: ^0.10.1+2
-#  TODO https://github.com/jonataslaw/get_cli/issues/263
-  win32: ^5.5.3
 
 dev_dependencies:
   build_runner:
   custom_lint: ^0.7.0
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.3
   flutter_test:
     sdk: flutter
   freezed: ^2.5.7
   injectable_generator: ^2.6.2
   json_serializable: ^6.9.0
-  mockito: ^5.4.4
+  mockito: ^5.4.5
 #  mocktail: ^0.3.0
   riverpod_lint: ^2.6.3
 
