@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'product_paginated_list_state.freezed.dart';
 
 @freezed
-class ProductPaginatedListState with _$ProductPaginatedListState {
+sealed class ProductPaginatedListState with _$ProductPaginatedListState {
   const factory ProductPaginatedListState.initial() =
       ProductPaginatedListStateInitial;
   const factory ProductPaginatedListState.loading() =

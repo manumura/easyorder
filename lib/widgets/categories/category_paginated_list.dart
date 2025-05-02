@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/models/category_model.dart';
 import 'package:easyorder/models/config.dart';
 import 'package:easyorder/state/category_list_state_notifier.dart';
@@ -7,6 +6,7 @@ import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/categories/category_slidable_list_tile.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -42,19 +42,19 @@ class _CategoryPaginatedListState extends ConsumerState<CategoryPaginatedList> {
     final CategoryPaginatedListState state =
         ref.watch(categoryListStateNotifierProvider);
 
-    return state.when(
-      initial: () => _buildLoadingIndicator(),
-      // const Center(
-      //   child: Text('No category found'),
-      // ),
-      loading: () => _buildLoadingIndicator(),
-      loaded: (List<CategoryModel> categories, bool hasNoMoreItemToLoad) {
-        return _buildList(categories, hasNoMoreItemToLoad);
-      },
-      error: (String message, Object? error) => Center(
-        child: Text(message),
-      ),
-    );
+    return switch (state) {
+      CategoryPaginatedListStateInitial() => _buildLoadingIndicator(),
+      CategoryPaginatedListStateLoading() => _buildLoadingIndicator(),
+      CategoryPaginatedListStateLoaded(
+        :List<CategoryModel> categories,
+        :bool hasNoMoreItemToLoad
+      ) =>
+        _buildList(categories, hasNoMoreItemToLoad),
+      CategoryPaginatedListStateError(:String message, error: Object? _) =>
+        Center(
+          child: Text(message),
+        ),
+    };
   }
 
   Widget _buildList(List<CategoryModel> categories, bool hasNoMoreItemToLoad) {

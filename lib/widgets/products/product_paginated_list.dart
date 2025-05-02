@@ -43,19 +43,19 @@ class _ProductPaginatedListState extends ConsumerState<ProductPaginatedList> {
     final ProductPaginatedListState state =
         ref.watch(productListStateNotifierProvider);
 
-    return state.when(
-      initial: () => _buildLoadingIndicator(),
-      // const Center(
-      //   child: Text('No product found'),
-      // ),
-      loading: () => _buildLoadingIndicator(),
-      loaded: (List<ProductModel> products, bool hasNoMoreItemToLoad) {
-        return _buildList(products, hasNoMoreItemToLoad);
-      },
-      error: (String message, Object? error) => Center(
-        child: Text(message),
-      ),
-    );
+    return switch (state) {
+      ProductPaginatedListStateInitial() => _buildLoadingIndicator(),
+      ProductPaginatedListStateLoading() => _buildLoadingIndicator(),
+      ProductPaginatedListStateLoaded(
+        :List<ProductModel> products,
+        :bool hasNoMoreItemToLoad
+      ) =>
+        _buildList(products, hasNoMoreItemToLoad),
+      ProductPaginatedListStateError(:String message, error: Object? _) =>
+        Center(
+          child: Text(message),
+        ),
+    };
   }
 
   Widget _buildList(List<ProductModel> products, bool hasNoMoreItemToLoad) {

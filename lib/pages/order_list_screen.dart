@@ -18,7 +18,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class OrderListScreen extends ConsumerStatefulWidget {
   const OrderListScreen({super.key});
@@ -263,12 +263,12 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
   }
 
   Future<void> _exportToCsv(BuildContext context, OrderBloc orderBloc) async {
-    if (!context.mounted) {
-      logger.d('Widget is not mounted');
-      return;
-    }
-
     try {
+      if (!context.mounted) {
+        logger.d('Widget is not mounted');
+        return;
+      }
+
       setState(() => _isLoading = true);
       final List<OrderModel> orders = await orderBloc.find();
 
@@ -282,11 +282,14 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
         return;
       }
 
-      Share.shareFiles(
-        <String>[file.path],
-        subject: 'Simple Order Manager: orders export $dateTitle',
-        text: 'Please find attached the orders export as csv file.',
-        sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+      final List<XFile> files = <XFile>[XFile(file.path)];
+      SharePlus.instance.share(
+        ShareParams(
+          files: files,
+          text: 'Please find attached the orders export as csv file.',
+          subject: 'Simple Order Manager: orders export $dateTitle',
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+        ),
       );
       setState(() => _isLoading = false);
     } catch (e) {

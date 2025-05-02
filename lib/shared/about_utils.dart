@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easyorder/models/about_route_arguments.dart';
 import 'package:easyorder/pages/privacy_policy_screen.dart';
 import 'package:easyorder/pages/terms_and_conditions_screen.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 void openAboutDialog(
     BuildContext context, PackageInfo packageInfo, String applicationLegalese) {

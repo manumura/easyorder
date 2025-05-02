@@ -15,7 +15,9 @@ final ThemeData _androidTheme = ThemeData(
     accentColor: Colors.indigoAccent,
   ),
   canvasColor: Colors.indigo.shade100,
-  dialogBackgroundColor: Colors.indigo.shade100,
+  dialogTheme: DialogThemeData(
+    backgroundColor: Colors.indigo.shade100,
+  ),
   // highlightColor: Colors.indigo.shade700,
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(
@@ -41,7 +43,9 @@ final ThemeData _iOSTheme = ThemeData(
     accentColor: Colors.blueGrey.shade600,
   ),
   canvasColor: Colors.grey.shade50,
-  dialogBackgroundColor: Colors.grey.shade50,
+  dialogTheme: DialogThemeData(
+    backgroundColor: Colors.grey.shade50,
+  ),
   // highlightColor: Colors.blueGrey.shade700,
   inputDecorationTheme: InputDecorationTheme(
     errorStyle: const TextStyle(

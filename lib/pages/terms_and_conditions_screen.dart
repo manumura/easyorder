@@ -14,7 +14,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
     final Widget body = _buildBody();
 
     return NavigatorPopHandler(
-      onPop: () {
+      onPopWithResult: (bool? result) {
         if (isLoggedIn) {
           Navigator.pop(context);
         }

@@ -10,8 +10,6 @@ class ImageTypeDirectory {
         return 'products';
       case ImageType.category:
         return 'categories';
-      default:
-        return null;
     }
   }
 }

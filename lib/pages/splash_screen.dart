@@ -190,7 +190,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final Color color = backgroundColor;
     return DecorationImage(
       fit: BoxFit.scaleDown,
-      colorFilter: ColorFilter.mode(color.withOpacity(0.5), BlendMode.dstATop),
+      colorFilter:
+          ColorFilter.mode(color.withValues(alpha: 0.5), BlendMode.dstATop),
       image: const AssetImage('assets/background.png'),
     );
   }

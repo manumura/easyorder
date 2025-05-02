@@ -65,7 +65,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
   @override
   Widget build(BuildContext context) {
     return NavigatorPopHandler(
-      onPop: () {
+      onPopWithResult: (bool? result) {
         Navigator.of(context).pop('Back pressed');
       },
       child: _buildScreenStream(),
@@ -205,7 +205,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
       indicator: BoxDecoration(
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        color: Theme.of(context).primaryColor.withOpacity(0.3),
+        color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
       ),
       // indicatorColor: backgroundColor,
       isScrollable: true,

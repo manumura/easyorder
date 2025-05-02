@@ -18,7 +18,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
 
@@ -609,7 +609,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
     final Color color = backgroundColor;
     return DecorationImage(
       fit: BoxFit.scaleDown,
-      colorFilter: ColorFilter.mode(color.withOpacity(0.1), BlendMode.dstATop),
+      colorFilter:
+          ColorFilter.mode(color.withValues(alpha: 0.1), BlendMode.dstATop),
       image: const AssetImage('assets/background.png'),
     );
   }

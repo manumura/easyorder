@@ -13,7 +13,6 @@ extension OrderStatusExtension on OrderStatus {
       case OrderStatus.completed:
         return 'completed';
       case OrderStatus.pending:
-      default:
         return 'pending';
     }
   }

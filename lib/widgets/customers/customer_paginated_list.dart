@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/models/config.dart';
 import 'package:easyorder/models/customer_model.dart';
 import 'package:easyorder/state/customer_list_state_notifier.dart';
@@ -7,6 +6,7 @@ import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/customers/customer_slidable_list_tile.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -42,19 +42,19 @@ class _CustomerPaginatedListState extends ConsumerState<CustomerPaginatedList> {
     final CustomerPaginatedListState state =
         ref.watch(customerListStateNotifierProvider);
 
-    return state.when(
-      initial: () => _buildLoadingIndicator(),
-      // const Center(
-      //   child: Text('No customer found'),
-      // ),
-      loading: () => _buildLoadingIndicator(),
-      loaded: (List<CustomerModel> customers, bool hasNoMoreItemToLoad) {
-        return _buildList(customers, hasNoMoreItemToLoad);
-      },
-      error: (String message, Object? error) => Center(
-        child: Text(message),
-      ),
-    );
+    return switch (state) {
+      CustomerPaginatedListStateInitial() => _buildLoadingIndicator(),
+      CustomerPaginatedListStateLoading() => _buildLoadingIndicator(),
+      CustomerPaginatedListStateLoaded(
+        :List<CustomerModel> customers,
+        :bool hasNoMoreItemToLoad
+      ) =>
+        _buildList(customers, hasNoMoreItemToLoad),
+      CustomerPaginatedListStateError(:String message, error: Object? _) =>
+        Center(
+          child: Text(message),
+        ),
+    };
   }
 
   Widget _buildList(List<CustomerModel> customers, bool hasNoMoreItemToLoad) {
