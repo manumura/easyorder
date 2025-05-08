@@ -37,6 +37,7 @@ class LogoutButton extends HookConsumerWidget {
         // Redirect to splash screen so that user can be logged out
         // from anywhere in the app
         if (!context.mounted) {
+          logger.e('Widget is not mounted');
           return;
         }
 
@@ -52,6 +53,7 @@ class LogoutButton extends HookConsumerWidget {
         logger.e('Error: $err');
 
         if (!context.mounted) {
+          logger.e('Widget is not mounted');
           return;
         }
         _showErrorDialog(context, 'Logout failed !', 'Please try again later');

@@ -94,7 +94,7 @@ Future<File> generateCsv(List<OrderModel> orders, DateTime now) async {
   final File file = File('${directory.path}/orders_$fileSuffix.csv');
   // final File file = MemoryFileSystem().file('tmp.csv');
   final String csv = const ListToCsvConverter().convert(rows);
-  file.writeAsString(csv);
+  await file.writeAsString(csv);
 
   return file;
 }

@@ -265,7 +265,7 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
   Future<void> _exportToCsv(BuildContext context, OrderBloc orderBloc) async {
     try {
       if (!context.mounted) {
-        logger.d('Widget is not mounted');
+        logger.e('Widget is not mounted');
         return;
       }
 
