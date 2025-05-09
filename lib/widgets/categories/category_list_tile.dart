@@ -27,17 +27,6 @@ mixin AbstractCategoryListTile {
       BuildContext context, CategoryModel category, Widget trailingWidget) {
     return ListTile(
       title: _buildTitle(context, category),
-      subtitle: Wrap(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 2.0),
-            child: Text(
-              category.description ?? '',
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-            ),
-          ),
-        ],
-      ),
       trailing: trailingWidget,
     );
   }

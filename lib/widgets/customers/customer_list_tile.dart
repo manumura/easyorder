@@ -44,7 +44,7 @@ mixin AbstractCustomerListTile {
         Padding(
           padding: const EdgeInsets.only(left: 2.0),
           child: Text(
-            customer.address ?? '',
+            customer.address?.trim().replaceAll('\n', ' ') ?? 'N/A',
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
@@ -63,7 +63,7 @@ mixin AbstractCustomerListTile {
         Padding(
           padding: const EdgeInsets.only(left: 2.0),
           child: Text(
-            customer.phoneNumber ?? '',
+            customer.phoneNumber ?? 'N/A',
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
@@ -100,11 +100,11 @@ mixin AbstractCustomerListTile {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        if (customer.address != null) buildAddress(context, customer),
+        buildAddress(context, customer),
         const SizedBox(
           height: 5,
         ),
-        if (customer.phoneNumber != null) buildPhoneNumber(context, customer),
+        buildPhoneNumber(context, customer),
       ],
     );
   }

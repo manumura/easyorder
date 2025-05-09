@@ -38,27 +38,10 @@ mixin AbstractOrderListTile {
   }
 
   Widget _buildCardSubtitle(BuildContext context, OrderModel order) {
-    final DateFormat format = DateFormat("EEEE MMMM d, yyyy 'at' h:mm a");
+    final DateFormat format = DateFormat("MMMM d, yyyy 'at' h:mm a");
     final String dateAsString = format.format(order.date);
     final bool isCompleted = order.status == OrderStatus.completed;
     final DateTime? dueDate = order.dueDate;
-
-    final Widget addressWidget = Wrap(
-      children: <Widget>[
-        Icon(
-          Icons.mail_outline,
-          color: Theme.of(context).colorScheme.secondary,
-          size: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 2.0),
-          child: Text(
-            order.customer.address ?? '',
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-          ),
-        ),
-      ],
-    );
 
     final Widget phoneNumberWidget = Wrap(
       children: <Widget>[
@@ -70,7 +53,7 @@ mixin AbstractOrderListTile {
         Padding(
           padding: const EdgeInsets.only(left: 2.0),
           child: Text(
-            order.customer.phoneNumber ?? '',
+            order.customer.phoneNumber ?? 'N/A',
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
         ),
@@ -97,8 +80,7 @@ mixin AbstractOrderListTile {
             ),
           ],
         ),
-        if (order.customer.address != null) addressWidget,
-        if (order.customer.phoneNumber != null) phoneNumberWidget,
+        phoneNumberWidget,
         const SizedBox(
           height: 2.0,
         ),
@@ -123,7 +105,7 @@ mixin AbstractOrderListTile {
     }
 
     if (isCompleted) {
-      final DateFormat format = DateFormat("EEEE MMMM d, yyyy 'at' h:mm a");
+      final DateFormat format = DateFormat('EEEE MMMM d, yyyy');
       final String dueDateAsString = format.format(dueDate);
       return Text(
         'Due on $dueDateAsString',
@@ -136,8 +118,7 @@ mixin AbstractOrderListTile {
       final int diffInMinutes = minutesBetween(dueDate, now);
       final TimeDifference timeDifference =
           calculateTimeDifference(diffInMinutes);
-      final String dueDateAsString =
-          'Due in ${timeDifference.days} days ${timeDifference.hours} hours ${timeDifference.minutes} min';
+      final String dueDateAsString = 'Due in ${timeDifference.days} days';
       return Text(
         dueDateAsString,
         style: const TextStyle(color: Colors.green),
@@ -146,8 +127,7 @@ mixin AbstractOrderListTile {
       final int diffInMinutes = minutesBetween(now, dueDate);
       final TimeDifference timeDifference =
           calculateTimeDifference(diffInMinutes);
-      final String dueDateAsString =
-          'Overdue by ${timeDifference.days} days ${timeDifference.hours} hours ${timeDifference.minutes} min';
+      final String dueDateAsString = 'Overdue by ${timeDifference.days} days';
       return Text(
         dueDateAsString,
         style: const TextStyle(color: Colors.red),
