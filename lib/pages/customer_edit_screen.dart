@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easyorder/exceptions/already_in_use_exception.dart';
 import 'package:easyorder/exceptions/not_unique_exception.dart';
 import 'package:easyorder/models/alert_type.dart';
@@ -149,9 +148,6 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
           elevation:
               Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           actions: <Widget>[
-            if (widget._currentCustomer != null)
-              _buildToggleActiveButton(widget._currentCustomer!),
-            if (widget._currentCustomer != null) _buildDeleteButton(),
             _buildSubmitButton(),
           ],
         ),
@@ -346,44 +342,20 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
   }
 
   Widget _buildSubmitButton() {
-    return IconButton(
+    return TextButton.icon(
       onPressed: _isLoading ? null : () => _submitForm(),
-      icon: const Icon(
+      icon: Icon(
         Icons.save,
-        // color: Colors.white,
+        color: Theme.of(context).primaryColor,
         size: 30,
       ),
-    );
-  }
-
-  Widget _buildDeleteButton() {
-    return IconButton(
-      onPressed: _isLoading ? null : () => _showConfirmationDialog(),
-      icon: const Icon(
-        Icons.delete_forever,
-        // color: Colors.white,
-        size: 30,
+      label: Text(
+        'SAVE',
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontSize: 20,
+        ),
       ),
-    );
-  }
-
-  Widget _buildToggleActiveButton(CustomerModel customer) {
-    return IconButton(
-      icon: customer.active
-          ? const Icon(
-              Icons.clear,
-              size: 30,
-              color: Colors.red,
-              semanticLabel: 'Inactivate',
-            )
-          : const Icon(
-              Icons.check,
-              size: 30,
-              color: Colors.green,
-              semanticLabel: 'Activate',
-            ),
-      tooltip: 'Toggle customer active',
-      onPressed: () => _toggleActive(!customer.active),
     );
   }
 
@@ -538,113 +510,113 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
     );
   }
 
-  void _showConfirmationDialog() {
-    if (widget._currentCustomer == null) {
-      return;
-    }
+  // void _showConfirmationDialog() {
+  //   if (widget._currentCustomer == null) {
+  //     return;
+  //   }
+  //
+  //   AwesomeDialog(
+  //     context: context,
+  //     dialogType: DialogType.warning,
+  //     animType: AnimType.bottomSlide,
+  //     body: const Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: <Widget>[
+  //         Padding(
+  //           padding: EdgeInsets.symmetric(horizontal: 50),
+  //           child: Text(
+  //             'Warning',
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 10,
+  //         ),
+  //         Text('Do you want to delete this customer ?'),
+  //       ],
+  //     ),
+  //     btnCancelColor: Colors.red,
+  //     btnOkColor: Colors.green,
+  //     btnCancelOnPress: () {
+  //       logger.d('Cancel delete customer ${widget._currentCustomer!.name}');
+  //     },
+  //     btnOkOnPress: () {
+  //       logger.d('Confirm delete customer ${widget._currentCustomer!.name}');
+  //       _deleteCustomer();
+  //     },
+  //   ).show();
+  // }
 
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      animType: AnimType.bottomSlide,
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Text(
-              'Warning',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text('Do you want to delete this customer ?'),
-        ],
-      ),
-      btnCancelColor: Colors.red,
-      btnOkColor: Colors.green,
-      btnCancelOnPress: () {
-        logger.d('Cancel delete customer ${widget._currentCustomer!.name}');
-      },
-      btnOkOnPress: () {
-        logger.d('Confirm delete customer ${widget._currentCustomer!.name}');
-        _deleteCustomer();
-      },
-    ).show();
-  }
+  // void _deleteCustomer() {
+  //   if (widget._currentCustomer == null) {
+  //     logger.e('Current customer is null');
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //
+  //   _customerListStateNotifier
+  //       .remove(customerToRemove: widget._currentCustomer!)
+  //       .then(
+  //     (bool success) {
+  //       setState(() => _isLoading = false);
+  //       if (mounted && success) {
+  //         Navigator.pop(context);
+  //       } else {
+  //         _showErrorDialog();
+  //       }
+  //     },
+  //   ).catchError(
+  //     (Object err, StackTrace trace) {
+  //       logger.e('Error: $err');
+  //       setState(() => _isLoading = false);
+  //
+  //       String title = genericErrorTitle;
+  //       String content = genericErrorMessage;
+  //
+  //       final bool isAlreadyInUse = err is AlreadyInUseException;
+  //       if (isAlreadyInUse) {
+  //         title = 'Cannot delete this customer.';
+  //         content = err.message;
+  //       }
+  //
+  //       if (mounted) {
+  //         UiHelper.showAlertDialog(context, AlertType.error, title, content);
+  //       }
+  //     },
+  //   );
+  // }
 
-  void _deleteCustomer() {
-    if (widget._currentCustomer == null) {
-      logger.e('Current customer is null');
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    _customerListStateNotifier
-        .remove(customerToRemove: widget._currentCustomer!)
-        .then(
-      (bool success) {
-        setState(() => _isLoading = false);
-        if (mounted && success) {
-          Navigator.pop(context);
-        } else {
-          _showErrorDialog();
-        }
-      },
-    ).catchError(
-      (Object err, StackTrace trace) {
-        logger.e('Error: $err');
-        setState(() => _isLoading = false);
-
-        String title = genericErrorTitle;
-        String content = genericErrorMessage;
-
-        final bool isAlreadyInUse = err is AlreadyInUseException;
-        if (isAlreadyInUse) {
-          title = 'Cannot delete this customer.';
-          content = err.message;
-        }
-
-        if (mounted) {
-          UiHelper.showAlertDialog(context, AlertType.error, title, content);
-        }
-      },
-    );
-  }
-
-  void _toggleActive(bool active) {
-    if (widget._currentCustomer == null ||
-        widget._currentCustomer!.id == null) {
-      logger.e('Current customer is null');
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    _customerListStateNotifier
-        .toggleActive(customerId: widget._currentCustomer!.id!, active: active)
-        .then(
-      (CustomerModel? customerUpdated) {
-        setState(() => _isLoading = false);
-        if (mounted && customerUpdated != null) {
-          Navigator.pop(context, customerUpdated);
-        } else {
-          _showErrorDialog();
-        }
-      },
-    ).catchError((Object err, StackTrace trace) {
-      logger.e('Error: $err');
-      setState(() => _isLoading = false);
-      _showErrorDialog();
-    });
-  }
+  // void _toggleActive(bool active) {
+  //   if (widget._currentCustomer == null ||
+  //       widget._currentCustomer!.id == null) {
+  //     logger.e('Current customer is null');
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //
+  //   _customerListStateNotifier
+  //       .toggleActive(customerId: widget._currentCustomer!.id!, active: active)
+  //       .then(
+  //     (CustomerModel? customerUpdated) {
+  //       setState(() => _isLoading = false);
+  //       if (mounted && customerUpdated != null) {
+  //         Navigator.pop(context, customerUpdated);
+  //       } else {
+  //         _showErrorDialog();
+  //       }
+  //     },
+  //   ).catchError((Object err, StackTrace trace) {
+  //     logger.e('Error: $err');
+  //     setState(() => _isLoading = false);
+  //     _showErrorDialog();
+  //   });
+  // }
 
   void _showErrorDialog() {
     UiHelper.showAlertDialog(

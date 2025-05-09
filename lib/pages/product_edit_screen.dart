@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easyorder/bloc/category_bloc.dart';
 import 'package:easyorder/exceptions/already_in_use_exception.dart';
 import 'package:easyorder/exceptions/not_unique_exception.dart';
@@ -179,9 +178,6 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
           elevation:
               Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           actions: <Widget>[
-            if (widget._currentProduct != null)
-              _buildToggleActiveButton(widget._currentProduct!),
-            if (widget._currentProduct != null) _buildDeleteButton(),
             if (categoriesExist) _buildSubmitButton() else const SizedBox(),
           ],
         ),
@@ -433,44 +429,20 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
   }
 
   Widget _buildSubmitButton() {
-    return IconButton(
+    return TextButton.icon(
       onPressed: _isLoading ? null : () => _submitForm(),
-      icon: const Icon(
+      icon: Icon(
         Icons.save,
-        // color: Colors.white,
+        color: Theme.of(context).primaryColor,
         size: 30,
       ),
-    );
-  }
-
-  Widget _buildDeleteButton() {
-    return IconButton(
-      onPressed: _isLoading ? null : () => _showConfirmationDialog(),
-      icon: const Icon(
-        Icons.delete_forever,
-        // color: Colors.white,
-        size: 30,
+      label: Text(
+        'SAVE',
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontSize: 20,
+        ),
       ),
-    );
-  }
-
-  Widget _buildToggleActiveButton(ProductModel product) {
-    return IconButton(
-      icon: product.active
-          ? const Icon(
-              Icons.clear,
-              size: 30,
-              color: Colors.red,
-              semanticLabel: 'Inactivate',
-            )
-          : const Icon(
-              Icons.check,
-              size: 30,
-              color: Colors.green,
-              semanticLabel: 'Activate',
-            ),
-      tooltip: 'Toggle customer active',
-      onPressed: () => _toggleActive(!product.active),
     );
   }
 
@@ -648,118 +620,118 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
     );
   }
 
-  void _showConfirmationDialog() {
-    if (widget._currentProduct == null) {
-      return;
-    }
+  // void _showConfirmationDialog() {
+  //   if (widget._currentProduct == null) {
+  //     return;
+  //   }
+  //
+  //   AwesomeDialog(
+  //     context: context,
+  //     dialogType: DialogType.warning,
+  //     animType: AnimType.bottomSlide,
+  //     body: const Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: <Widget>[
+  //         Padding(
+  //           padding: EdgeInsets.symmetric(horizontal: 50),
+  //           child: Text(
+  //             'Warning',
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 10,
+  //         ),
+  //         Text('Do you want to delete this product ?'),
+  //         Text('It will be removed from current orders.'),
+  //       ],
+  //     ),
+  //     btnCancelColor: Colors.red,
+  //     btnOkColor: Colors.green,
+  //     btnCancelOnPress: () {
+  //       logger.d('Cancel delete product ${widget._currentProduct!.name}');
+  //     },
+  //     btnOkOnPress: () {
+  //       logger.d('Confirm delete product ${widget._currentProduct!.name}');
+  //       _deleteProduct();
+  //     },
+  //   ).show();
+  // }
 
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      animType: AnimType.bottomSlide,
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Text(
-              'Warning',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text('Do you want to delete this product ?'),
-          Text('It will be removed from current orders.'),
-        ],
-      ),
-      btnCancelColor: Colors.red,
-      btnOkColor: Colors.green,
-      btnCancelOnPress: () {
-        logger.d('Cancel delete product ${widget._currentProduct!.name}');
-      },
-      btnOkOnPress: () {
-        logger.d('Confirm delete product ${widget._currentProduct!.name}');
-        _deleteProduct();
-      },
-    ).show();
-  }
+  // void _deleteProduct() {
+  //   if (widget._currentProduct == null) {
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //
+  //   _productListStateNotifier
+  //       .remove(productToRemove: widget._currentProduct!)
+  //       .then(
+  //     (bool success) {
+  //       setState(() => _isLoading = false);
+  //       if (mounted && success) {
+  //         Navigator.pop(context);
+  //       } else {
+  //         _showErrorDialog();
+  //       }
+  //     },
+  //   ).catchError(
+  //     (Object err, StackTrace trace) {
+  //       logger.e('Error: $err');
+  //       setState(() => _isLoading = false);
+  //
+  //       String title = genericErrorTitle;
+  //       String content = genericErrorMessage;
+  //
+  //       final bool isAlreadyInUse = err is AlreadyInUseException;
+  //       if (isAlreadyInUse) {
+  //         title = 'Cannot delete this product.';
+  //         content = err.message;
+  //       }
+  //
+  //       if (mounted) {
+  //         UiHelper.showAlertDialog(context, AlertType.error, title, content);
+  //       }
+  //     },
+  //   );
+  // }
 
-  void _deleteProduct() {
-    if (widget._currentProduct == null) {
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    _productListStateNotifier
-        .remove(productToRemove: widget._currentProduct!)
-        .then(
-      (bool success) {
-        setState(() => _isLoading = false);
-        if (mounted && success) {
-          Navigator.pop(context);
-        } else {
-          _showErrorDialog();
-        }
-      },
-    ).catchError(
-      (Object err, StackTrace trace) {
-        logger.e('Error: $err');
-        setState(() => _isLoading = false);
-
-        String title = genericErrorTitle;
-        String content = genericErrorMessage;
-
-        final bool isAlreadyInUse = err is AlreadyInUseException;
-        if (isAlreadyInUse) {
-          title = 'Cannot delete this product.';
-          content = err.message;
-        }
-
-        if (mounted) {
-          UiHelper.showAlertDialog(context, AlertType.error, title, content);
-        }
-      },
-    );
-  }
-
-  void _toggleActive(bool active) {
-    if (widget._currentProduct == null ||
-        widget._currentProduct!.id == null ||
-        widget._currentProduct!.uuid == null) {
-      logger.e('Current product is null');
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    _productListStateNotifier
-        .toggleActive(
-      productId: widget._currentProduct!.id!,
-      productUuid: widget._currentProduct!.uuid!,
-      active: active,
-    )
-        .then(
-      (ProductModel? productUpdated) {
-        setState(() => _isLoading = false);
-        if (mounted && productUpdated != null) {
-          Navigator.pop(context, productUpdated);
-        } else {
-          _showErrorDialog();
-        }
-      },
-    ).catchError((Object err, StackTrace trace) {
-      logger.e('Error: $err');
-      setState(() => _isLoading = false);
-      _showErrorDialog();
-    });
-  }
+  // void _toggleActive(bool active) {
+  //   if (widget._currentProduct == null ||
+  //       widget._currentProduct!.id == null ||
+  //       widget._currentProduct!.uuid == null) {
+  //     logger.e('Current product is null');
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //
+  //   _productListStateNotifier
+  //       .toggleActive(
+  //     productId: widget._currentProduct!.id!,
+  //     productUuid: widget._currentProduct!.uuid!,
+  //     active: active,
+  //   )
+  //       .then(
+  //     (ProductModel? productUpdated) {
+  //       setState(() => _isLoading = false);
+  //       if (mounted && productUpdated != null) {
+  //         Navigator.pop(context, productUpdated);
+  //       } else {
+  //         _showErrorDialog();
+  //       }
+  //     },
+  //   ).catchError((Object err, StackTrace trace) {
+  //     logger.e('Error: $err');
+  //     setState(() => _isLoading = false);
+  //     _showErrorDialog();
+  //   });
+  // }
 
   void _openEditCategoryScreen() {
     Navigator.of(context).push(MaterialPageRoute<void>(
