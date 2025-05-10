@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/product_bloc.dart';
 import 'package:easyorder/pages/product_edit_screen.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/products/product_paginated_list.dart';
 import 'package:easyorder/widgets/search/product_search_delegate.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
-import 'package:easyorder/widgets/ui_elements/logout_button.dart';
 import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProductListScreen extends HookConsumerWidget {
@@ -70,7 +69,6 @@ class ProductListScreen extends HookConsumerWidget {
                 context: context,
                 delegate: ProductSearchDelegate(productBloc: productBloc)),
           ),
-          LogoutButton(),
         ],
       ),
       body: ProductPaginatedList(),

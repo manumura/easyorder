@@ -5,6 +5,7 @@ import 'package:easyorder/pages/product_list_screen.dart';
 import 'package:easyorder/shared/about_utils.dart';
 import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/shared/utils.dart';
+import 'package:easyorder/widgets/ui_elements/logout_list_tile.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
@@ -139,6 +140,11 @@ class _SideDrawerState extends State<SideDrawer> {
             onTap: () =>
                 openAboutDialog(context, _packageInfo, applicationLegalese),
           ),
+          const Divider(
+            color: Colors.black,
+            thickness: 0.5,
+          ),
+          LogoutListTile(),
         ],
       ),
     );

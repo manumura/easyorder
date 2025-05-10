@@ -11,7 +11,6 @@ import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/orders/order_list.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
-import 'package:easyorder/widgets/ui_elements/logout_button.dart';
 import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -122,7 +121,6 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
               // ),
               _buildChip(orders$),
               _buildCsvExportButton(orderBloc),
-              LogoutButton(),
             ],
           ),
           body: PageView(

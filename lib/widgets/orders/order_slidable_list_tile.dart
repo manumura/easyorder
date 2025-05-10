@@ -1,14 +1,13 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/order_bloc.dart';
 import 'package:easyorder/models/order_model.dart';
-import 'package:easyorder/models/order_status.dart';
 import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
 import 'package:easyorder/widgets/orders/order_list_tile.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -19,7 +18,8 @@ class OrderSlidableListTile extends ConsumerStatefulWidget {
   final OrderModel order;
 
   @override
-  ConsumerState<OrderSlidableListTile> createState() => _OrderSlidableListTileState();
+  ConsumerState<OrderSlidableListTile> createState() =>
+      _OrderSlidableListTileState();
 }
 
 class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {
@@ -48,23 +48,15 @@ class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {
   }
 
   Widget _buildOrderListTile(OrderBloc orderBloc) {
-    final bool isCompleted = widget.order.status == OrderStatus.completed;
+    // final bool isCompleted = widget.order.status == OrderStatus.completed;
 
     return _isLoading
         ? OrderLoadingListTile(order: widget.order)
         : Slidable(
             endActionPane: ActionPane(
               motion: const DrawerMotion(),
-              extentRatio: 0.6,
+              extentRatio: 0.3,
               children: <Widget>[
-                SlidableAction(
-                  onPressed: (BuildContext context) =>
-                      _updateOrderStatus(!isCompleted, orderBloc),
-                  backgroundColor: isCompleted ? Colors.blue : Colors.green,
-                  foregroundColor: Colors.white,
-                  icon: isCompleted ? Icons.shopping_basket : Icons.access_time,
-                  label: isCompleted ? 'Reopen' : 'Complete',
-                ),
                 SlidableAction(
                   onPressed: (BuildContext context) =>
                       _showConfirmationDialog(orderBloc),
@@ -79,45 +71,45 @@ class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {
           );
   }
 
-  void _updateOrderStatus(bool isCompleted, OrderBloc orderBloc) {
-    if (widget.order.id == null) {
-      logger.e('Current order id cannot be null');
-      return;
-    }
-
-    setState(() => _isLoading = true);
-    orderBloc
-        .updateStatus(
-            orderId: widget.order.id!,
-            order: widget.order,
-            status: isCompleted ? OrderStatus.completed : OrderStatus.pending)
-        .then(
-      (bool success) {
-        setState(() => _isLoading = false);
-        if (success) {
-          final String status = isCompleted ? 'completed' : 'reopened';
-          final Flushbar<void> flushbar = UiHelper.createSuccessFlushbar(
-              message: 'Order #${widget.order.number} successfully $status !',
-              title: 'Success !');
-          flushbar.show(navigatorKey.currentContext ?? context);
-        } else {
-          final Flushbar<void> flushbar = UiHelper.createErrorFlushbar(
-              message: 'Failed to update order #${widget.order.number} !',
-              title: 'Error !');
-          flushbar.show(navigatorKey.currentContext ?? context);
-        }
-      },
-    ).catchError(
-      (Object err, StackTrace trace) {
-        setState(() => _isLoading = false);
-        logger.e('Error: $err');
-        final Flushbar<void> flushbar = UiHelper.createErrorFlushbar(
-            message: 'Failed to update order #${widget.order.number} !',
-            title: 'Error !');
-        flushbar.show(navigatorKey.currentContext ?? context);
-      },
-    );
-  }
+  // void _updateOrderStatus(bool isCompleted, OrderBloc orderBloc) {
+  //   if (widget.order.id == null) {
+  //     logger.e('Current order id cannot be null');
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //   orderBloc
+  //       .updateStatus(
+  //           orderId: widget.order.id!,
+  //           order: widget.order,
+  //           status: isCompleted ? OrderStatus.completed : OrderStatus.pending)
+  //       .then(
+  //     (bool success) {
+  //       setState(() => _isLoading = false);
+  //       if (success) {
+  //         final String status = isCompleted ? 'completed' : 'reopened';
+  //         final Flushbar<void> flushbar = UiHelper.createSuccessFlushbar(
+  //             message: 'Order #${widget.order.number} successfully $status !',
+  //             title: 'Success !');
+  //         flushbar.show(navigatorKey.currentContext ?? context);
+  //       } else {
+  //         final Flushbar<void> flushbar = UiHelper.createErrorFlushbar(
+  //             message: 'Failed to update order #${widget.order.number} !',
+  //             title: 'Error !');
+  //         flushbar.show(navigatorKey.currentContext ?? context);
+  //       }
+  //     },
+  //   ).catchError(
+  //     (Object err, StackTrace trace) {
+  //       setState(() => _isLoading = false);
+  //       logger.e('Error: $err');
+  //       final Flushbar<void> flushbar = UiHelper.createErrorFlushbar(
+  //           message: 'Failed to update order #${widget.order.number} !',
+  //           title: 'Error !');
+  //       flushbar.show(navigatorKey.currentContext ?? context);
+  //     },
+  //   );
+  // }
 
   void _showConfirmationDialog(OrderBloc orderBloc) {
     AwesomeDialog(

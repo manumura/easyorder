@@ -4,7 +4,6 @@ import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/customers/customer_paginated_list.dart';
 import 'package:easyorder/widgets/search/customer_search_delegate.dart';
 import 'package:easyorder/widgets/ui_elements/adapative_progress_indicator.dart';
-import 'package:easyorder/widgets/ui_elements/logout_button.dart';
 import 'package:easyorder/widgets/ui_elements/side_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -70,7 +69,6 @@ class CustomerListScreen extends HookConsumerWidget {
                 context: context,
                 delegate: CustomerSearchDelegate(customerBloc: customerBloc)),
           ),
-          LogoutButton(),
         ],
       ),
       body: CustomerPaginatedList(),

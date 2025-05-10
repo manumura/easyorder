@@ -176,9 +176,10 @@ class _CartScreenState extends ConsumerState<CartScreen>
           right: 12,
         ),
         child: IconButton(
-          icon: const Icon(
-            Icons.delete_sharp,
+          icon: Icon(
+            Icons.restart_alt_sharp,
             size: 30.0,
+            color: Colors.red[700],
           ),
           onPressed: _showConfirmationDialog,
         ),

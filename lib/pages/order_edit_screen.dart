@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easyorder/bloc/cart_bloc.dart';
 import 'package:easyorder/bloc/customer_bloc.dart';
@@ -204,7 +203,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
           elevation:
               Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
           actions: <Widget>[
-            if (widget._currentOrder != null) _buildDeleteButton(),
+            if (widget._currentOrder != null) _buildCompleteOrReopenButton(),
             _buildSubmitButton(),
           ],
         ),
@@ -224,7 +223,6 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             if (!_isOrderCompleted) _buildOpenCartScreenButton(cartItems),
-            if (widget._currentOrder != null) _buildCompleteOrReopenButton(),
           ],
         ),
       ],
@@ -592,7 +590,7 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   Widget _buildSubmitButton() {
     return _isOrderCompleted
         ? const SizedBox()
-        : IconButton(
+        : TextButton.icon(
             onPressed:
                 _isLoading || _isSaveDisabled ? null : () => _submitForm(),
             icon: const Icon(
@@ -600,18 +598,14 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
               // color: Colors.white,
               size: 30,
             ),
+            label: Text(
+              'SAVE',
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 20,
+              ),
+            ),
           );
-  }
-
-  Widget _buildDeleteButton() {
-    return IconButton(
-      onPressed: _isLoading ? null : () => _showConfirmationDialog(),
-      icon: const Icon(
-        Icons.delete_forever,
-        // color: Colors.white,
-        size: 30,
-      ),
-    );
   }
 
   Widget _buildPriceTotalTag(double price) {
@@ -638,8 +632,8 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
                 (Set<WidgetState> states) => 4.0),
           ),
           label: (cartItems.isEmpty)
-              ? const Text('ADD TO CART')
-              : const Text('MY CART'),
+              ? const Text('ADD ITEMS TO MY CART')
+              : const Text('EDIT MY CART'),
           icon: const Icon(Icons.add_shopping_cart),
           onPressed: () => _openCartScreen(cartItems),
         ),
@@ -648,34 +642,63 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   }
 
   Widget _buildCompleteOrReopenButton() {
-    final String label = _isOrderCompleted ? 'REOPEN' : 'COMPLETE';
     final Icon icon = _isOrderCompleted
-        ? const Icon(Icons.open_in_new)
-        : const Icon(Icons.check);
-    final Color color = _isOrderCompleted ? Colors.blue : Colors.green;
+        ? const Icon(
+            Icons.open_in_new,
+            size: 30,
+          )
+        : const Icon(
+            Icons.close_fullscreen_sharp,
+            size: 30,
+          );
+    final Color? color =
+        _isOrderCompleted ? Colors.green[700] : Colors.red[700];
 
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: ElevatedButton.icon(
-          style: ButtonStyle(
-            shape: WidgetStateProperty.resolveWith(
-              (Set<WidgetState> states) => ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-            foregroundColor: WidgetStateProperty.resolveWith(
-                (Set<WidgetState> states) => Colors.white),
-            backgroundColor: WidgetStateProperty.resolveWith(
-                (Set<WidgetState> states) => color),
-          ),
-          label: Text(label),
-          icon: icon,
-          onPressed: () => _updateOrderStatus(!_isOrderCompleted),
-        ),
-      ),
+    return IconButton(
+      onPressed: _isLoading || _isSaveDisabled
+          ? null
+          : () => _updateOrderStatus(!_isOrderCompleted),
+      icon: icon,
+      color: color,
     );
   }
+
+  // TODO
+  // void _showConfirmationDialog(OrderBloc orderBloc) {
+  //   AwesomeDialog(
+  //     context: context,
+  //     dialogType: DialogType.warning,
+  //     animType: AnimType.bottomSlide,
+  //     body: Column(
+  //       children: const <Widget>[
+  //         Padding(
+  //           padding: EdgeInsets.symmetric(horizontal: 50),
+  //           child: Text(
+  //             'Warning',
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 10,
+  //         ),
+  //         Text('Do you want to delete this order ?'),
+  //         Text('It will be removed permanently.')
+  //       ],
+  //     ),
+  //     btnCancelColor: Colors.red,
+  //     btnOkColor: Colors.green,
+  //     btnCancelOnPress: () {
+  //       logger.d('Cancel delete order ${widget.order.uuid}');
+  //     },
+  //     btnOkOnPress: () {
+  //       logger.d('Confirm delete order ${widget.order.uuid}');
+  //       _deleteOrder(orderBloc);
+  //     },
+  //   ).show();
+  // }
 
   Widget _buildLoadingScreen() {
     final String title =
@@ -834,70 +857,70 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
     );
   }
 
-  void _showConfirmationDialog() {
-    if (widget._currentOrder == null) {
-      return;
-    }
+  // void _showConfirmationDialog() {
+  //   if (widget._currentOrder == null) {
+  //     return;
+  //   }
+  //
+  //   AwesomeDialog(
+  //     context: context,
+  //     dialogType: DialogType.warning,
+  //     animType: AnimType.bottomSlide,
+  //     body: const Column(
+  //       children: <Widget>[
+  //         Padding(
+  //           padding: EdgeInsets.symmetric(horizontal: 50),
+  //           child: Text(
+  //             'Warning',
+  //             style: TextStyle(
+  //               fontWeight: FontWeight.bold,
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(
+  //           height: 10,
+  //         ),
+  //         Text('Do you want to delete this order ?'),
+  //         Text('It will be removed permanently.')
+  //       ],
+  //     ),
+  //     btnCancelColor: Colors.red,
+  //     btnOkColor: Colors.green,
+  //     btnCancelOnPress: () {
+  //       logger.d('Cancel delete order ${widget._currentOrder!.uuid}');
+  //     },
+  //     btnOkOnPress: () {
+  //       logger.d('Confirm delete order ${widget._currentOrder!.uuid}');
+  //       _deleteOrder();
+  //     },
+  //   ).show();
+  // }
 
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      animType: AnimType.bottomSlide,
-      body: const Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Text(
-              'Warning',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text('Do you want to delete this order ?'),
-          Text('It will be removed permanently.')
-        ],
-      ),
-      btnCancelColor: Colors.red,
-      btnOkColor: Colors.green,
-      btnCancelOnPress: () {
-        logger.d('Cancel delete order ${widget._currentOrder!.uuid}');
-      },
-      btnOkOnPress: () {
-        logger.d('Confirm delete order ${widget._currentOrder!.uuid}');
-        _deleteOrder();
-      },
-    ).show();
-  }
-
-  void _deleteOrder() {
-    if (widget._currentOrder == null) {
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    _orderBloc.delete(orderId: widget._currentOrder!.id!).then(
-      (bool success) {
-        setState(() => _isLoading = false);
-        if (mounted && success) {
-          Navigator.pop(context);
-        } else {
-          _showErrorDialog();
-        }
-      },
-    ).catchError(
-      (Object err, StackTrace trace) {
-        logger.e('Error: $err');
-        setState(() => _isLoading = false);
-        _showErrorDialog();
-      },
-    );
-  }
+  // void _deleteOrder() {
+  //   if (widget._currentOrder == null) {
+  //     return;
+  //   }
+  //
+  //   setState(() => _isLoading = true);
+  //
+  //   _orderBloc.delete(orderId: widget._currentOrder!.id!).then(
+  //     (bool success) {
+  //       setState(() => _isLoading = false);
+  //       if (mounted && success) {
+  //         Navigator.pop(context);
+  //       } else {
+  //         _showErrorDialog();
+  //       }
+  //     },
+  //   ).catchError(
+  //     (Object err, StackTrace trace) {
+  //       logger.e('Error: $err');
+  //       setState(() => _isLoading = false);
+  //       _showErrorDialog();
+  //     },
+  //   );
+  // }
 
   Future<DateTime?> _onShowPickerCreationDate(
       BuildContext context, DateTime? currentValue) async {
