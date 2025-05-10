@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:easyorder/bloc/cart_bloc.dart';
 import 'package:easyorder/bloc/customer_bloc.dart';
@@ -657,48 +658,55 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
     return IconButton(
       onPressed: _isLoading || _isSaveDisabled
           ? null
-          : () => _updateOrderStatus(!_isOrderCompleted),
+          : () => _showConfirmationDialog(),
       icon: icon,
       color: color,
     );
   }
 
   // TODO
-  // void _showConfirmationDialog(OrderBloc orderBloc) {
-  //   AwesomeDialog(
-  //     context: context,
-  //     dialogType: DialogType.warning,
-  //     animType: AnimType.bottomSlide,
-  //     body: Column(
-  //       children: const <Widget>[
-  //         Padding(
-  //           padding: EdgeInsets.symmetric(horizontal: 50),
-  //           child: Text(
-  //             'Warning',
-  //             style: TextStyle(
-  //               fontWeight: FontWeight.bold,
-  //               fontSize: 20,
-  //             ),
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           height: 10,
-  //         ),
-  //         Text('Do you want to delete this order ?'),
-  //         Text('It will be removed permanently.')
-  //       ],
-  //     ),
-  //     btnCancelColor: Colors.red,
-  //     btnOkColor: Colors.green,
-  //     btnCancelOnPress: () {
-  //       logger.d('Cancel delete order ${widget.order.uuid}');
-  //     },
-  //     btnOkOnPress: () {
-  //       logger.d('Confirm delete order ${widget.order.uuid}');
-  //       _deleteOrder(orderBloc);
-  //     },
-  //   ).show();
-  // }
+  void _showConfirmationDialog() {
+    final String title = _isOrderCompleted
+        ? 'Do you want to re-open this order ?'
+        : 'Do you want to mark this order as completed ?';
+    final String description = _isOrderCompleted
+        ? 'It will go to current orders list.'
+        : 'It will go to past orders list.';
+
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50),
+            child: Text(
+              'Warning',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(title),
+          Text(description),
+        ],
+      ),
+      btnCancelColor: Colors.red,
+      btnOkColor: Colors.green,
+      btnCancelOnPress: () {
+        logger.d('Cancel update order status ${widget._currentOrder?.uuid}');
+      },
+      btnOkOnPress: () {
+        logger.d('Confirm update order status ${widget._currentOrder?.uuid}');
+        _updateOrderStatus(!_isOrderCompleted);
+      },
+    ).show();
+  }
 
   Widget _buildLoadingScreen() {
     final String title =
