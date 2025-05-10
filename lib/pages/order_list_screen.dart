@@ -158,6 +158,7 @@ class _OrderListScreenState extends ConsumerState<OrderListScreen>
                 ),
               ],
               elevation: 10.0,
+              backgroundColor: Theme.of(context).secondaryHeaderColor,
               // backgroundColor: backgroundColor,
             ),
           ),

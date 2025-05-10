@@ -1,5 +1,6 @@
 import 'package:easyorder/bloc/category_bloc.dart';
 import 'package:easyorder/pages/category_edit_screen.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/categories/category_paginated_list.dart';
 import 'package:easyorder/widgets/search/category_search_delegate.dart';
@@ -72,7 +73,12 @@ class CategoryListScreen extends HookConsumerWidget {
         ],
       ),
       body: CategoryPaginatedList(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 10.0,
+        color: Theme.of(context).secondaryHeaderColor,
+        height: navigationBarThemeData.height,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

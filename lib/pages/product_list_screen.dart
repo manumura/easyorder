@@ -1,5 +1,6 @@
 import 'package:easyorder/bloc/product_bloc.dart';
 import 'package:easyorder/pages/product_edit_screen.dart';
+import 'package:easyorder/shared/adaptive_theme.dart';
 import 'package:easyorder/state/providers.dart';
 import 'package:easyorder/widgets/products/product_paginated_list.dart';
 import 'package:easyorder/widgets/search/product_search_delegate.dart';
@@ -72,7 +73,12 @@ class ProductListScreen extends HookConsumerWidget {
         ],
       ),
       body: ProductPaginatedList(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: BottomAppBar(
+        elevation: 10.0,
+        color: Theme.of(context).secondaryHeaderColor,
+        height: navigationBarThemeData.height,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute<void>(
