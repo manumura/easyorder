@@ -8,8 +8,12 @@ final Color titleColor =
     Platform.isAndroid ? Colors.indigo.shade700 : Colors.blueGrey.shade700;
 
 final ThemeData _androidTheme = ThemeData(
+  useMaterial3: true,
   brightness: Brightness.light,
   primarySwatch: Colors.indigo,
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.indigo.shade100,
+  ),
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: Colors.indigo,
     accentColor: Colors.indigoAccent,
@@ -36,8 +40,12 @@ final ThemeData _androidTheme = ThemeData(
 );
 
 final ThemeData _iOSTheme = ThemeData(
+  useMaterial3: true,
   brightness: Brightness.light,
   primarySwatch: Colors.grey,
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.grey.shade50,
+  ),
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: Colors.grey,
     accentColor: Colors.blueGrey.shade600,

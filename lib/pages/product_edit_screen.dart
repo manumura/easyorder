@@ -241,34 +241,39 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
         ? const Center(
             child: Text('* No active category found'),
           )
-        : DropdownFormField<CategoryModel>(
-            initialValue: product?.category,
-            decoration: InputDecoration(
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(left: 5.0),
-                child: Icon(
-                  Icons.category,
-                ),
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-              filled: true,
-              fillColor: Colors.white,
+        : Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Theme.of(context).secondaryHeaderColor,
             ),
-            labelText: 'Category *',
-            items: categories.map((CategoryModel category) {
-              return DropdownMenuItem<CategoryModel>(
-                value: category,
-                child: Text(category.name),
-              );
-            }).toList(),
-            validator: (CategoryModel? value) {
-              return Validator.validateCategory(value);
-            },
-            onSaved: (CategoryModel? value) {
-              _formData.category = value;
-            },
+            child: DropdownFormField<CategoryModel>(
+              initialValue: product?.category,
+              decoration: InputDecoration(
+                prefixIcon: const Padding(
+                  padding: EdgeInsets.only(left: 5.0),
+                  child: Icon(
+                    Icons.category,
+                  ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              labelText: 'Category *',
+              items: categories.map((CategoryModel category) {
+                return DropdownMenuItem<CategoryModel>(
+                  value: category,
+                  child: Text(category.name),
+                );
+              }).toList(),
+              validator: (CategoryModel? value) {
+                return Validator.validateCategory(value);
+              },
+              onSaved: (CategoryModel? value) {
+                _formData.category = value;
+              },
+            ),
           );
 
     return Row(

@@ -28,7 +28,7 @@ mixin AbstractOrderListTile {
       BuildContext context, OrderModel order, Widget trailingWidget) {
     return ListTile(
       title: Text(
-        'Order#: ${order.number}',
+        'No. ${order.number}',
         style: TextStyle(color: titleColor),
       ),
       subtitle: _buildCardSubtitle(context, order),

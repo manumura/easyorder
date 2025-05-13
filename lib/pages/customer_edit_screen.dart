@@ -242,66 +242,71 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
   }
 
   Widget _buildPhoneNumberField() {
-    return InternationalPhoneNumberInput(
-      inputDecoration: InputDecoration(
-        prefixIcon: const Padding(
-          padding: EdgeInsets.only(left: 5.0),
-          child: Icon(
-            Icons.phone,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        canvasColor: Theme.of(context).secondaryHeaderColor,
+      ),
+      child: InternationalPhoneNumberInput(
+        inputDecoration: InputDecoration(
+          prefixIcon: const Padding(
+            padding: EdgeInsets.only(left: 5.0),
+            child: Icon(
+              Icons.phone,
+            ),
           ),
-        ),
-        suffixIcon: !_isPhoneNumberClearVisible
-            ? const SizedBox()
-            : Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () => _phoneNumberTextController.clear(),
+          suffixIcon: !_isPhoneNumberClearVisible
+              ? const SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () => _phoneNumberTextController.clear(),
+                  ),
                 ),
-              ),
-        labelText: 'Phone number',
-        counterStyle: const TextStyle(
-          height: double.minPositive,
+          labelText: 'Phone number',
+          counterStyle: const TextStyle(
+            height: double.minPositive,
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          filled: true,
+          // fillColor: Colors.white,
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        filled: true,
-        fillColor: Colors.white,
+        spaceBetweenSelectorAndTextField: 0,
+        selectorConfig: const SelectorConfig(
+          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+          setSelectorButtonAsPrefixIcon: true,
+          leadingPadding: 20,
+        ),
+        ignoreBlank: false,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        selectorTextStyle: const TextStyle(color: Colors.black),
+        initialValue: _initialPhoneNumber,
+        textFieldController: _phoneNumberTextController,
+        formatInput: false,
+        keyboardType: const TextInputType.numberWithOptions(
+            signed: false, decimal: false),
+        inputBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        onInputChanged: (PhoneNumber number) {
+          // print('number: ${number.phoneNumber}');
+        },
+        onSaved: (PhoneNumber number) {
+          final String parsedNumber = number.parseNumber();
+          if (parsedNumber.isNotEmpty) {
+            _formData.phoneNumber = number;
+          }
+        },
+        onInputValidated: (bool isValid) {
+          _isPhoneNumberValid = isValid;
+        },
+        validator: (String? value) {
+          return Validator.validateCustomerPhoneNumber(
+              value, _isPhoneNumberValid);
+        },
+        errorMessage: 'Invalid phone number',
       ),
-      spaceBetweenSelectorAndTextField: 0,
-      selectorConfig: const SelectorConfig(
-        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-        setSelectorButtonAsPrefixIcon: true,
-        leadingPadding: 20,
-      ),
-      ignoreBlank: false,
-      autoValidateMode: AutovalidateMode.onUserInteraction,
-      selectorTextStyle: const TextStyle(color: Colors.black),
-      initialValue: _initialPhoneNumber,
-      textFieldController: _phoneNumberTextController,
-      formatInput: false,
-      keyboardType:
-          const TextInputType.numberWithOptions(signed: false, decimal: false),
-      inputBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      onInputChanged: (PhoneNumber number) {
-        // print('number: ${number.phoneNumber}');
-      },
-      onSaved: (PhoneNumber number) {
-        final String parsedNumber = number.parseNumber();
-        if (parsedNumber.isNotEmpty) {
-          _formData.phoneNumber = number;
-        }
-      },
-      onInputValidated: (bool isValid) {
-        _isPhoneNumberValid = isValid;
-      },
-      validator: (String? value) {
-        return Validator.validateCustomerPhoneNumber(
-            value, _isPhoneNumberValid);
-      },
-      errorMessage: 'Invalid phone number',
     );
   }
 
