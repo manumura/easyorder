@@ -32,27 +32,41 @@ mixin AbstractCategoryListTile {
   }
 
   Widget _buildTitle(BuildContext context, CategoryModel category) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        category.active
-            ? const Icon(
-                Icons.check,
-                size: 20,
-                color: Colors.green,
-                semanticLabel: 'Active',
-              )
-            : const Icon(
-                Icons.clear,
-                size: 20,
-                color: Colors.red,
-                semanticLabel: 'Inactive',
-              ),
-        Text(
-          category.name,
-          style: TextStyle(color: titleColor),
-        ),
-      ],
+    final Icon icon = category.active
+        ? const Icon(
+            Icons.check,
+            size: 20,
+            color: Colors.green,
+            semanticLabel: 'Active',
+          )
+        : const Icon(
+            Icons.clear,
+            size: 20,
+            color: Colors.red,
+            semanticLabel: 'Inactive',
+          );
+
+    return Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: icon,
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: category.name,
+            style: TextStyle(
+              color: titleColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

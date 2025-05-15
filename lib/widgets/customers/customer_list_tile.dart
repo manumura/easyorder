@@ -34,65 +34,99 @@ mixin AbstractCustomerListTile {
   }
 
   Widget buildAddress(BuildContext context, CustomerModel customer) {
-    return Wrap(
-      children: <Widget>[
-        Icon(
-          Icons.mail_outline,
-          color: Theme.of(context).primaryColor,
-          size: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 2.0),
-          child: Text(
-            customer.address?.trim().replaceAll('\n', ' ') ?? 'N/A',
+    final String addressAsString = customer.address?.trim() ?? 'N/A';
+    final String addressAsStringWithComma =
+        addressAsString.replaceAll(RegExp(r'\n'), ', ');
+
+    return Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: Icon(
+              Icons.mail_outline,
+              color: Theme.of(context).primaryColor,
+              size: 18,
+            ),
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: addressAsStringWithComma,
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget buildPhoneNumber(BuildContext context, CustomerModel customer) {
-    return Wrap(
-      children: <Widget>[
-        Icon(
-          Icons.phone,
-          color: Theme.of(context).primaryColor,
-          size: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 2.0),
-          child: Text(
-            customer.phoneNumber ?? 'N/A',
+    return Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: Icon(
+              Icons.phone,
+              color: Theme.of(context).primaryColor,
+              size: 18,
+            ),
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: customer.phoneNumber ?? 'N/A',
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildTitle(BuildContext context, CustomerModel customer) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        customer.active
-            ? const Icon(
-                Icons.check,
-                size: 20,
-                color: Colors.green,
-                semanticLabel: 'Active',
-              )
-            : const Icon(
-                Icons.clear,
-                size: 20,
-                color: Colors.red,
-                semanticLabel: 'Inactive',
-              ),
-        Text(
-          customer.name,
-          style: TextStyle(color: titleColor),
-        ),
-      ],
+    final Icon icon = customer.active
+        ? const Icon(
+            Icons.check,
+            size: 20,
+            color: Colors.green,
+            semanticLabel: 'Active',
+          )
+        : const Icon(
+            Icons.clear,
+            size: 20,
+            color: Colors.red,
+            semanticLabel: 'Inactive',
+          );
+
+    return Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: icon,
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: customer.name,
+            style: TextStyle(
+              color: titleColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

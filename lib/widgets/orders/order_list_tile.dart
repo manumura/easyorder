@@ -43,21 +43,60 @@ mixin AbstractOrderListTile {
     final bool isCompleted = order.status == OrderStatus.completed;
     final DateTime? dueDate = order.dueDate;
 
-    final Widget phoneNumberWidget = Wrap(
-      children: <Widget>[
-        Icon(
-          Icons.phone,
-          color: Theme.of(context).colorScheme.secondary,
-          size: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 2.0),
-          child: Text(
-            order.customer.phoneNumber ?? 'N/A',
-            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+    final Widget customerWidget = Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: Icon(
+              Icons.perm_identity_rounded,
+              color: Theme.of(context).colorScheme.secondary,
+              size: 18,
+            ),
           ),
-        ),
-      ],
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: order.customer.name,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Raleway',
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final Widget phoneNumberWidget = Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: Icon(
+              Icons.phone,
+              color: Theme.of(context).colorScheme.secondary,
+              size: 18,
+            ),
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: order.customer.phoneNumber ?? 'N/A',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
+        ],
+      ),
     );
 
     return Column(
@@ -66,20 +105,7 @@ mixin AbstractOrderListTile {
         const SizedBox(
           height: 2.0,
         ),
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.perm_identity_rounded,
-              color: Theme.of(context).colorScheme.secondary,
-              size: 18,
-            ),
-            Text(
-              order.customer.name,
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-            ),
-          ],
-        ),
+        customerWidget,
         phoneNumberWidget,
         const SizedBox(
           height: 2.0,

@@ -6,18 +6,36 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 void openAboutDialog(
     BuildContext context, PackageInfo packageInfo, String applicationLegalese) {
-  showAboutDialog(
+  showAdaptiveDialog(
     context: context,
-    applicationIcon: Icon(
-      Icons.shopping_cart_rounded,
-      size: 65,
-      color: Theme.of(context).colorScheme.secondary,
+    builder: (BuildContext context) => buildAboutDialog(
+      context,
+      packageInfo,
+      applicationLegalese,
     ),
-    applicationName: packageInfo.appName,
-    applicationVersion: packageInfo.version,
-    applicationLegalese: applicationLegalese,
-    children: buildAboutBoxChildren(context),
     useRootNavigator: false,
+  );
+}
+
+Widget buildAboutDialog(
+    BuildContext context, PackageInfo packageInfo, String applicationLegalese) {
+  return Theme(
+    data: Theme.of(context).copyWith(
+      dialogTheme: DialogThemeData(
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+      ),
+    ),
+    child: AboutDialog(
+      applicationIcon: Icon(
+        Icons.shopping_cart_rounded,
+        size: 65,
+        color: Theme.of(context).colorScheme.secondary,
+      ),
+      applicationName: packageInfo.appName,
+      applicationVersion: packageInfo.version,
+      applicationLegalese: applicationLegalese,
+      children: buildAboutBoxChildren(context),
+    ),
   );
 }
 
@@ -26,8 +44,8 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
     const SizedBox(
       height: 20,
     ),
-    RichText(
-      text: const TextSpan(
+    Text.rich(
+      const TextSpan(
         children: <InlineSpan>[
           TextSpan(
             text:
@@ -37,8 +55,8 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
         ],
       ),
     ),
-    RichText(
-      text: const TextSpan(
+    Text.rich(
+      const TextSpan(
         children: <InlineSpan>[
           TextSpan(
             text:
@@ -48,8 +66,8 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
         ],
       ),
     ),
-    RichText(
-      text: const TextSpan(
+    Text.rich(
+      const TextSpan(
         children: <InlineSpan>[
           TextSpan(
             text:
@@ -59,8 +77,8 @@ List<Widget> buildAboutBoxChildren(BuildContext context) {
         ],
       ),
     ),
-    RichText(
-      text: const TextSpan(
+    Text.rich(
+      const TextSpan(
         children: <InlineSpan>[
           TextSpan(
             text: 'No more pen and paper, everything is in your pocket !',

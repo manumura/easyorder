@@ -68,27 +68,41 @@ mixin AbstractProductListTile {
   }
 
   Widget _buildTitle(BuildContext context, ProductModel product) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: <Widget>[
-        product.active
-            ? const Icon(
-                Icons.check,
-                size: 20,
-                color: Colors.green,
-                semanticLabel: 'Active',
-              )
-            : const Icon(
-                Icons.clear,
-                size: 20,
-                color: Colors.red,
-                semanticLabel: 'Inactive',
-              ),
-        Text(
-          product.name,
-          style: TextStyle(color: titleColor),
-        ),
-      ],
+    final Icon icon = product.active
+        ? const Icon(
+            Icons.check,
+            size: 20,
+            color: Colors.green,
+            semanticLabel: 'Active',
+          )
+        : const Icon(
+            Icons.clear,
+            size: 20,
+            color: Colors.red,
+            semanticLabel: 'Inactive',
+          );
+
+    return Text.rich(
+      // softWrap: false,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        children: <InlineSpan>[
+          WidgetSpan(
+            child: icon,
+          ),
+          WidgetSpan(
+            child: SizedBox(
+              width: 5,
+            ),
+          ),
+          TextSpan(
+            text: product.name,
+            style: TextStyle(
+              color: titleColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
