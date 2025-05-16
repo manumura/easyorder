@@ -77,7 +77,17 @@ class _ProductEditScreenState extends ConsumerState<ProductEditScreen> {
     _priceTextController.addListener(_togglePriceClearVisible);
     _priceTextController.text = (widget._currentProduct == null)
         ? ''
-        : widget._currentProduct!.price.toString();
+        : _formatPrice(widget._currentProduct!.price);
+  }
+
+  String _formatPrice(double value) {
+    final String formatted = value.toStringAsFixed(2);
+    if (formatted.endsWith('.00')) {
+      return formatted.substring(0, formatted.length - 3);
+    } else if (formatted.endsWith('0')) {
+      return formatted.substring(0, formatted.length - 1);
+    }
+    return formatted;
   }
 
   @override

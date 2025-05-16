@@ -38,7 +38,7 @@ mixin AbstractOrderListTile {
   }
 
   Widget _buildCardSubtitle(BuildContext context, OrderModel order) {
-    final DateFormat format = DateFormat("MMMM d, yyyy 'at' h:mm a");
+    final DateFormat format = DateFormat("MMM d, yyyy 'at' h:mm a");
     final String dateAsString = format.format(order.date);
     final bool isCompleted = order.status == OrderStatus.completed;
     final DateTime? dueDate = order.dueDate;
@@ -65,7 +65,6 @@ mixin AbstractOrderListTile {
             style: TextStyle(
               color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Raleway',
             ),
           ),
         ],

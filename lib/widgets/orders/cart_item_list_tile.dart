@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easyorder/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:easyorder/bloc/cart_bloc.dart';
 import 'package:easyorder/models/cart_item_model.dart';
@@ -54,10 +55,17 @@ class _CartItemListTileState extends ConsumerState<CartItemListTile> {
   }
 
   Widget _buildListTile(BuildContext context, CartBloc cartBloc) {
+    final String formattedPrice =
+        currencyFormat.format(widget.cartItem.product.price);
+
     return ListTile(
       leading: _buildAvatar(),
-      title: Text(widget.cartItem.product.name),
-      subtitle: Text('\$${widget.cartItem.product.price.toString()}'),
+      title: Text(
+        widget.cartItem.product.name,
+        // softWrap: false,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(formattedPrice),
       trailing: _buildAddRemoveButtons(context, cartBloc, widget.cartItem),
     );
   }

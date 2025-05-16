@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
@@ -8,6 +9,8 @@ final String applicationLegalese = '© $year Emmanuel Mura';
 const String genericErrorTitle = 'Something went wrong!';
 const String genericErrorMessage =
     'Please try again later, and make sure the app is up-to-date.';
+final NumberFormat currencyFormat = NumberFormat.currency(
+    locale: Intl.defaultLocale, symbol: '\$', decimalDigits: 2);
 
 class Constants {
   Constants._();
