@@ -191,8 +191,9 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   Widget _buildScaffold(List<CartItemModel> cartItems, double price,
       List<CustomerModel> customers) {
     final OrderModel? currentOrder = widget._currentOrder;
-    final Widget body =
-        _buildBody(context, currentOrder, cartItems, price, customers);
+    final Widget body = SafeArea(
+      child: _buildBody(context, currentOrder, cartItems, price, customers),
+    );
     final String title = (currentOrder == null) ? 'Create Order' : 'Edit Order';
 
     return LoadingOverlay(
@@ -667,11 +668,11 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   // TODO
   void _showConfirmationDialog() {
     final String title = _isOrderCompleted
-        ? 'Do you want to re-open this order ?'
-        : 'Do you want to mark this order as completed ?';
+        ? 'Re-open this order ?'
+        : 'Mark this order as completed ?';
     final String description = _isOrderCompleted
-        ? 'It will go to current orders list.'
-        : 'It will go to past orders list.';
+        ? '(it will go to current orders list)'
+        : '(it will go to past orders list)';
 
     AwesomeDialog(
       context: context,

@@ -131,8 +131,8 @@ class _OrderSlidableListTileState extends ConsumerState<OrderSlidableListTile> {
           SizedBox(
             height: 10,
           ),
-          Text('Do you want to delete this order ?'),
-          Text('It will be removed permanently.')
+          Text('Confirm to delete this order ?'),
+          Text('(it will be removed permanently)')
         ],
       ),
       btnCancelColor: Colors.red,

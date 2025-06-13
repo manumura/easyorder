@@ -347,7 +347,7 @@ class _CartScreenState extends ConsumerState<CartScreen>
           SizedBox(
             height: 10,
           ),
-          Text('Do you want to empty your cart ?'),
+          Text('Empty your cart ?'),
         ],
       ),
       btnCancelColor: Colors.red,
