@@ -57,35 +57,42 @@ class ProductListScreen extends HookConsumerWidget {
 
   Widget _buildScreen(
       BuildContext context, String pageTitle, ProductBloc productBloc) {
-    return Scaffold(
-      drawer: SideDrawer(),
-      appBar: AppBar(
-        title: const Text('Products'),
-        elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
-        actions: <Widget>[
-          _buildChip(context, productBloc),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () => showSearch<List<Widget>?>(
-                context: context,
-                delegate: ProductSearchDelegate(productBloc: productBloc)),
-          ),
-        ],
-      ),
-      body: ProductPaginatedList(),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10.0,
-        color: Theme.of(context).secondaryHeaderColor,
-        height: navigationBarThemeData.height,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute<void>(
-              settings: const RouteSettings(name: ProductEditScreen.routeName),
-              builder: (BuildContext context) => ProductEditScreen()));
-        },
-        child: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        drawer: SideDrawer(),
+        appBar: AppBar(
+          title: const Text('Products'),
+          elevation:
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          actions: <Widget>[
+            _buildChip(context, productBloc),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () async {
+                await showSearch<List<Widget>?>(
+                  context: context,
+                  delegate: ProductSearchDelegate(productBloc: productBloc),
+                );
+              },
+            ),
+          ],
+        ),
+        body: ProductPaginatedList(),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 10.0,
+          color: Theme.of(context).secondaryHeaderColor,
+          height: navigationBarThemeData.height,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute<void>(
+                settings:
+                    const RouteSettings(name: ProductEditScreen.routeName),
+                builder: (BuildContext context) => ProductEditScreen()));
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

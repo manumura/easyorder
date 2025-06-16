@@ -510,12 +510,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       _buildAboutButton(context),
     ];
 
-    return Container(
-      // color: backgroundColor,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border.all(color: backgroundColor), // Colors.red
-      ),
+    return BottomAppBar(
+      height: 150,
+      color: backgroundColor,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,

@@ -76,7 +76,9 @@ class ProductSearchDelegate extends SearchDelegate<List<Widget>?> {
         }
 
         if (snapshot.data!.isEmpty) {
-          return const Center(child: Text('No product found !'));
+          return const Center(
+            child: Text('No product found !'),
+          );
         }
 
         return ProductList(products: snapshot.data!);

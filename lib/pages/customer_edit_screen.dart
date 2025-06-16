@@ -142,16 +142,18 @@ class _CustomerEditScreenState extends ConsumerState<CustomerEditScreen> {
     return LoadingOverlay(
       isLoading: _isLoading,
       progressIndicator: AdaptiveProgressIndicator(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(pageTitle),
-          elevation:
-              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
-          actions: <Widget>[
-            _buildSubmitButton(),
-          ],
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(pageTitle),
+            elevation:
+                Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+            actions: <Widget>[
+              _buildSubmitButton(),
+            ],
+          ),
+          body: pageContent,
         ),
-        body: pageContent,
       ),
     );
   }

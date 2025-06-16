@@ -136,7 +136,11 @@ class _CartScreenState extends ConsumerState<CartScreen>
         appBar: AppBar(
           title: Text(pageTitle),
         ),
-        body: const Center(child: Text('Please add a product first !')),
+        body: SafeArea(
+          child: const Center(
+            child: Text('Please add a product first !'),
+          ),
+        ),
         floatingActionButton: _buildAddProductButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
@@ -157,7 +161,9 @@ class _CartScreenState extends ConsumerState<CartScreen>
           actions: _buildActions(),
           bottom: _buildTabBar(categoriesMap),
         ),
-        body: _buildListView(cartItems), //CartItemList(),
+        body: SafeArea(
+          child: _buildListView(cartItems),
+        ), //CartItemList(),
         // floatingActionButton: FloatingActionButton.extended(
         //   elevation: 4.0,
         //   icon: const Icon(Icons.add),

@@ -57,38 +57,42 @@ class CategoryListScreen extends HookConsumerWidget {
 
   Widget _buildScreen(
       BuildContext context, String pageTitle, CategoryBloc categoryBloc) {
-    return Scaffold(
-      drawer: SideDrawer(),
-      appBar: AppBar(
-        title: Text(pageTitle),
-        elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
-        actions: <Widget>[
-          _buildChip(context, categoryBloc),
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () => showSearch<List<Widget>?>(
-                context: context,
-                delegate: CategorySearchDelegate(categoryBloc: categoryBloc)),
-          ),
-        ],
-      ),
-      body: CategoryPaginatedList(),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 10.0,
-        color: Theme.of(context).secondaryHeaderColor,
-        height: navigationBarThemeData.height,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              settings: const RouteSettings(name: CategoryEditScreen.routeName),
-              builder: (BuildContext context) => const CategoryEditScreen(),
+    return SafeArea(
+      child: Scaffold(
+        drawer: SideDrawer(),
+        appBar: AppBar(
+          title: Text(pageTitle),
+          elevation:
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          actions: <Widget>[
+            _buildChip(context, categoryBloc),
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () => showSearch<List<Widget>?>(
+                  context: context,
+                  delegate: CategorySearchDelegate(categoryBloc: categoryBloc)),
             ),
-          );
-        },
-        child: const Icon(Icons.add),
+          ],
+        ),
+        body: CategoryPaginatedList(),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 10.0,
+          color: Theme.of(context).secondaryHeaderColor,
+          height: navigationBarThemeData.height,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                settings:
+                    const RouteSettings(name: CategoryEditScreen.routeName),
+                builder: (BuildContext context) => const CategoryEditScreen(),
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

@@ -191,9 +191,8 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   Widget _buildScaffold(List<CartItemModel> cartItems, double price,
       List<CustomerModel> customers) {
     final OrderModel? currentOrder = widget._currentOrder;
-    final Widget body = SafeArea(
-      child: _buildBody(context, currentOrder, cartItems, price, customers),
-    );
+    final Widget body =
+        _buildBody(context, currentOrder, cartItems, price, customers);
     final String title = (currentOrder == null) ? 'Create Order' : 'Edit Order';
 
     return LoadingOverlay(
@@ -209,25 +208,32 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
             _buildSubmitButton(),
           ],
         ),
-        body: body,
+        body: SafeArea(
+          child: body,
+        ),
         bottomNavigationBar: _buildBottomAppBar(cartItems, price),
       ),
     );
   }
 
   Widget _buildBottomAppBar(List<CartItemModel> cartItems, double price) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        _buildPriceTotalTag(price),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            if (!_isOrderCompleted) _buildOpenCartScreenButton(cartItems),
-          ],
-        ),
-      ],
+    final List<Widget> children = _isOrderCompleted
+        ? <Widget>[
+            _buildPriceTotalTag(price),
+          ]
+        : <Widget>[
+            _buildPriceTotalTag(price),
+            _buildOpenCartScreenButton(cartItems),
+          ];
+    final double height = children.length > 1 ? 120.0 : 80.0;
+
+    return BottomAppBar(
+      height: height,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: children,
+      ),
     );
   }
 
@@ -615,30 +621,32 @@ class _OrderEditScreenState extends ConsumerState<OrderEditScreen> {
   }
 
   Widget _buildOpenCartScreenButton(List<CartItemModel> cartItems) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: ElevatedButton.icon(
-          style: ButtonStyle(
-            shape: WidgetStateProperty.resolveWith(
-              (Set<WidgetState> states) => ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-            ),
-            foregroundColor: WidgetStateProperty.resolveWith(
-                (Set<WidgetState> states) => Colors.white),
-            backgroundColor: WidgetStateProperty.resolveWith(
-                (Set<WidgetState> states) =>
-                    Theme.of(context).colorScheme.secondary),
-            elevation: WidgetStateProperty.resolveWith(
-                (Set<WidgetState> states) => 4.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: ElevatedButton.icon(
+        style: ButtonStyle(
+          // make this button full width
+          minimumSize: WidgetStateProperty.resolveWith(
+            (Set<WidgetState> states) => const Size(double.infinity, 40),
           ),
-          label: (cartItems.isEmpty)
-              ? const Text('ADD ITEMS TO MY CART')
-              : const Text('EDIT MY CART'),
-          icon: const Icon(Icons.add_shopping_cart),
-          onPressed: () => _openCartScreen(cartItems),
+          shape: WidgetStateProperty.resolveWith(
+            (Set<WidgetState> states) => ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+            ),
+          ),
+          foregroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) => Colors.white),
+          backgroundColor: WidgetStateProperty.resolveWith(
+              (Set<WidgetState> states) =>
+                  Theme.of(context).colorScheme.secondary),
+          elevation:
+              WidgetStateProperty.resolveWith((Set<WidgetState> states) => 4.0),
         ),
+        label: (cartItems.isEmpty)
+            ? const Text('ADD ITEMS TO MY CART')
+            : const Text('EDIT MY CART'),
+        icon: const Icon(Icons.add_shopping_cart),
+        onPressed: () => _openCartScreen(cartItems),
       ),
     );
   }

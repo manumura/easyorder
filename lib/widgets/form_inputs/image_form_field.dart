@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:easyorder/shared/constants.dart';
 import 'package:easyorder/widgets/helpers/logger.dart';
 import 'package:easyorder/widgets/helpers/ui_helper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
@@ -12,7 +13,8 @@ import './image_input_adapter.dart';
 
 class ImageFormField extends FormField<ImageInputAdapter> {
   /// ImageFormField
-  ImageFormField({super.key, 
+  ImageFormField({
+    super.key,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -141,11 +143,15 @@ class ImageFormField extends FormField<ImageInputAdapter> {
   static void _openImagePicker(FormFieldState<ImageInputAdapter> state,
       double fileMaxWidth, int imageQuality) {
     showModalBottomSheet<BuildContext>(
-      shape: const RoundedRectangleBorder(
-        side: BorderSide(
-          color: Colors.white,
-          width: 2.0,
+      isScrollControlled: true,
+      useSafeArea: true,
+      constraints: BoxConstraints.loose(
+        Size(
+          MediaQuery.of(state.context).size.width,
+          MediaQuery.of(state.context).size.height * 0.33,
         ),
+      ),
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10.0),
           topRight: Radius.circular(10.0),
@@ -153,19 +159,13 @@ class ImageFormField extends FormField<ImageInputAdapter> {
       ),
       context: state.context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: 160.0,
-//            decoration: BoxDecoration(
-//              color: Colors.white,
-//              borderRadius: BorderRadius.only(
-//                topLeft: Radius.circular(20.0),
-//                topRight: Radius.circular(20.0),
-//              )
-//            ),
-          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
+              const SizedBox(
+                height: 20.0,
+              ),
               const Text(
                 'Pick an Image',
                 style: TextStyle(
@@ -176,7 +176,8 @@ class ImageFormField extends FormField<ImageInputAdapter> {
               const SizedBox(
                 height: 10.0,
               ),
-              TextButton(
+              TextButton.icon(
+                icon: FaIcon(FontAwesomeIcons.camera),
                 style: ButtonStyle(
                   foregroundColor: WidgetStateProperty.resolveWith(
                       (Set<WidgetState> states) =>
@@ -186,14 +187,15 @@ class ImageFormField extends FormField<ImageInputAdapter> {
                   _getImage(
                       state, ImageSource.camera, fileMaxWidth, imageQuality);
                 },
-                child: const Text(
+                label: const Text(
                   'Use Camera',
                   style: TextStyle(
                     fontSize: 16.0,
                   ),
                 ),
               ),
-              TextButton(
+              TextButton.icon(
+                icon: FaIcon(FontAwesomeIcons.image),
                 style: ButtonStyle(
                   foregroundColor: WidgetStateProperty.resolveWith(
                       (Set<WidgetState> states) =>
@@ -203,7 +205,7 @@ class ImageFormField extends FormField<ImageInputAdapter> {
                   _getImage(
                       state, ImageSource.gallery, fileMaxWidth, imageQuality);
                 },
-                child: const Text(
+                label: const Text(
                   'Use Gallery',
                   style: TextStyle(
                     fontSize: 16.0,
