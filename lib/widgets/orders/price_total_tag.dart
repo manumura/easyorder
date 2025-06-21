@@ -1,3 +1,4 @@
+import 'package:easyorder/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class PriceTotalTag extends StatelessWidget {
@@ -10,7 +11,7 @@ class PriceTotalTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String priceAsString = price.toStringAsFixed(2);
+    final String formattedPrice = currencyFormat.format(price);
 
     return Padding(
       padding: const EdgeInsets.all(5.0),
@@ -43,7 +44,7 @@ class PriceTotalTag extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  '\$$priceAsString',
+                  formattedPrice,
                   style: TextStyle(
                     fontSize: 25.0,
                     color: Theme.of(context).primaryColor,
