@@ -31,7 +31,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
         ),
         body: Container(
           color: Theme.of(context).canvasColor,
-          child: body,
+          child: SafeArea(
+            child: body,
+          ),
         ),
       ),
     );
