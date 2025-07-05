@@ -86,6 +86,7 @@ platform :ios, '11.0'
 // TODO invoices
 // TODO OrderFilterScreen
 // TODO noti due date
+// TODO Teams (share orders with other users) : https://stackoverflow.com/questions/68235838/how-do-i-share-data-between-3-separate-authenticated-users-in-firestore https://firebase.google.com/docs/firestore/solutions/role-based-access
 // https://www.youtube.com/watch?v=JAq9fVn3X7U
 // https://stackoverflow.com/questions/65223986/schedule-notification-in-flutter-using-firebase
 // https://medium.com/firebase-developers/how-to-schedule-a-cloud-function-to-run-in-the-future-in-order-to-build-a-firestore-document-ttl-754f9bf3214a
